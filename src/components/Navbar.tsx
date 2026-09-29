@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useRental } from './RentalContext';
+import { ThemeToggle } from './ThemeToggle';
 import { ShoppingBag, Menu, X } from 'lucide-react';
 
 const NAV_LINKS = [
@@ -21,15 +22,20 @@ export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-40 bg-[#F7F5F0]/90 backdrop-blur-md border-b border-[#E2DDD4] transition-all">
+    <header className="sticky top-0 z-40 bg-[var(--bg-main)]/90 backdrop-blur-md border-b border-[var(--border-color)] transition-colors duration-200">
       <div className="max-w-7xl mx-auto px-6 md:px-12 h-20 flex items-center justify-between">
-        {/* Brand / Logo */}
-        <Link
-          href="/"
-          className="text-lg md:text-xl font-bold tracking-tight text-[#181716] uppercase hover:opacity-80 transition-opacity"
-        >
-          Maryam Attar
-        </Link>
+        {/* Brand / Logo + Region Indicator */}
+        <div className="flex items-baseline gap-3">
+          <Link
+            href="/"
+            className="text-lg md:text-xl font-bold tracking-tight text-[var(--text-main)] uppercase hover:opacity-80 transition-opacity"
+          >
+            Maryam Attar
+          </Link>
+          <span className="hidden xl:inline text-[10px] font-mono uppercase text-[var(--text-muted)] tracking-wider">
+            JEDDAH / REMOTE
+          </span>
+        </div>
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
@@ -39,33 +45,36 @@ export function Navbar() {
               <Link
                 key={link.name}
                 href={link.href}
-                className={`text-sm tracking-wide transition-colors relative py-1 ${
+                className={`text-xs font-mono uppercase tracking-wider transition-colors relative py-1 ${
                   isActive
-                    ? 'text-[#181716] font-medium'
-                    : 'text-[#6B665F] hover:text-[#181716]'
+                    ? 'text-[var(--text-main)] font-semibold'
+                    : 'text-[var(--text-muted)] hover:text-[var(--text-main)]'
                 }`}
               >
                 {link.name}
                 {isActive && (
-                  <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#B8532B]" />
+                  <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-[var(--accent)]" />
                 )}
               </Link>
             );
           })}
         </nav>
 
-        {/* Right Actions: Rental Cart Drawer Trigger & Mobile Menu */}
-        <div className="flex items-center gap-3">
+        {/* Right Actions: Theme Toggle + Rental Cart Drawer Trigger + Mobile Menu */}
+        <div className="flex items-center gap-2 sm:gap-3">
+          {/* Bespoke Studio Lighting Theme Toggle */}
+          <ThemeToggle />
+
           {/* Rental Cart Trigger */}
           <button
             onClick={() => setIsCartDrawerOpen(true)}
             aria-label="View equipment rental cart"
-            className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#E2DDD4] bg-[#FFFFFF] hover:border-[#B8532B] text-xs font-mono tracking-wider text-[#181716] transition-colors cursor-pointer"
+            className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-[var(--border-color)] bg-[var(--bg-card)] hover:border-[var(--accent)] text-xs font-mono tracking-wider text-[var(--text-main)] transition-all cursor-pointer"
           >
-            <ShoppingBag size={14} className="text-[#B8532B]" />
-            <span className="hidden sm:inline">RENTAL CART</span>
+            <ShoppingBag size={13} className="text-[var(--accent)]" />
+            <span className="hidden sm:inline text-[11px]">CART</span>
             {totalItems > 0 && (
-              <span className="w-5 h-5 rounded-full bg-[#B8532B] text-[#FFFFFF] text-[10px] font-bold flex items-center justify-center">
+              <span className="w-4 h-4 rounded-full bg-[var(--accent)] text-white text-[9px] font-bold flex items-center justify-center">
                 {totalItems}
               </span>
             )}
@@ -74,7 +83,7 @@ export function Navbar() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 text-[#181716] hover:bg-[#EFECE5] rounded-md transition-colors"
+            className="md:hidden p-2 text-[var(--text-main)] hover:bg-[var(--bg-subtle)] rounded-md transition-colors"
             aria-label="Toggle Navigation Menu"
           >
             {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
@@ -84,7 +93,7 @@ export function Navbar() {
 
       {/* Mobile Navigation Dropdown */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-[#F7F5F0] border-b border-[#E2DDD4] px-6 py-6 space-y-4 animate-in slide-in-from-top-2">
+        <div className="md:hidden bg-[var(--bg-main)] border-b border-[var(--border-color)] px-6 py-6 space-y-4 animate-in slide-in-from-top-2">
           {NAV_LINKS.map((link) => {
             const isActive = pathname === link.href;
             return (
@@ -92,10 +101,10 @@ export function Navbar() {
                 key={link.name}
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className={`block text-base py-2 transition-colors ${
+                className={`block text-xs font-mono uppercase tracking-wider py-2 transition-colors ${
                   isActive
-                    ? 'text-[#B8532B] font-semibold pl-2 border-l-2 border-[#B8532B]'
-                    : 'text-[#181716] hover:text-[#B8532B]'
+                    ? 'text-[var(--accent)] font-semibold pl-2 border-l-2 border-[var(--accent)]'
+                    : 'text-[var(--text-main)] hover:text-[var(--accent)]'
                 }`}
               >
                 {link.name}
