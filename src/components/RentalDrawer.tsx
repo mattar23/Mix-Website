@@ -43,28 +43,28 @@ export function RentalDrawer() {
     <div className="fixed inset-0 z-50 overflow-hidden">
       {/* Backdrop */}
       <div
-        className="absolute inset-0 bg-black/40 backdrop-blur-xs transition-opacity"
+        className="absolute inset-0 bg-black/60 backdrop-blur-xs transition-opacity"
         onClick={() => setIsCartDrawerOpen(false)}
       />
 
-      <div className="fixed inset-y-0 right-0 max-w-full flex pl-10">
-        <div className="w-screen max-w-md bg-[#F7F5F0] border-l border-[#E2DDD4] shadow-2xl flex flex-col">
+      <div className="fixed inset-y-0 right-0 max-w-full flex pl-6 sm:pl-10">
+        <div className="w-screen max-w-md bg-[var(--bg-main)] border-l border-[var(--border-color)] shadow-2xl flex flex-col text-[var(--text-main)]">
           {/* Header */}
-          <div className="p-6 border-b border-[#E2DDD4] flex items-center justify-between">
+          <div className="p-6 border-b border-[var(--border-color)] flex items-center justify-between">
             <div>
               <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-[#B8532B]" />
-                <span className="text-xs uppercase font-mono tracking-wider text-[#6B665F]">
+                <span className="w-2 h-2 rounded-full bg-[var(--accent)]" />
+                <span className="text-xs uppercase font-mono tracking-wider text-[var(--text-muted)]">
                   Equipment Booking
                 </span>
               </div>
-              <h2 className="text-xl font-semibold tracking-tight text-[#181716] mt-1">
+              <h2 className="text-xl font-semibold tracking-tight text-[var(--text-main)] mt-1">
                 Rental Inquiry Cart
               </h2>
             </div>
             <button
               onClick={() => setIsCartDrawerOpen(false)}
-              className="p-2 text-[#6B665F] hover:text-[#181716] transition-colors rounded-full hover:bg-[#EFECE5]"
+              className="p-2 text-[var(--text-muted)] hover:text-[var(--text-main)] transition-colors rounded-full hover:bg-[var(--bg-subtle)] cursor-pointer"
             >
               <X size={20} />
             </button>
@@ -74,35 +74,35 @@ export function RentalDrawer() {
           <div className="flex-1 overflow-y-auto p-6 space-y-6">
             {submitted ? (
               <div className="py-12 text-center space-y-4">
-                <div className="w-12 h-12 rounded-full bg-[#F7EDE7] text-[#B8532B] flex items-center justify-center mx-auto">
+                <div className="w-12 h-12 rounded-full bg-[var(--accent-light)] text-[var(--accent)] flex items-center justify-center mx-auto">
                   <CheckCircle2 size={28} />
                 </div>
-                <h3 className="text-xl font-semibold text-[#181716]">Inquiry Generated</h3>
-                <p className="text-sm text-[#6B665F] leading-relaxed">
+                <h3 className="text-xl font-semibold text-[var(--text-main)]">Inquiry Generated</h3>
+                <p className="text-sm text-[var(--text-muted)] leading-relaxed">
                   Thank you, {formData.name}. Your equipment request for{' '}
-                  <span className="font-semibold text-[#181716]">{totalCostSAR} SAR</span> has been prepared. Maryam will review your dates and confirm equipment availability.
+                  <span className="font-semibold text-[var(--text-main)]">{totalCostSAR} SAR</span> has been prepared. Maryam will review your dates and confirm equipment availability.
                 </p>
-                <div className="p-4 bg-[#EFECE5] rounded border border-[#E2DDD4] text-left text-xs space-y-2">
-                  <p><span className="font-semibold text-[#181716]">Client:</span> {formData.name} ({formData.phone})</p>
-                  <p><span className="font-semibold text-[#181716]">Dates:</span> {formData.startDate || 'TBD'} to {formData.endDate || 'TBD'}</p>
-                  <p><span className="font-semibold text-[#181716]">Items:</span> {cart.map(c => `${c.item.name} (x${c.quantity})`).join(', ')}</p>
+                <div className="p-4 bg-[var(--bg-subtle)] rounded border border-[var(--border-color)] text-left text-xs space-y-2">
+                  <p><span className="font-semibold text-[var(--text-main)]">Client:</span> {formData.name} ({formData.phone})</p>
+                  <p><span className="font-semibold text-[var(--text-main)]">Dates:</span> {formData.startDate || 'TBD'} to {formData.endDate || 'TBD'}</p>
+                  <p><span className="font-semibold text-[var(--text-main)]">Items:</span> {cart.map(c => `${c.item.name} (x${c.quantity})`).join(', ')}</p>
                 </div>
                 <button
                   onClick={resetForm}
-                  className="w-full py-2.5 bg-[#181716] text-[#F7F5F0] text-sm uppercase tracking-wider font-mono hover:bg-[#B8532B] transition-colors rounded"
+                  className="w-full py-2.5 bg-[var(--text-main)] text-[var(--bg-main)] text-xs uppercase tracking-wider font-mono hover:bg-[var(--accent)] hover:text-white transition-colors rounded cursor-pointer"
                 >
                   Close & Clear
                 </button>
               </div>
             ) : cart.length === 0 ? (
               <div className="py-16 text-center space-y-3">
-                <p className="text-sm text-[#6B665F]">Your rental inquiry cart is empty.</p>
-                <p className="text-xs text-[#6B665F]/80">
+                <p className="text-sm text-[var(--text-muted)]">Your rental inquiry cart is empty.</p>
+                <p className="text-xs text-[var(--text-muted)]/80">
                   Select microphones, mixers, pedals, or DI boxes from the inventory to build a custom booking quote.
                 </p>
                 <button
                   onClick={() => setIsCartDrawerOpen(false)}
-                  className="mt-4 px-4 py-2 border border-[#181716] text-xs uppercase font-mono tracking-wider hover:bg-[#181716] hover:text-[#F7F5F0] transition-colors rounded"
+                  className="mt-4 px-4 py-2 border border-[var(--border-color)] text-xs uppercase font-mono tracking-wider hover:bg-[var(--text-main)] hover:text-[var(--bg-main)] transition-colors rounded cursor-pointer"
                 >
                   Browse Equipment
                 </button>
@@ -121,20 +121,20 @@ export function RentalDrawer() {
                     return (
                       <div
                         key={ci.item.id}
-                        className="p-3.5 bg-[#FFFFFF] border border-[#E2DDD4] rounded space-y-2.5"
+                        className="p-3.5 bg-[var(--bg-card)] border border-[var(--border-color)] rounded space-y-2.5"
                       >
                         <div className="flex justify-between items-start gap-2">
                           <div>
-                            <span className="text-[10px] uppercase font-mono text-[#B8532B]">
+                            <span className="text-[10px] uppercase font-mono text-[var(--accent)]">
                               {ci.item.brand}
                             </span>
-                            <h4 className="text-sm font-medium text-[#181716]">
+                            <h4 className="text-sm font-medium text-[var(--text-main)]">
                               {ci.item.name}
                             </h4>
                           </div>
                           <button
                             onClick={() => removeFromCart(ci.item.id)}
-                            className="text-[#6B665F] hover:text-red-600 transition-colors p-1"
+                            className="text-[var(--text-muted)] hover:text-red-500 transition-colors p-1 cursor-pointer"
                             title="Remove item"
                           >
                             <Trash2 size={15} />
@@ -142,24 +142,24 @@ export function RentalDrawer() {
                         </div>
 
                         {/* Period & Quantity Controls */}
-                        <div className="flex items-center justify-between text-xs pt-1 border-t border-[#EFECE5]">
+                        <div className="flex items-center justify-between text-xs pt-1 border-t border-[var(--border-subtle)]">
                           <div className="flex items-center gap-1.5">
                             <button
                               onClick={() => updatePeriod(ci.item.id, 'day')}
-                              className={`px-2 py-0.5 rounded text-[11px] font-mono transition-colors ${
+                              className={`px-2 py-0.5 rounded text-[11px] font-mono transition-colors cursor-pointer ${
                                 ci.rentalPeriod === 'day'
-                                  ? 'bg-[#181716] text-[#F7F5F0]'
-                                  : 'bg-[#EFECE5] text-[#6B665F] hover:text-[#181716]'
+                                  ? 'bg-[var(--text-main)] text-[var(--bg-main)]'
+                                  : 'bg-[var(--bg-subtle)] text-[var(--text-muted)] hover:text-[var(--text-main)]'
                               }`}
                             >
                               Day
                             </button>
                             <button
                               onClick={() => updatePeriod(ci.item.id, 'week')}
-                              className={`px-2 py-0.5 rounded text-[11px] font-mono transition-colors ${
+                              className={`px-2 py-0.5 rounded text-[11px] font-mono transition-colors cursor-pointer ${
                                 ci.rentalPeriod === 'week'
-                                  ? 'bg-[#181716] text-[#F7F5F0]'
-                                  : 'bg-[#EFECE5] text-[#6B665F] hover:text-[#181716]'
+                                  ? 'bg-[var(--text-main)] text-[var(--bg-main)]'
+                                  : 'bg-[var(--bg-subtle)] text-[var(--text-muted)] hover:text-[var(--text-main)]'
                               }`}
                             >
                               Week (3x)
@@ -167,13 +167,13 @@ export function RentalDrawer() {
                           </div>
 
                           <div className="flex items-center gap-2">
-                            <span className="text-[11px] text-[#6B665F]">Qty:</span>
+                            <span className="text-[11px] text-[var(--text-muted)]">Qty:</span>
                             <select
                               value={ci.quantity}
                               onChange={(e) =>
                                 updateQuantity(ci.item.id, Number(e.target.value))
                               }
-                              className="bg-[#EFECE5] text-[#181716] text-xs font-mono px-2 py-0.5 rounded border-none outline-none cursor-pointer"
+                              className="bg-[var(--bg-subtle)] text-[var(--text-main)] text-xs font-mono px-2 py-0.5 rounded border border-[var(--border-color)] outline-none cursor-pointer"
                             >
                               {Array.from(
                                 { length: ci.item.quantity },
@@ -184,7 +184,7 @@ export function RentalDrawer() {
                                 </option>
                               ))}
                             </select>
-                            <span className="font-mono text-sm font-semibold text-[#181716] ml-2">
+                            <span className="font-mono text-sm font-semibold text-[var(--text-main)] ml-2">
                               {subtotal} SAR
                             </span>
                           </div>
@@ -195,26 +195,26 @@ export function RentalDrawer() {
                 </div>
 
                 {/* Subtotal */}
-                <div className="p-4 bg-[#EFECE5] rounded border border-[#E2DDD4] space-y-2">
-                  <div className="flex justify-between items-center text-sm font-semibold text-[#181716]">
+                <div className="p-4 bg-[var(--bg-subtle)] rounded border border-[var(--border-color)] space-y-2">
+                  <div className="flex justify-between items-center text-sm font-semibold text-[var(--text-main)]">
                     <span>Estimated Total:</span>
-                    <span className="font-mono text-lg text-[#B8532B]">
+                    <span className="font-mono text-lg text-[var(--accent)]">
                       {totalCostSAR} SAR
                     </span>
                   </div>
-                  <p className="text-[11px] text-[#6B665F] leading-tight flex items-start gap-1.5">
-                    <ShieldCheck size={14} className="shrink-0 mt-0.5 text-[#B8532B]" />
-                    <span>Refundable deposit required. Pick-up and return in Jeddah, KSA.</span>
+                  <p className="text-[11px] text-[var(--text-muted)] leading-tight flex items-start gap-1.5">
+                    <ShieldCheck size={14} className="shrink-0 mt-0.5 text-[var(--accent)]" />
+                    <span>Refundable deposit required. Pick-up and return in Jeddah, KSA. Delivery options available.</span>
                   </p>
                 </div>
 
                 {/* Booking Inquiry Form */}
                 <form onSubmit={handleSubmit} className="space-y-3 pt-2">
-                  <h4 className="text-xs uppercase font-mono tracking-wider text-[#6B665F]">
-                    Rental Details
+                  <h4 className="text-xs uppercase font-mono tracking-wider text-[var(--text-muted)]">
+                    Rental Parameters
                   </h4>
                   <div>
-                    <label className="block text-[11px] font-mono text-[#181716] mb-1">
+                    <label className="block text-[11px] font-mono text-[var(--text-main)] mb-1">
                       Full Name *
                     </label>
                     <input
@@ -225,12 +225,12 @@ export function RentalDrawer() {
                         setFormData({ ...formData, name: e.target.value })
                       }
                       placeholder="e.g. Tariq Al-Ghamdi"
-                      className="w-full bg-[#FFFFFF] border border-[#E2DDD4] px-3 py-2 text-xs text-[#181716] rounded outline-none focus:border-[#B8532B]"
+                      className="w-full bg-[var(--bg-card)] border border-[var(--border-color)] px-3 py-2 text-xs text-[var(--text-main)] rounded outline-none focus:border-[var(--accent)]"
                     />
                   </div>
                   <div className="grid grid-cols-2 gap-2">
                     <div>
-                      <label className="block text-[11px] font-mono text-[#181716] mb-1">
+                      <label className="block text-[11px] font-mono text-[var(--text-main)] mb-1">
                         Email *
                       </label>
                       <input
@@ -241,11 +241,11 @@ export function RentalDrawer() {
                           setFormData({ ...formData, email: e.target.value })
                         }
                         placeholder="producer@studio.com"
-                        className="w-full bg-[#FFFFFF] border border-[#E2DDD4] px-3 py-2 text-xs text-[#181716] rounded outline-none focus:border-[#B8532B]"
+                        className="w-full bg-[var(--bg-card)] border border-[var(--border-color)] px-3 py-2 text-xs text-[var(--text-main)] rounded outline-none focus:border-[var(--accent)]"
                       />
                     </div>
                     <div>
-                      <label className="block text-[11px] font-mono text-[#181716] mb-1">
+                      <label className="block text-[11px] font-mono text-[var(--text-main)] mb-1">
                         Phone *
                       </label>
                       <input
@@ -256,13 +256,13 @@ export function RentalDrawer() {
                           setFormData({ ...formData, phone: e.target.value })
                         }
                         placeholder="+966 5..."
-                        className="w-full bg-[#FFFFFF] border border-[#E2DDD4] px-3 py-2 text-xs text-[#181716] rounded outline-none focus:border-[#B8532B]"
+                        className="w-full bg-[var(--bg-card)] border border-[var(--border-color)] px-3 py-2 text-xs text-[var(--text-main)] rounded outline-none focus:border-[var(--accent)]"
                       />
                     </div>
                   </div>
                   <div className="grid grid-cols-2 gap-2">
                     <div>
-                      <label className="block text-[11px] font-mono text-[#181716] mb-1 flex items-center gap-1">
+                      <label className="block text-[11px] font-mono text-[var(--text-main)] mb-1 flex items-center gap-1">
                         <Calendar size={12} /> Start Date
                       </label>
                       <input
@@ -271,11 +271,11 @@ export function RentalDrawer() {
                         onChange={(e) =>
                           setFormData({ ...formData, startDate: e.target.value })
                         }
-                        className="w-full bg-[#FFFFFF] border border-[#E2DDD4] px-3 py-2 text-xs text-[#181716] rounded outline-none focus:border-[#B8532B]"
+                        className="w-full bg-[var(--bg-card)] border border-[var(--border-color)] px-3 py-2 text-xs text-[var(--text-main)] rounded outline-none focus:border-[var(--accent)]"
                       />
                     </div>
                     <div>
-                      <label className="block text-[11px] font-mono text-[#181716] mb-1 flex items-center gap-1">
+                      <label className="block text-[11px] font-mono text-[var(--text-main)] mb-1 flex items-center gap-1">
                         <Calendar size={12} /> Return Date
                       </label>
                       <input
@@ -284,12 +284,12 @@ export function RentalDrawer() {
                         onChange={(e) =>
                           setFormData({ ...formData, endDate: e.target.value })
                         }
-                        className="w-full bg-[#FFFFFF] border border-[#E2DDD4] px-3 py-2 text-xs text-[#181716] rounded outline-none focus:border-[#B8532B]"
+                        className="w-full bg-[var(--bg-card)] border border-[var(--border-color)] px-3 py-2 text-xs text-[var(--text-main)] rounded outline-none focus:border-[var(--accent)]"
                       />
                     </div>
                   </div>
                   <div>
-                    <label className="block text-[11px] font-mono text-[#181716] mb-1">
+                    <label className="block text-[11px] font-mono text-[var(--text-main)] mb-1">
                       Session / Project Notes
                     </label>
                     <textarea
@@ -298,14 +298,14 @@ export function RentalDrawer() {
                       onChange={(e) =>
                         setFormData({ ...formData, projectNotes: e.target.value })
                       }
-                      placeholder="e.g. Location shoot, recording vocal session this weekend..."
-                      className="w-full bg-[#FFFFFF] border border-[#E2DDD4] px-3 py-2 text-xs text-[#181716] rounded outline-none focus:border-[#B8532B]"
+                      placeholder="e.g. Location shoot, recording session this weekend..."
+                      className="w-full bg-[var(--bg-card)] border border-[var(--border-color)] px-3 py-2 text-xs text-[var(--text-main)] rounded outline-none focus:border-[var(--accent)]"
                     />
                   </div>
 
                   <button
                     type="submit"
-                    className="w-full py-3 bg-[#B8532B] hover:bg-[#9E431E] text-[#FFFFFF] text-xs font-mono uppercase tracking-wider font-semibold rounded flex items-center justify-center gap-2 transition-colors cursor-pointer mt-2"
+                    className="w-full py-3 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white text-xs font-mono uppercase tracking-wider font-semibold rounded flex items-center justify-center gap-2 transition-colors cursor-pointer mt-2"
                   >
                     <span>Submit Rental Booking Request</span>
                     <ArrowRight size={14} />
