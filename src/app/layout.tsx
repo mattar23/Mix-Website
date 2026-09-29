@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import { AudioProvider } from '@/components/AudioPlayerContext';
@@ -9,6 +9,8 @@ import { Footer } from '@/components/Footer';
 import { AudioPlayerBar } from '@/components/AudioPlayerBar';
 import { RentalDrawer } from '@/components/RentalDrawer';
 import { NoiseOverlay } from '@/components/NoiseOverlay';
+import { JsonLd } from '@/components/JsonLd';
+import { siteConfig } from '@/config/site';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -20,28 +22,71 @@ const geistMono = Geist_Mono({
   subsets: ['latin'],
 });
 
-export const metadata: Metadata = {
-  title: 'Maryam Attar | Audio Engineer, Music Producer & Sound Designer',
-  description:
-    'Sound for music, spaces and moving images. Production, mixing, sound design, and audio equipment rental based in Jeddah, Saudi Arabia — working with artists and clients across the region and worldwide.',
-  keywords: [
-    'Maryam Attar',
-    'Music Producer Saudi Arabia',
-    'Audio Engineer Jeddah',
-    'Sound Design Middle East',
-    'MDLBeast Producer',
-    'Equipment Rental Jeddah',
-    'Remote Audio Mixing',
-    'Analog Recording Studio'
+export const viewport: Viewport = {
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#F7F5F0' },
+    { media: '(prefers-color-scheme: dark)', color: '#0D0C0B' },
   ],
-  authors: [{ name: 'Maryam Attar' }],
-  openGraph: {
-    title: 'Maryam Attar — Audio Engineer & Music Producer',
-    description: 'Sound for music, spaces and moving images. Jeddah & Worldwide.',
-    type: 'website',
-    locale: 'en_US',
-    siteName: 'Maryam Attar Music',
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+};
+
+export const metadata: Metadata = {
+  metadataBase: new URL(siteConfig.url),
+  title: {
+    default: siteConfig.title,
+    template: '%s | Maryam Attar',
   },
+  description: siteConfig.description,
+  keywords: siteConfig.keywords,
+  authors: [{ name: siteConfig.author.name, url: siteConfig.url }],
+  creator: siteConfig.author.name,
+  publisher: siteConfig.author.name,
+  alternates: {
+    canonical: '/',
+  },
+  openGraph: {
+    type: 'website',
+    locale: siteConfig.locale,
+    alternateLocale: siteConfig.alternateLocales,
+    url: siteConfig.url,
+    siteName: siteConfig.name,
+    title: siteConfig.title,
+    description: siteConfig.description,
+    images: [
+      {
+        url: siteConfig.ogImage,
+        width: 1200,
+        height: 630,
+        alt: `${siteConfig.name} Studio Session`,
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: siteConfig.title,
+    description: siteConfig.description,
+    images: [siteConfig.ogImage],
+    creator: '@maryamattar',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
+    apple: '/favicon.ico',
+  },
+  manifest: '/manifest.webmanifest',
 };
 
 export default function RootLayout({
@@ -52,6 +97,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`} data-theme="light">
       <head>
+        <JsonLd />
         <script
           dangerouslySetInnerHTML={{
             __html: `

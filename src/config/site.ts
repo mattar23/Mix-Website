@@ -1,0 +1,37 @@
+export const siteConfig = {
+  name: 'Maryam Attar',
+  title: 'Maryam Attar | Audio Engineer & Music Producer',
+  description:
+    'Sound for music, spaces and moving images. Production, mixing, sound design, and equipment rental based in Jeddah, Saudi Arabia — collaborating with artists, cultural organizations, and directors across the GCC and internationally.',
+  url: process.env.NEXT_PUBLIC_SITE_URL || 'https://maryamattar.com',
+  ogImage: '/images/maryam-studio-portrait.jpg',
+  locale: 'en_US',
+  alternateLocales: ['ar_SA'],
+  author: {
+    name: 'Maryam Attar',
+    role: 'Audio Engineer, Music Producer & Sound Designer',
+    email: 'maryamattarmusic@gmail.com',
+    location: 'Jeddah, Saudi Arabia',
+  },
+  keywords: [
+    'Maryam Attar',
+    'Music Producer Jeddah',
+    'Audio Engineer Saudi Arabia',
+    'Audio Mixing Jeddah',
+    'Sound Design Saudi Arabia',
+    'Equipment Rental Jeddah',
+    'Shure SM7B Rental Jeddah',
+    'Tascam Model 12 Hire Saudi',
+    'Film Scoring GCC',
+    'MDLBeast Producer',
+    'Audio Restoration iZotope RX',
+    'Remote Multitrack Mixing',
+    'Berklee Music Producer',
+    'Experimental Electronic Music',
+  ],
+  socials: {
+    instagram: 'https://www.instagram.com',
+    soundcloud: 'https://soundcloud.com',
+    linkedin: 'https://linkedin.com',
+  },
+};
