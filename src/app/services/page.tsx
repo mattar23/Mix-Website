@@ -1,8 +1,25 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { Metadata } from 'next';
 import { SERVICES } from '@/data/services';
 import { ArrowRight, CheckCircle2, FileAudio } from 'lucide-react';
+import { siteConfig } from '@/config/site';
+
+export const metadata: Metadata = {
+  title: 'Audio Mixing, Production & Sound Design Services',
+  description:
+    'Detailed audio mixing, creative music production, bespoke sound design, and audio restoration services by Maryam Attar. Multitrack specifications and delivery requirements included.',
+  alternates: {
+    canonical: `${siteConfig.url}/services`,
+  },
+  openGraph: {
+    title: 'Studio Services & Technical Specs | Maryam Attar',
+    description:
+      'Explore delivery guidelines, DAW session requirements, revision policies, and custom quote options for music and visual media.',
+    url: `${siteConfig.url}/services`,
+  },
+};
 
 export default function ServicesPage() {
   return (

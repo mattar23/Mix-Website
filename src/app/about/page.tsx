@@ -1,8 +1,33 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { Metadata } from 'next';
 import { ARTIST_INFO } from '@/data/bio';
 import { ArrowRight, Award, GraduationCap, Cpu, CheckCircle2 } from 'lucide-react';
+import { siteConfig } from '@/config/site';
+
+export const metadata: Metadata = {
+  title: 'About Maryam Attar | Bio, Credentials & Studio Toolkit',
+  description:
+    'Learn about Maryam Attar, an audio engineer and music producer based in Jeddah, Saudi Arabia. Berklee College of Music Dean’s List honor student, cognitive neuroscience background, and verified client portfolio.',
+  alternates: {
+    canonical: `${siteConfig.url}/about`,
+  },
+  openGraph: {
+    title: 'About Maryam Attar | Bio & Credentials',
+    description:
+      'Sound design and music production rooted in experimental electronic music, analog processing, and narrative storytelling.',
+    url: `${siteConfig.url}/about`,
+    images: [
+      {
+        url: `${siteConfig.url}/images/maryam-session-collab.jpg`,
+        width: 1200,
+        height: 630,
+        alt: 'Maryam Attar Studio Session',
+      },
+    ],
+  },
+};
 
 export default function AboutPage() {
   return (
