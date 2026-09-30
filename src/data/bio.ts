@@ -8,20 +8,20 @@ export const ARTIST_INFO = {
   longBio: [
     'Maryam Attar is a music producer, sound designer, and audio engineer based in Jeddah, Saudi Arabia. Her work is rooted in experimental electronic music, drawing inspiration from genres like trip-hop and alternative rock.',
     'Sound design and production are closely intertwined in her work. Through recording, processing, sampling, and resampling, Maryam explores how sounds can be pushed beyond their original form and repurposed as musical material. Her process moves between experimentation and intention, allowing sound itself to shape the direction of a piece while using tone, texture, and space to build an immersive environment around its narrative.',
-    'Her growing involvement in audio engineering developed from this same process, expanding the technical control available within her creative work. Ultimately, her aim is to draw the listener into the world of a piece — to create an experience that is felt and followed rather than simply heard.',
+    'Her growing involvement in audio engineering developed from this same process, expanding the technical control available within her creative work. Ultimately, her aim is to draw the listener into the world of a piece, creating an experience that is felt and followed rather than simply heard.',
     'Her practice spans artistic and commercial contexts, with projects for MDLBEAST and Athr Gallery, as well as music production for Nur Taibah’s performance piece "Blending In".'
   ],
   education: [
     {
       degree: 'BA Interdisciplinary Music Studies',
       institution: 'Berklee College of Music',
-      period: '2023 – Present',
+      period: '2023 to present',
       honors: "GPA 4.0 | Dean's List"
     },
     {
       degree: 'DipHE Cognitive & Clinical Neuroscience',
       institution: 'University of Westminster',
-      period: '2016 – 2020'
+      period: '2016 to 2020'
     }
   ],
   toolkit: [

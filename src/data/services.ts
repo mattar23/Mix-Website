@@ -44,7 +44,7 @@ export const SERVICES: ServiceDetail[] = [
         heading: 'Rough Mix & References',
         points: [
           'Include the latest producer or rough mix as an essential benchmark for existing balance and spatial ideas.',
-          'Share a short playlist (2–3 tracks) representing the tone, energy, or aesthetic vibe you envision.'
+          'Share a short playlist (2 to 3 tracks) representing the tone, energy, or aesthetic vibe you envision.'
         ]
       },
       {

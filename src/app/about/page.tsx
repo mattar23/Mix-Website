@@ -3,27 +3,24 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Metadata } from 'next';
 import { ARTIST_INFO } from '@/data/bio';
-import { ArrowRight, Award, GraduationCap, Cpu, CheckCircle2 } from 'lucide-react';
 import { siteConfig } from '@/config/site';
 
 export const metadata: Metadata = {
-  title: 'About Maryam Attar | Bio, Credentials & Studio Toolkit',
+  title: 'About',
   description:
-    'Learn about Maryam Attar, an audio engineer and music producer based in Jeddah, Saudi Arabia. Berklee College of Music Dean’s List honor student, cognitive neuroscience background, and verified client portfolio.',
-  alternates: {
-    canonical: `${siteConfig.url}/about`,
-  },
+    'Maryam Attar is a producer, sound designer, and audio engineer in Jeddah, working in experimental electronic music and sound for film and exhibition.',
+  alternates: { canonical: `${siteConfig.url}/about` },
   openGraph: {
-    title: 'About Maryam Attar | Bio & Credentials',
+    title: 'About | Maryam Attar',
     description:
-      'Sound design and music production rooted in experimental electronic music, analog processing, and narrative storytelling.',
+      'Sound design and production rooted in experimental electronic music and narrative listening.',
     url: `${siteConfig.url}/about`,
     images: [
       {
         url: `${siteConfig.url}/images/maryam-session-collab.jpg`,
         width: 1200,
         height: 630,
-        alt: 'Maryam Attar Studio Session',
+        alt: 'Maryam Attar in the studio',
       },
     ],
   },
@@ -31,140 +28,107 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <div className="max-w-7xl mx-auto px-6 md:px-12 py-12 md:py-16 space-y-20">
-      {/* Hero Split Section */}
-      <section className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-        {/* Left Column: Portrait */}
-        <div className="lg:col-span-6 space-y-4">
-          <div className="relative aspect-[4/3] sm:aspect-[1/1] w-full rounded-lg overflow-hidden border border-[var(--border-color)] shadow-md group">
-            <Image
-              src="/images/maryam-session-collab.jpg"
-              alt="Maryam Attar working in studio environment"
-              fill
-              priority
-              className="object-cover group-hover:scale-102 transition-transform duration-700"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-80" />
-            <div className="absolute bottom-4 left-4 right-4 text-white text-xs font-mono flex justify-between items-center">
-              <span>STUDIO COLLABORATION · JEDDAH</span>
-              <span className="text-[var(--accent)] font-semibold">EST. 2019</span>
-            </div>
-          </div>
+    <>
+      <section className="wrap step">
+        <h1 className="hero-type" style={{ maxWidth: '10ch' }}>
+          Maryam Attar
+        </h1>
 
-          <div className="p-5 bg-[var(--bg-card)] border border-[var(--border-color)] rounded text-xs text-[var(--text-muted)] space-y-2">
-            <div className="flex items-center gap-2 text-[var(--text-main)] font-semibold uppercase font-mono text-[11px]">
-              <Award size={14} className="text-[var(--accent)]" />
-              <span>Philosophy</span>
-            </div>
-            <p className="leading-relaxed">
-              &ldquo;Moving between experimentation and intention, allowing sound itself to shape the direction of a piece while using tone, texture, and space to build an immersive environment around its narrative.&rdquo;
-            </p>
-          </div>
-        </div>
-
-        {/* Right Column: Bio Content */}
-        <div className="lg:col-span-6 space-y-6">
-          <div className="space-y-3">
-            <div className="w-12 h-1 bg-[var(--accent)]" />
-            <span className="text-xs font-mono uppercase tracking-widest text-[var(--accent)]">
-              Biography
-            </span>
-            <h1 className="text-4xl sm:text-5xl font-light text-[var(--text-main)] tracking-tight">
-              Maryam Attar
-            </h1>
-            <p className="text-sm font-mono text-[var(--text-muted)]">
-              {ARTIST_INFO.title} · {ARTIST_INFO.location}
-            </p>
-          </div>
-
-          <div className="space-y-4 text-sm sm:text-base text-[var(--text-main)] leading-relaxed font-light border-l-2 border-[var(--border-color)] pl-6">
-            {ARTIST_INFO.longBio.map((paragraph, idx) => (
-              <p key={idx}>{paragraph}</p>
+        <div className="doc" style={{ marginTop: 'clamp(2.5rem, 6vw, 5rem)' }}>
+          <p className="meta doc__margin">
+            {ARTIST_INFO.title}
+            <br />
+            {ARTIST_INFO.location}
+          </p>
+          <div className="prose">
+            {ARTIST_INFO.longBio.map((paragraph) => (
+              <p key={paragraph.slice(0, 32)}>{paragraph}</p>
             ))}
-          </div>
-
-          <div className="pt-4 flex items-center gap-4">
-            <Link
-              href="/contact"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-[var(--text-main)] hover:bg-[var(--accent)] text-[var(--bg-main)] hover:text-white text-xs font-mono uppercase tracking-wider rounded transition-colors"
-            >
-              <span>Work Together</span>
-              <ArrowRight size={14} />
-            </Link>
-            <Link
-              href="/work"
-              className="inline-flex items-center gap-2 px-6 py-3 border border-[var(--border-color)] hover:border-[var(--text-main)] text-[var(--text-main)] text-xs font-mono uppercase tracking-wider rounded transition-colors"
-            >
-              <span>View Portfolio</span>
-            </Link>
           </div>
         </div>
       </section>
 
-      {/* CREDENTIALS, EDUCATION & TOOLKIT */}
-      <section className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-8 border-t border-[var(--border-color)]">
-        {/* Education & Academic Honors */}
-        <div className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-lg p-6 space-y-5">
-          <div className="flex items-center gap-2">
-            <GraduationCap size={18} className="text-[var(--accent)]" />
-            <h3 className="text-sm font-semibold uppercase font-mono tracking-wider text-[var(--text-main)]">
-              Education & Honors
-            </h3>
-          </div>
-          <div className="space-y-4">
-            {ARTIST_INFO.education.map((edu, idx) => (
-              <div key={idx} className="space-y-1">
-                <h4 className="text-sm font-medium text-[var(--text-main)]">{edu.degree}</h4>
-                <p className="text-xs text-[var(--text-muted)]">{edu.institution}</p>
-                <div className="flex items-center justify-between text-[11px] font-mono text-[var(--text-muted)]">
-                  <span>{edu.period}</span>
-                  {edu.honors && (
-                    <span className="text-[var(--accent)] font-semibold">{edu.honors}</span>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
+      <section className="wrap step-b">
+        <div className="figure" style={{ aspectRatio: '16 / 7' }}>
+          <Image
+            src="/images/maryam-session-collab.jpg"
+            alt="Maryam Attar working with a collaborator in the studio"
+            fill
+            sizes="100vw"
+            style={{ objectFit: 'cover' }}
+          />
         </div>
+      </section>
 
-        {/* Technical Toolkit */}
-        <div className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-lg p-6 space-y-5">
-          <div className="flex items-center gap-2">
-            <Cpu size={18} className="text-[var(--accent)]" />
-            <h3 className="text-sm font-semibold uppercase font-mono tracking-wider text-[var(--text-main)]">
-              Technical Toolkit
-            </h3>
-          </div>
-          <ul className="space-y-2.5">
-            {ARTIST_INFO.toolkit.map((tool, idx) => (
-              <li key={idx} className="flex items-center gap-2 text-xs text-[var(--text-muted)]">
-                <CheckCircle2 size={14} className="text-[var(--accent)] shrink-0" />
-                <span>{tool}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* Selected Clients & Credits */}
-        <div className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-lg p-6 space-y-5">
-          <div className="flex items-center gap-2">
-            <Award size={18} className="text-[var(--accent)]" />
-            <h3 className="text-sm font-semibold uppercase font-mono tracking-wider text-[var(--text-main)]">
-              Selected Credits
-            </h3>
-          </div>
-          <div className="space-y-3">
-            {ARTIST_INFO.clientsAndCredits.map((credit, idx) => (
-              <div key={idx} className="space-y-0.5">
-                <span className="text-xs font-semibold text-[var(--text-main)]">
-                  {credit.name}
+      <section className="wrap step-b">
+        <hr className="rule" />
+        <div className="doc" style={{ paddingTop: '2.5rem' }}>
+          <p className="meta doc__margin">Credits</p>
+          <div className="index" style={{ borderTop: 0 }}>
+            {ARTIST_INFO.clientsAndCredits.map((credit) => (
+              <div className="index__row index__row-static" key={credit.name}>
+                <span className="index__year">{credit.name}</span>
+                <span className="prose prose-fine" style={{ maxWidth: '40ch' }}>
+                  {credit.detail}
                 </span>
-                <p className="text-xs text-[var(--text-muted)]">{credit.detail}</p>
+                <span />
               </div>
             ))}
           </div>
         </div>
       </section>
-    </div>
+
+      <section className="wrap step-b">
+        <hr className="rule" />
+        <div className="doc" style={{ paddingTop: '2.5rem' }}>
+          <p className="meta doc__margin">Background</p>
+
+          <div className="two-col">
+            <div>
+              <p className="meta">Study</p>
+              <div className="stack" style={{ marginTop: '0.75rem' }}>
+                {ARTIST_INFO.education.map((edu) => (
+                  <div key={edu.degree}>
+                    <p style={{ fontWeight: 500, letterSpacing: '-0.012em' }}>{edu.degree}</p>
+                    <p className="meta">
+                      {edu.institution}, {edu.period}
+                      {edu.honors ? ` · ${edu.honors}` : ''}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <p className="meta">Tools in regular use</p>
+              <ul className="speclist" style={{ marginTop: '0.75rem' }}>
+                {ARTIST_INFO.toolkit.map((tool) => (
+                  <li className="prose prose-fine" key={tool}>
+                    {tool}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="wrap step-b">
+        <hr className="rule" />
+        <div style={{ paddingTop: 'clamp(2.5rem, 6vw, 4.5rem)' }}>
+          <h2 className="hero-type" style={{ maxWidth: '12ch' }}>
+            Work together.
+          </h2>
+          <p className="cluster cluster-lg" style={{ marginTop: '2.5rem' }}>
+            <Link className="btn btn-solid" href="/contact">
+              Get in touch
+            </Link>
+            <Link className="btn" href="/work">
+              See the work
+            </Link>
+          </p>
+        </div>
+      </section>
+    </>
   );
 }

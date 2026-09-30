@@ -3,16 +3,13 @@ import ContactClient from './ContactClient';
 import { siteConfig } from '@/config/site';
 
 export const metadata: Metadata = {
-  title: 'Contact & Studio Inquiries | Maryam Attar',
+  title: 'Contact',
   description:
-    'Initiate a music production, audio mixing, sound design, or equipment rental inquiry with Maryam Attar. Based in Jeddah, Saudi Arabia and serving regional and international clients.',
-  alternates: {
-    canonical: `${siteConfig.url}/contact`,
-  },
+    'Start a mixing, production, sound design, or equipment hire enquiry with Maryam Attar in Jeddah, Saudi Arabia.',
+  alternates: { canonical: `${siteConfig.url}/contact` },
   openGraph: {
-    title: 'Contact & Studio Inquiries | Maryam Attar',
-    description:
-      'Book a mixing session, original composition project, or audio equipment hire in Jeddah or remotely worldwide.',
+    title: 'Contact | Maryam Attar',
+    description: 'Book a session, or hire audio equipment in Jeddah.',
     url: `${siteConfig.url}/contact`,
   },
 };

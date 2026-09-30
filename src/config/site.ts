@@ -2,7 +2,7 @@ export const siteConfig = {
   name: 'Maryam Attar',
   title: 'Maryam Attar | Audio Engineer & Music Producer',
   description:
-    'Sound for music, spaces and moving images. Production, mixing, sound design, and equipment rental based in Jeddah, Saudi Arabia — collaborating with artists, cultural organizations, and directors across the GCC and internationally.',
+    'Sound for music, spaces and moving images. Production, mixing, sound design, and equipment rental based in Jeddah, Saudi Arabia, collaborating with artists, cultural organizations, and directors across the GCC and internationally.',
   url: process.env.NEXT_PUBLIC_SITE_URL || 'https://maryamattar.com',
   ogImage: '/images/maryam-studio-portrait.jpg',
   locale: 'en_US',
