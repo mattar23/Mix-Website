@@ -1,35 +1,40 @@
 import type { Metadata, Viewport } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
+import { Archivo, Newsreader } from 'next/font/google';
 import './globals.css';
 import { AudioProvider } from '@/components/AudioPlayerContext';
 import { RentalProvider } from '@/components/RentalContext';
 import { ThemeProvider } from '@/components/ThemeContext';
-import { Navbar } from '@/components/Navbar';
-import { Footer } from '@/components/Footer';
-import { AudioPlayerBar } from '@/components/AudioPlayerBar';
+import { Masthead } from '@/components/Masthead';
+import { Colophon } from '@/components/Colophon';
+import { PlayerBar } from '@/components/PlayerBar';
 import { RentalDrawer } from '@/components/RentalDrawer';
-import { NoiseOverlay } from '@/components/NoiseOverlay';
 import { JsonLd } from '@/components/JsonLd';
 import { siteConfig } from '@/config/site';
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
+// Display and interface. The width axis, 62 to 125, carries the personality.
+const archivo = Archivo({
   subsets: ['latin'],
+  axes: ['wdth'],
+  variable: '--font-archivo',
+  display: 'swap',
 });
 
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
+// Reading text. Optical sizing keeps prose warm at length.
+const newsreader = Newsreader({
   subsets: ['latin'],
+  axes: ['opsz'],
+  style: ['normal', 'italic'],
+  variable: '--font-newsreader',
+  display: 'swap',
 });
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#F7F5F0' },
-    { media: '(prefers-color-scheme: dark)', color: '#0D0C0B' },
+    { media: '(prefers-color-scheme: light)', color: '#e4e2dd' },
+    { media: '(prefers-color-scheme: dark)', color: '#0a0a09' },
   ],
   width: 'device-width',
   initialScale: 1,
-  maximumScale: 5,
 };
 
 export const metadata: Metadata = {
@@ -43,9 +48,7 @@ export const metadata: Metadata = {
   authors: [{ name: siteConfig.author.name, url: siteConfig.url }],
   creator: siteConfig.author.name,
   publisher: siteConfig.author.name,
-  alternates: {
-    canonical: '/',
-  },
+  alternates: { canonical: '/' },
   openGraph: {
     type: 'website',
     locale: siteConfig.locale,
@@ -59,7 +62,7 @@ export const metadata: Metadata = {
         url: siteConfig.ogImage,
         width: 1200,
         height: 630,
-        alt: `${siteConfig.name} Studio Session`,
+        alt: 'Maryam Attar in the studio',
       },
     ],
   },
@@ -68,7 +71,6 @@ export const metadata: Metadata = {
     title: siteConfig.title,
     description: siteConfig.description,
     images: [siteConfig.ogImage],
-    creator: '@maryamattar',
   },
   robots: {
     index: true,
@@ -81,46 +83,45 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  icons: {
-    icon: '/favicon.ico',
-    shortcut: '/favicon.ico',
-    apple: '/favicon.ico',
-  },
+  icons: { icon: '/favicon.ico', shortcut: '/favicon.ico', apple: '/favicon.ico' },
   manifest: '/manifest.webmanifest',
 };
 
+// Runs before paint so the stored theme never flashes.
+const themeInit = `
+try {
+  var t = localStorage.getItem('ma-theme')
+    || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  document.documentElement.setAttribute('data-theme', t);
+} catch (e) {}
+`;
+
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
+  // suppressHydrationWarning: the theme script rewrites data-theme before
+  // React hydrates, so the server value is meant to differ. It applies to
+  // this element's own attributes only, not to anything nested inside.
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`} data-theme="light">
+    <html
+      lang="en"
+      data-theme="light"
+      suppressHydrationWarning
+      className={`${archivo.variable} ${newsreader.variable}`}
+    >
       <head>
         <JsonLd />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              try {
-                const saved = localStorage.getItem('maryam_theme');
-                const theme = saved || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-                document.documentElement.setAttribute('data-theme', theme);
-                if (theme === 'dark') document.documentElement.classList.add('dark');
-              } catch (e) {}
-            `,
-          }}
-        />
+        <script dangerouslySetInnerHTML={{ __html: themeInit }} />
       </head>
-      <body className="min-h-full flex flex-col bg-[var(--bg-main)] text-[var(--text-main)] pb-24 transition-colors duration-200">
-        <NoiseOverlay />
+      <body>
         <ThemeProvider>
           <AudioProvider>
             <RentalProvider>
-              <Navbar />
-              <main className="flex-1">{children}</main>
+              <Masthead />
+              <main>{children}</main>
+              <Colophon />
               <RentalDrawer />
-              <AudioPlayerBar />
-              <Footer />
+              <PlayerBar />
             </RentalProvider>
           </AudioProvider>
         </ThemeProvider>

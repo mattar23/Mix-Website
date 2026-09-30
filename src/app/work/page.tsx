@@ -3,23 +3,20 @@ import WorkClient from './WorkClient';
 import { siteConfig } from '@/config/site';
 
 export const metadata: Metadata = {
-  title: 'Selected Works & Audio Samples',
+  title: 'Work',
   description:
-    'Explore portfolio works, original compositions, and audio mixing credits by Maryam Attar for MDLBeast Expo 2020 Dubai, Nadine Jewellery, Athr Gallery, and independent artists.',
-  alternates: {
-    canonical: `${siteConfig.url}/work`,
-  },
+    'Selected commissions and collaborations by Maryam Attar across music, film, and exhibition, including MDLBEAST, Athr Gallery, and Nadine Jewellery.',
+  alternates: { canonical: `${siteConfig.url}/work` },
   openGraph: {
-    title: 'Selected Works & Audio Samples | Maryam Attar',
-    description:
-      'Listen to commercial scoring, sound design, and vocal mix samples produced in Jeddah and available worldwide.',
+    title: 'Work | Maryam Attar',
+    description: 'Scoring, sound design, and mixing for records, campaigns, and exhibitions.',
     url: `${siteConfig.url}/work`,
     images: [
       {
-        url: `${siteConfig.url}/images/projects/cloud-walker.jpg`,
+        url: `${siteConfig.url}/images/projects/rawda-water.jpg`,
         width: 1200,
         height: 630,
-        alt: 'Maryam Attar Selected Works',
+        alt: 'Selected work by Maryam Attar',
       },
     ],
   },

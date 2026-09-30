@@ -6,7 +6,10 @@ export interface Project {
   year: string;
   category: 'Music' | 'Commercial' | 'Art' | 'Sound Design';
   description: string;
-  image: string;
+  /** Optional: several projects have no usable source imagery yet. */
+  image?: string;
+  /** Short muted loop shown in place of the still while a row is hovered. */
+  video?: string;
   audioSrc?: string;
   externalLink?: string;
   tags: string[];
@@ -15,14 +18,13 @@ export interface Project {
 export const PROJECTS: Project[] = [
   {
     id: 'cloud-walker',
-    title: 'Cloud Walker — Expo 2020 Dubai',
+    title: 'Cloud Walker, Expo 2020 Dubai',
     clientOrArtist: 'MDLBEAST / Saudi Arabia Pavilion',
     role: 'Original Music Composition & Production',
     year: '2021',
     category: 'Commercial',
     description:
       'Composed and produced original music for the Saudi Arabia Pavilion\'s animated promotional campaign at Expo 2020 Dubai, capturing Saudi cultural essence and the forward-looking vision of 2030.',
-    image: '/images/projects/cloud-walker.jpg',
     externalLink: 'https://www.youtube.com/watch?v=CLok4hx-Cms',
     tags: ['Original Score', 'MDLBeast', 'Orchestral Hybrid', 'Expo 2020']
   },
@@ -31,11 +33,12 @@ export const PROJECTS: Project[] = [
     title: 'Rawda Collection Campaign',
     clientOrArtist: 'Nadine Jewellery',
     role: 'Music Production, Voiceover Recording & Mix',
-    year: '2022 – 2023',
+    year: '2022/23',
     category: 'Commercial',
     description:
       'Music production and complete audio mixing for luxury campaign videos celebrating nature, heritage, and poetic storytelling. Recorded, edited, and balanced voiceover narration across multiple collection chapters.',
-    image: '/images/projects/nadine-jewellery.jpg',
+    image: '/images/projects/rawda-water.jpg',
+    video: '/video/rawda-water.mp4',
     audioSrc: '/audio/gemma-nj-rawda.mp3',
     externalLink: 'https://www.instagram.com/reel/DQGjQg6AAw3/',
     tags: ['Music Production', 'Voiceover Mix', 'Brand Scoring', 'Luxury']
@@ -49,13 +52,12 @@ export const PROJECTS: Project[] = [
     category: 'Art',
     description:
       'Created immersive sound design and tactile sonic identity for Athr Gallery’s social media campaign announcing their international contemporary artist open call.',
-    image: '/images/projects/athr-gallery.jpg',
     externalLink: 'https://www.instagram.com/p/B47bRS3ALwa/',
     tags: ['Sound Design', 'Contemporary Art', 'Spatial Texture']
   },
   {
     id: 'blending-in',
-    title: 'Blending In — Audiovisual Performance',
+    title: 'Blending In, Audiovisual Performance',
     clientOrArtist: 'Nur Taibah',
     role: 'Original Music Production & Audio Narrative',
     year: '2021',
@@ -63,6 +65,7 @@ export const PROJECTS: Project[] = [
     description:
       'Produced original music for an audiovisual performance art piece combining spoken word, intimate field recordings, and moving video for a public exhibition.',
     image: '/images/projects/blending-in.jpg',
+    video: '/video/blending-in.mp4',
     tags: ['Audiovisual Art', 'Spoken Word', 'Experimental Electronic']
   },
   {
@@ -74,7 +77,6 @@ export const PROJECTS: Project[] = [
     category: 'Sound Design',
     description:
       'Engineered detailed spectral repair and audio restoration for an archival Saudi cultural sample pack, removing artifacts, clicks, and background noise to yield pristine, project-ready creative libraries.',
-    image: '/images/aesthetic/analog-mixer.jpg',
     tags: ['iZotope RX', 'Audio Restoration', 'Heritage Archives']
   },
   {
@@ -86,7 +88,7 @@ export const PROJECTS: Project[] = [
     category: 'Music',
     description:
       'Assisted recording sessions for bands and singer-songwriters, handling microphone placement, DAW routing, vocal comping, and production consultation.',
-    image: '/images/maryam-session-collab.jpg',
+    image: '/images/projects/studio-session.jpg',
     tags: ['Tracking', 'Analog Desk', 'Vocal Production']
   }
 ];
@@ -103,42 +105,80 @@ export interface AudioSample {
 export const AUDIO_SAMPLES: AudioSample[] = [
   {
     id: 'gemma',
-    title: 'Gemma Chapter — Rawda Campaign',
+    title: 'Gemma Chapter, Rawda Campaign',
     subtitle: 'Nadine Jewellery · Voiceover Mix & Original Production',
     src: '/audio/gemma-nj-rawda.mp3',
-    duration: '0:55',
+    duration: '1:40',
     category: 'Commercial'
   },
   {
     id: 'haya',
-    title: 'Haya Chapter — Rawda Campaign',
+    title: 'Haya Chapter, Rawda Campaign',
     subtitle: 'Nadine Jewellery · Voiceover Mix & Sound Design',
     src: '/audio/haya-nj-rawda.mp3',
-    duration: '1:10',
+    duration: '2:07',
     category: 'Commercial'
   },
   {
     id: 'manna',
-    title: 'Manna Chapter — Rawda Campaign',
+    title: 'Manna Chapter, Rawda Campaign',
     subtitle: 'Nadine Jewellery · Voiceover Mix & Atmosphere',
     src: '/audio/manna-nj-rawda.mp3',
-    duration: '1:15',
+    duration: '2:16',
+    category: 'Commercial'
+  },
+  {
+    id: 'palma',
+    title: 'Palma Chapter, Rawda Campaign',
+    subtitle: 'Nadine Jewellery · Voiceover Mix',
+    src: '/audio/palma-nj-rawda.mp3',
+    duration: '1:50',
     category: 'Commercial'
   },
   {
     id: 'rosa',
-    title: 'Rosa Chapter — Rawda Campaign',
+    title: 'Rosa Chapter, Rawda Campaign',
     subtitle: 'Nadine Jewellery · Spatial Tone & Voiceover Mix',
     src: '/audio/rosa-nj-rawda.mp3',
-    duration: '0:51',
+    duration: '1:34',
     category: 'Commercial'
   },
   {
     id: 'yasmina',
-    title: 'Yasmina Chapter — Rawda Campaign',
+    title: 'Yasmina Chapter, Rawda Campaign',
     subtitle: 'Nadine Jewellery · Intimate Spoken Voiceover & Sonic Space',
     src: '/audio/yasmina-nj-rawda.mp3',
-    duration: '0:43',
+    duration: '1:18',
     category: 'Commercial'
+  }
+];
+
+/** A finished film carrying Maryam's sound, shown with its audio on. */
+export interface Film {
+  id: string;
+  title: string;
+  /** Links the film to its entry in PROJECTS for client and credit. */
+  projectId: string;
+  src: string;
+  poster: string;
+  duration: string;
+}
+
+export const FILMS: Film[] = [
+  {
+    id: 'rawda-botanica',
+    title: 'Rawda Botanica',
+    projectId: 'nadine-jewellery-rawda',
+    src: '/video/rawda-botanica.mp4',
+    poster: '/images/films/rawda-botanica.jpg',
+    duration: '0:38'
+  },
+  {
+    id: 'rawda-gemma',
+    title: 'Rawda Gemma',
+    projectId: 'nadine-jewellery-rawda',
+    src: '/video/rawda-gemma.mp4',
+    poster: '/images/films/rawda-gemma.jpg',
+    duration: '0:31'
   }
 ];
