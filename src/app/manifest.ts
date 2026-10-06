@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next';
 import { siteConfig } from '@/config/site';
+import { asset } from '@/lib/asset';
 
 // Required for metadata routes under output: 'export'.
 export const dynamic = 'force-static';
@@ -9,10 +10,10 @@ export default function manifest(): MetadataRoute.Manifest {
     name: siteConfig.title,
     short_name: 'Maryam Attar',
     description: siteConfig.description,
-    start_url: '/',
+    start_url: asset('/'),
     display: 'standalone',
     background_color: '#f1ede6',
     theme_color: '#f1ede6',
-    icons: [{ src: '/favicon.ico', sizes: 'any', type: 'image/x-icon' }],
+    icons: [{ src: asset('/favicon.ico'), sizes: 'any', type: 'image/x-icon' }],
   };
 }

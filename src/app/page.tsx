@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { asset } from '@/lib/asset';
 import { SERVICES } from '@/data/services';
 
 const ENTRIES = [
@@ -38,7 +39,7 @@ export default function HomePage() {
               carry rather than run full bleed. */}
           <div className="figure hero__portrait">
             <Image
-              src="/images/maryam-portrait.jpg"
+              src={asset('/images/maryam-portrait.jpg')}
               alt="Maryam Attar at her desk in the studio"
               fill
               priority

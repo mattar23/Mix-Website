@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import type { Film, Project } from '@/data/projects';
 import { useAudio } from '@/components/AudioPlayerContext';
 import { Glyph } from '@/components/Glyph';
+import { asset } from '@/lib/asset';
 
 // Only one thing on the site makes sound at a time. Films tell each other
 // through this event, and yield to the track player through the audio context.
@@ -39,8 +40,8 @@ export function FilmPlate({ film, project }: { film: Film; project?: Project }) 
       <div className="figure film__frame">
         <video
           ref={ref}
-          src={film.src}
-          poster={film.poster}
+          src={asset(film.src)}
+          poster={asset(film.poster)}
           preload="none"
           playsInline
           // Native controls appear once the film has started, for scrubbing
@@ -67,11 +68,10 @@ export function FilmPlate({ film, project }: { film: Film; project?: Project }) 
             <span className="track__title" style={{ display: 'block' }}>
               {film.title}
             </span>
-            {project && (
-              <span className="meta meta-micro muted">
-                {project.clientOrArtist}, {project.role}
-              </span>
-            )}
+            <span className="meta meta-micro muted">
+              {project ? `${project.clientOrArtist}, ` : ''}
+              {film.credit}
+            </span>
           </span>
           <span className="track__dur">{film.duration}</span>
         </button>

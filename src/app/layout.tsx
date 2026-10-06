@@ -7,6 +7,7 @@ import { Colophon } from '@/components/Colophon';
 import { PlayerBar } from '@/components/PlayerBar';
 import { JsonLd } from '@/components/JsonLd';
 import { siteConfig } from '@/config/site';
+import { asset } from '@/lib/asset';
 
 // Display and interface. The width axis, 62 to 125, carries the personality.
 const archivo = Archivo({
@@ -53,7 +54,7 @@ export const metadata: Metadata = {
     description: siteConfig.description,
     images: [
       {
-        url: siteConfig.ogImage,
+        url: `${siteConfig.url}${siteConfig.ogImage}`,
         width: 1200,
         height: 630,
         alt: 'Maryam Attar in her Jeddah studio',
@@ -64,7 +65,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: siteConfig.title,
     description: siteConfig.description,
-    images: [siteConfig.ogImage],
+    images: [`${siteConfig.url}${siteConfig.ogImage}`],
   },
   robots: {
     index: true,
@@ -77,8 +78,7 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  icons: { icon: '/favicon.ico', shortcut: '/favicon.ico', apple: '/favicon.ico' },
-  manifest: '/manifest.webmanifest',
+  manifest: asset('/manifest.webmanifest'),
   // Region hints for local search. Harmless where ignored.
   other: {
     'geo.region': 'SA-02',

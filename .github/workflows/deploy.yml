@@ -24,9 +24,14 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      # Preview from the GitHub project URL. Once maryamattar.co is connected
+      # (DEPLOY.md, step 4) change these two lines to
+      #   NEXT_PUBLIC_SITE_URL: https://maryamattar.co
+      #   NEXT_PUBLIC_BASE_PATH: ""
       - run: npm run build
         env:
-          NEXT_PUBLIC_SITE_URL: https://maryamattar.co
+          NEXT_PUBLIC_SITE_URL: https://mattar23.github.io/Mix-Website
+          NEXT_PUBLIC_BASE_PATH: /Mix-Website
       - uses: actions/upload-pages-artifact@v3
         with:
           path: out

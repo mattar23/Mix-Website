@@ -7,6 +7,7 @@ import { useAudio } from '@/components/AudioPlayerContext';
 import { useReducedMotion } from '@/components/useReducedMotion';
 import { Glyph } from '@/components/Glyph';
 import { FilmPlate } from '@/components/FilmPlate';
+import { asset } from '@/lib/asset';
 
 export default function WorkClient() {
   const { currentTrack, isPlaying, playTrack } = useAudio();
@@ -90,7 +91,7 @@ export default function WorkClient() {
                     {p.image && (
                       <div className="figure index__thumb">
                         <Image
-                          src={p.image}
+                          src={asset(p.image)}
                           alt={p.title}
                           fill
                           sizes="100vw"
@@ -114,7 +115,7 @@ export default function WorkClient() {
                 <Image
                   key={p.id}
                   className={`plate__img${p.id === shown?.id ? ' plate__img-on' : ''}`}
-                  src={p.image as string}
+                  src={asset(p.image as string)}
                   alt=""
                   fill
                   sizes="26rem"
@@ -132,8 +133,8 @@ export default function WorkClient() {
                     if (el) void el.play().catch(() => {});
                   }}
                   className={`plate__vid${videoReady ? ' plate__vid-on' : ''}`}
-                  src={shown.video}
-                  poster={shown.image}
+                  src={asset(shown.video)}
+                  poster={shown.image ? asset(shown.image) : undefined}
                   autoPlay
                   muted
                   loop

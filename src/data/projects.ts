@@ -68,29 +68,6 @@ export const PROJECTS: Project[] = [
     video: '/video/blending-in.mp4',
     tags: ['Audiovisual Art', 'Spoken Word', 'Experimental Electronic']
   },
-  {
-    id: 'cultural-sample-pack',
-    title: 'Cultural Heritage Audio Restoration',
-    clientOrArtist: 'Saudi Music Commission',
-    role: 'Audio Restoration & Sample Mastering',
-    year: '2022',
-    category: 'Sound Design',
-    description:
-      'Engineered detailed spectral repair and audio restoration for an archival Saudi cultural sample pack, removing artifacts, clicks, and background noise to yield pristine, project-ready creative libraries.',
-    tags: ['iZotope RX', 'Audio Restoration', 'Heritage Archives']
-  },
-  {
-    id: 'independent-artist-sessions',
-    title: 'Studio Recording & Vocal Comping',
-    clientOrArtist: 'Wall of Sound Label Sessions',
-    role: 'Assistant Audio Engineer',
-    year: '2021',
-    category: 'Music',
-    description:
-      'Assisted recording sessions for bands and singer-songwriters, handling microphone placement, DAW routing, vocal comping, and production consultation.',
-    image: '/images/projects/studio-session.jpg',
-    tags: ['Tracking', 'Analog Desk', 'Vocal Production']
-  }
 ];
 
 export interface AudioSample {
@@ -157,8 +134,10 @@ export const AUDIO_SAMPLES: AudioSample[] = [
 export interface Film {
   id: string;
   title: string;
-  /** Links the film to its entry in PROJECTS for client and credit. */
+  /** Links the film to its entry in PROJECTS for the client name. */
   projectId: string;
+  /** Maryam's credit on this film. The voiceover on the films was not hers. */
+  credit: string;
   src: string;
   poster: string;
   duration: string;
@@ -169,6 +148,7 @@ export const FILMS: Film[] = [
     id: 'rawda-botanica',
     title: 'Rawda Botanica',
     projectId: 'nadine-jewellery-rawda',
+    credit: 'Music Production & Mix',
     src: '/video/rawda-botanica.mp4',
     poster: '/images/films/rawda-botanica.jpg',
     duration: '0:38'
@@ -177,6 +157,7 @@ export const FILMS: Film[] = [
     id: 'rawda-gemma',
     title: 'Rawda Gemma',
     projectId: 'nadine-jewellery-rawda',
+    credit: 'Music Production & Mix',
     src: '/video/rawda-gemma.mp4',
     poster: '/images/films/rawda-gemma.jpg',
     duration: '0:31'

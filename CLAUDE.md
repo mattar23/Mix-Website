@@ -19,7 +19,7 @@ There is no test runner and no test files. CI is the deploy workflow only, see D
 
 ## What this is
 
-A portfolio and equipment hire site for Maryam Attar, a mixing and voiceover engineer in Jeddah, Saudi Arabia. Six static routes: home, work, services, equipment, about, contact. Next.js 16 App Router, React 19, TypeScript strict, exported as static files. No database, no API routes, no backend.
+A portfolio and equipment hire site for Maryam Attar, a mixing and voiceover engineer in Jeddah, Saudi Arabia. Seven static routes: home, work, services, equipment, about, contact, and `/links`, the page a social bio points at, which stays out of the masthead. Next.js 16 App Router, React 19, TypeScript strict, exported as static files. No database, no API routes, no backend.
 
 Dependencies are deliberately minimal: `next`, `react`, `react-dom` and nothing else. There is no CSS framework, no icon library, no component library. Adding one needs a real reason.
 
@@ -74,11 +74,13 @@ Four typed modules are the single source of content truth. Pages import and rend
 
 `SERVICES` holds exactly two entries, `mixing` and `voiceover`, and the copy is Maryam's own from her services document. Production, sound design, and restoration were removed as services at her request; they survive only as credits and projects. `RENTAL_TERMS` is a numbered list of `{ heading, body }` and is a draft she has not yet approved.
 
-`src/config/site.ts` holds site-level identity: canonical URL, description, keywords, `areaServed`, socials. The URL reads `NEXT_PUBLIC_SITE_URL` and falls back to `https://maryamattar.co`. Metadata, sitemap, robots, manifest, and JSON-LD all derive from it.
+`src/config/site.ts` holds site-level identity: canonical URL, description, keywords, `areaServed`, socials. The URL reads `NEXT_PUBLIC_SITE_URL` and falls back to `https://maryamattar.co`. Metadata, sitemap, robots, manifest, and JSON-LD all derive from it. The contact address is `info@maryamattar.co` in both `site.ts` and `bio.ts`; it has no mailbox yet, see `DEPLOY.md`.
+
+`src/lib/asset.ts` prefixes a public path with `NEXT_PUBLIC_BASE_PATH`. Every raw `src` or `poster` on an image, video, or audio element, and every `next/image` src, goes through `asset()`. `next/link` prefixes the base path itself. The base path is `/Mix-Website` while the site is previewed from the GitHub project URL and empty on the real domain; forgetting `asset()` breaks only the preview, so test with the two variables the workflow sets.
 
 Adding a piece of gear means adding one entry to `EQUIPMENT_INVENTORY`. It then appears in the rate sheet and the structured data automatically. Same for a project.
 
-A project is linked to its audio by matching `Project.audioSrc` against `AudioSample.src`, not by id. Keep those paths in sync or the listen control disappears from the work index.
+A project is linked to its audio by matching `Project.audioSrc` against `AudioSample.src`, not by id. Keep those paths in sync or the listen control disappears from the work index. A `Film` carries its own `credit` line (music production and mix) because the voiceover on the two Rawda films was not Maryam's, while the audio chapters are her voiceover mixes.
 
 `Project.image` is optional, and `Project.video` is an optional short muted loop. The work plate handles all three cases: a still, a still with a loop that plays while the row is hovered, or a typeset card built from the project's tags when there is no imagery at all. Never fill a gap by stretching a small file, which is what the card exists to prevent.
 
@@ -88,7 +90,7 @@ A project is linked to its audio by matching `Project.audioSrc` against `AudioSa
 
 ### Server pages, two client components
 
-`/`, `/about`, `/services`, and `/equipment` are pure server components. `/work` and `/contact` split in two: `page.tsx` exports `metadata` and renders a sibling `*Client.tsx` marked `'use client'`. Work drives the audio player and the hover plate; Contact reads `useSearchParams` inside a `Suspense` boundary, which the static export requires.
+`/`, `/about`, `/services`, `/equipment`, and `/links` are pure server components. `/work` and `/contact` split in two: `page.tsx` exports `metadata` and renders a sibling `*Client.tsx` marked `'use client'`. Work drives the audio player and the hover plate; Contact reads `useSearchParams` inside a `Suspense` boundary, which the static export requires.
 
 Per-route `metadata` sets `alternates.canonical` and an `openGraph` block built from `siteConfig.url`. New routes also go in `app/sitemap.ts`. Metadata routes (`sitemap.ts`, `robots.ts`, `manifest.ts`) carry `export const dynamic = 'force-static'`, which `output: 'export'` demands.
 
@@ -98,7 +100,7 @@ Ranking for mixing, voiceover, and equipment hire in Saudi Arabia and the GCC is
 
 ## Deployment
 
-The site is a static export served by GitHub Pages from a repository in Maryam's account. `next.config.ts` sets `output: 'export'`, `trailingSlash: true`, and `images.unoptimized`. `.github/workflows/deploy.yml` builds and deploys on every push to `main`, with `NEXT_PUBLIC_SITE_URL` set to the live domain. `public/CNAME` holds `maryamattar.co`. The human steps (account, repository, Pages setting, GoDaddy DNS records) are in `DEPLOY.md`.
+The site is a static export served by GitHub Pages from `mattar23/Mix-Website`, Maryam's repository, with Moad as a collaborator (push, not admin). `next.config.ts` sets `output: 'export'`, `trailingSlash: true`, `images.unoptimized`, and `basePath` from `NEXT_PUBLIC_BASE_PATH`. `.github/workflows/deploy.yml` builds and deploys on every push to `main`; its two `env` lines pick the preview address or the real domain. The human steps (visibility, Pages source, GoDaddy DNS, email forwarding) are in `DEPLOY.md`.
 
 ## Media
 
@@ -106,7 +108,7 @@ Source material lives outside the repo in `maryam_web_info/media_content`, inclu
 
 Web assets were derived with ffmpeg and Pillow. Stills are cropped to 3:2 to match the footage, resized to roughly 1800px wide, and saved as progressive JPEG at quality 80. Hover loops are five or six seconds, cropped to the same 3:2 frame, scaled to 1000px, stripped of audio, and encoded with libx264 at crf 31 with faststart.
 
-The portrait Maryam chose for the home page, `public/images/maryam-portrait.jpg`, is a 1024 by 682 crop of `DSCF2076.jpeg` and the only copy that exists. It sits beside the headline on Home and beside the bio on About inside the `.hero` grid, capped at 40rem so it is never requested wider than its source. `public/images/og-portrait.jpg` is a 1200 by 630 crop of the same frame for Open Graph and the JSON-LD `Person` image.
+The portrait Maryam chose for the home page, `public/images/maryam-portrait.jpg`, is a 1024 by 682 crop of `DSCF2076.jpeg` and the only copy that exists. It sits beside the headline on Home inside the `.hero` grid, capped at 40rem so it is never requested wider than its source, and as a small square on `/links`. `public/images/og-portrait.jpg` is a 1200 by 630 crop of the same frame for Open Graph and the JSON-LD `Person` image. The About page carries `maryam-session.jpg`, the dark background session photo she asked for there, cut to 3:2 at 1800px from `DSCF2712.jpg`.
 
 The two Rawda campaign films play in full, with sound, in the Films section at the foot of the Work page. They are the finished spots carrying Maryam's music and mix, so the audio is only AAC encoded, never normalised or altered. Each is scaled to 1920px, encoded with libx264 at crf 24 capped at 5Mbps, AAC at 192k, faststart, with the camera timecode track dropped. That lands at 8 to 12MB each, which is why they use `preload="none"` behind a poster frame saved to `public/images/films/`.
 
@@ -120,11 +122,9 @@ The only enquiry path hands off to the visitor's mail client. The contact form c
 
 `RENTAL_TERMS` is a plain-words draft of a standard hire agreement. Maryam has not approved it and no lawyer has read it.
 
-Social URLs in `config/site.ts` and `data/bio.ts` are bare domain placeholders (`https://instagram.com` and similar) and feed the JSON-LD `sameAs` array. They need Maryam's real profile URLs.
-
 Several `EquipmentItem` entries have no `image` field. The rate sheet does not show images, so this currently costs nothing, but the data is incomplete.
 
-Three projects have no imagery and fall back to the tag card: Cloud Walker, the Athr Gallery open call, and the Saudi Music Commission restoration. Cloud Walker's YouTube thumbnail crop was tried and rejected as too soft. Each needs a still or a clip from Maryam before it can carry a plate.
+Two projects have no imagery and fall back to the tag card: Cloud Walker and the Athr Gallery open call. Cloud Walker's YouTube thumbnail crop was tried and rejected as too soft. Each needs a still or a clip from Maryam before it can carry a plate. The Music Commission restoration and the Wall of Sound sessions were removed from the Work page at Maryam's request on 2026-10-06.
 
 `AudioSample.duration` is a hardcoded display string, not read from the file. Check it against `ffprobe` when adding a track; the first five were once listed at roughly half their real length.
 
@@ -135,7 +135,7 @@ An Arabic version of the pages with `hreflang` would be the biggest remaining le
 - Import with the `@/*` alias mapped to `./src/*`.
 - Images go through `next/image`; a raw `<img>` fails `next/core-web-vitals` lint.
 - Play and pause are the only icons, drawn in `components/Glyph.tsx`. Do not reintroduce an icon dependency for a shape that can be two rects.
-- Prices are integers in Saudi riyals with a `SAR` suffix in the name. Week rate is three times the day rate, and the copy sells that as seven days for the price of three.
+- Prices are integers in Saudi riyals with a `SAR` suffix in the name. Week rate is three times the day rate, and the copy says a week costs the same as three days.
 - The services and equipment pages deep-link into the contact form with `/contact?service=<id>`. Unknown ids fall back to the first service. Preserve the `Suspense` boundary around `useSearchParams` or the build fails.
 - **No dashes anywhere.** Maryam's brief is explicit: no em dash, no en dash, no `--`. This covers site copy, content in `src/data/`, code comments, commit messages, and class names. Use a comma, a colon, a full stop, or a rewrite. Year spans use a slash, as in `2022/23`. Ranges in prose read "2 to 3 tracks". List items take the square marker from `.speclist`, never a dash bullet. BEM modifiers use a single hyphen, so `.btn-solid`, not `.btn--solid`.
 - CSS custom properties are the one exception, since `--ink` and the rest are required syntax and cannot be written any other way.

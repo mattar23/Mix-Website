@@ -2,6 +2,7 @@
 
 import React, { createContext, useContext, useState, useRef, useEffect } from 'react';
 import { AUDIO_SAMPLES, AudioSample } from '@/data/projects';
+import { asset } from '@/lib/asset';
 
 interface AudioContextType {
   currentTrack: AudioSample | null;
@@ -64,7 +65,7 @@ export function AudioProvider({ children }: { children: React.ReactNode }) {
     }
 
     setCurrentTrack(track);
-    audioRef.current.src = track.src;
+    audioRef.current.src = asset(track.src);
     audioRef.current.currentTime = 0;
     audioRef.current.play().then(() => {
       setIsPlaying(true);

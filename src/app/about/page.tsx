@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
+import { asset } from '@/lib/asset';
 import { Metadata } from 'next';
 import { ARTIST_INFO } from '@/data/bio';
 import { siteConfig } from '@/config/site';
@@ -7,7 +8,7 @@ import { siteConfig } from '@/config/site';
 export const metadata: Metadata = {
   title: 'About',
   description:
-    'Maryam Attar is a mixing and voiceover engineer in Jeddah, Saudi Arabia, with credits for MDLBEAST, Athr Gallery, Nadine Jewellery, and the Saudi Music Commission.',
+    'Maryam Attar is a mixing and voiceover engineer in Jeddah, Saudi Arabia, with credits for MDLBEAST, Athr Gallery, Nadine Jewellery, and Nur Taibah.',
   alternates: { canonical: `${siteConfig.url}/about` },
   openGraph: {
     title: 'About | Maryam Attar',
@@ -49,11 +50,12 @@ export default function AboutPage() {
               ))}
             </div>
           </div>
-          {/* Same 1024px portrait as the home page, held to a width it can carry. */}
+          {/* The dark background session photo Maryam chose for this page,
+              cut to 3:2 from the 40 megapixel original. */}
           <div className="figure hero__portrait">
             <Image
-              src="/images/maryam-portrait.jpg"
-              alt="Maryam Attar at her desk in the studio"
+              src={asset('/images/maryam-session.jpg')}
+              alt="Maryam Attar listening back with a collaborator during a session"
               fill
               sizes="(max-width: 1024px) 100vw, 40rem"
               style={{ objectFit: 'cover' }}
