@@ -1,6 +1,9 @@
 import { MetadataRoute } from 'next';
 import { siteConfig } from '@/config/site';
 
+// Required for metadata routes under output: 'export'.
+export const dynamic = 'force-static';
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = siteConfig.url;
   const currentDate = new Date().toISOString();
