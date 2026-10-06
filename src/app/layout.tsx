@@ -3,7 +3,6 @@ import { Archivo, Newsreader } from 'next/font/google';
 import './globals.css';
 import { AudioProvider } from '@/components/AudioPlayerContext';
 import { RentalProvider } from '@/components/RentalContext';
-import { ThemeProvider } from '@/components/ThemeContext';
 import { Masthead } from '@/components/Masthead';
 import { Colophon } from '@/components/Colophon';
 import { PlayerBar } from '@/components/PlayerBar';
@@ -29,10 +28,7 @@ const newsreader = Newsreader({
 });
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#e4e2dd' },
-    { media: '(prefers-color-scheme: dark)', color: '#0a0a09' },
-  ],
+  themeColor: '#f1ede6',
   width: 'device-width',
   initialScale: 1,
 };
@@ -87,44 +83,24 @@ export const metadata: Metadata = {
   manifest: '/manifest.webmanifest',
 };
 
-// Runs before paint so the stored theme never flashes.
-const themeInit = `
-try {
-  var t = localStorage.getItem('ma-theme')
-    || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-  document.documentElement.setAttribute('data-theme', t);
-} catch (e) {}
-`;
-
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  // suppressHydrationWarning: the theme script rewrites data-theme before
-  // React hydrates, so the server value is meant to differ. It applies to
-  // this element's own attributes only, not to anything nested inside.
   return (
-    <html
-      lang="en"
-      data-theme="light"
-      suppressHydrationWarning
-      className={`${archivo.variable} ${newsreader.variable}`}
-    >
+    <html lang="en" className={`${archivo.variable} ${newsreader.variable}`}>
       <head>
         <JsonLd />
-        <script dangerouslySetInnerHTML={{ __html: themeInit }} />
       </head>
       <body>
-        <ThemeProvider>
-          <AudioProvider>
-            <RentalProvider>
-              <Masthead />
-              <main>{children}</main>
-              <Colophon />
-              <RentalDrawer />
-              <PlayerBar />
-            </RentalProvider>
-          </AudioProvider>
-        </ThemeProvider>
+        <AudioProvider>
+          <RentalProvider>
+            <Masthead />
+            <main>{children}</main>
+            <Colophon />
+            <RentalDrawer />
+            <PlayerBar />
+          </RentalProvider>
+        </AudioProvider>
       </body>
     </html>
   );

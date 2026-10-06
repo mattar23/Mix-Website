@@ -1,20 +1,20 @@
 /* ============
-   Maryam Attar, two-colour offset liner notes
-   Black ink + Reflex Blue spot on uncoated grey stock.
-   The spot colour marks audio that is playing. Nothing else.
+   Maryam Attar, cream stock, near black ink, one rust accent.
+   The accent marks the current page, the rule above a heading,
+   and audio that is playing. Nothing else.
    ============ */
 
 /* ============ tokens ============ */
 
 :root {
-  --paper:      #e4e2dd;
-  --paper-2:    #dbd8d2;
-  --ink:        #000000;
-  --ink-2:      #6e6b65;
-  --ink-3:      #94908a;
-  --rule:       #c9c6bf;
-  --rule-soft:  #d5d2cb;
-  --spot:       #001489;
+  --paper:      #f1ede6;
+  --paper-2:    #e6e1d8;
+  --ink:        #0c0c0b;
+  --ink-2:      #5f5a52;
+  --ink-3:      #8a847b;
+  --rule:       #d6d2cb;
+  --rule-soft:  #e0dcd5;
+  --spot:       #b5653a;
   --spot-ink:   #ffffff;
 
   --sans: var(--font-archivo), "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -38,19 +38,6 @@
 
   --player-h: 0px;
   color-scheme: light;
-}
-
-[data-theme="dark"] {
-  --paper:      #0a0a09;
-  --paper-2:    #131311;
-  --ink:        #eceae4;
-  --ink-2:      #8d8981;
-  --ink-3:      #66625b;
-  --rule:       #2a2926;
-  --rule-soft:  #1e1d1b;
-  --spot:       #6b7cff;
-  --spot-ink:   #06060a;
-  color-scheme: dark;
 }
 
 /* ============ reset ============ */
@@ -210,6 +197,15 @@ h2 { font-size: var(--t-sub); }
 
 .rule-soft { background: var(--rule-soft); }
 
+/* The short bar above a page heading, as on the client's mockups. */
+.accent-rule {
+  display: block;
+  width: 2.5rem;
+  height: 1px;
+  background: var(--spot);
+  margin-bottom: 1.5rem;
+}
+
 @media (max-width: 800px) {
   .doc { grid-template-columns: minmax(0, 1fr); gap: 1rem; }
   .doc__margin { position: static; }
@@ -260,7 +256,7 @@ h2 { font-size: var(--t-sub); }
 
 .navlink[aria-current="page"] {
   color: var(--ink);
-  box-shadow: inset 0 -1px 0 0 var(--ink);
+  box-shadow: inset 0 -1px 0 0 var(--spot);
 }
 
 .masthead__tools {
@@ -945,4 +941,20 @@ input[type="range"].scrub::-moz-range-thumb {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+/* ============ about: bio beside a portrait held to its native size ============ */
+
+.lead {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 20rem;
+  gap: var(--gutter);
+  align-items: start;
+}
+
+.lead__portrait { aspect-ratio: 3 / 2; }
+
+@media (max-width: 1280px) {
+  .lead { grid-template-columns: minmax(0, 1fr); }
+  .lead__portrait { max-width: 34em; }
 }

@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useRental } from './RentalContext';
-import { useTheme } from './ThemeContext';
 
 const LINKS = [
   { name: 'About', href: '/about' },
@@ -17,7 +16,6 @@ const LINKS = [
 export function Masthead() {
   const pathname = usePathname();
   const { totalItems, setIsCartDrawerOpen } = useRental();
-  const { theme, toggleTheme } = useTheme();
   const [open, setOpen] = useState(false);
 
   const links = LINKS.map((link) => (
@@ -45,10 +43,6 @@ export function Masthead() {
           </nav>
 
           <div className="masthead__tools">
-            <button className="toolbtn" onClick={toggleTheme}>
-              {theme === 'dark' ? 'Light' : 'Dark'}
-            </button>
-
             <button className="toolbtn" onClick={() => setIsCartDrawerOpen(true)}>
               Enquiry{' '}
               {totalItems > 0 && <span className="toolbtn__count">{totalItems}</span>}
