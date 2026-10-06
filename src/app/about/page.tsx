@@ -51,13 +51,13 @@ export default function AboutPage() {
             </div>
           </div>
           {/* The dark background session photo Maryam chose for this page,
-              cut to 3:2 from the 40 megapixel original. */}
-          <div className="figure hero__portrait">
+              cut 4:5 around the two figures from the 40 megapixel original. */}
+          <div className="figure hero__portrait hero__portrait-tall">
             <Image
               src={asset('/images/maryam-session.jpg')}
               alt="Maryam Attar listening back with a collaborator during a session"
               fill
-              sizes="(max-width: 1024px) 100vw, 40rem"
+              sizes="(max-width: 1024px) 100vw, 30rem"
               style={{ objectFit: 'cover' }}
             />
           </div>
