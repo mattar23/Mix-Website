@@ -13,7 +13,9 @@ const LINKS = [
 ];
 
 export function Masthead() {
-  const pathname = usePathname();
+  // The static export serves /work/ with a trailing slash, so compare
+  // without it or no link is ever marked current.
+  const pathname = (usePathname() ?? '/').replace(/\/+$/, '') || '/';
   const [open, setOpen] = useState(false);
 
   const links = LINKS.map((link) => (
