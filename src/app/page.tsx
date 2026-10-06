@@ -43,7 +43,7 @@ export default function HomePage() {
               alt="Maryam Attar at her desk in the studio"
               fill
               priority
-              sizes="(max-width: 1024px) 100vw, 40rem"
+              sizes="(max-width: 880px) 100vw, 40rem"
               style={{ objectFit: 'cover' }}
             />
           </div>

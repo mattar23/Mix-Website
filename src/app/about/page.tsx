@@ -57,7 +57,7 @@ export default function AboutPage() {
               src={asset('/images/maryam-session.jpg')}
               alt="Maryam Attar listening back with a collaborator during a session"
               fill
-              sizes="(max-width: 1024px) 100vw, 30rem"
+              sizes="(max-width: 880px) 100vw, 30rem"
               style={{ objectFit: 'cover' }}
             />
           </div>

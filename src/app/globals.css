@@ -7,13 +7,13 @@
 /* ============ tokens ============ */
 
 :root {
-  --paper:      #f1ede6;
-  --paper-2:    #e6e1d8;
-  --ink:        #0c0c0b;
-  --ink-2:      #5f5a52;
-  --ink-3:      #8a847b;
-  --rule:       #d6d2cb;
-  --rule-soft:  #e0dcd5;
+  --paper:      #efe8dc;
+  --paper-2:    #e6ded0;
+  --ink:        #15120e;
+  --ink-2:      #5e5649;
+  --ink-3:      #8a8172;
+  --rule:       #d4cbbb;
+  --rule-soft:  #dfd7c8;
   --spot:       #b5653a;
   --spot-ink:   #ffffff;
 
@@ -680,7 +680,7 @@ input[type="range"].scrub::-moz-range-thumb {
 .hero .hero-type { font-size: clamp(2.5rem, 5vw, 4.5rem); }
 .hero__portrait { aspect-ratio: 3 / 2; max-width: 40rem; }
 .hero__portrait-tall { aspect-ratio: 4 / 5; max-width: 30rem; }
-@media (max-width: 1024px) {
+@media (max-width: 880px) {
   .hero { grid-template-columns: minmax(0, 1fr); }
   .hero .hero-type { font-size: var(--t-hero); }
 }
