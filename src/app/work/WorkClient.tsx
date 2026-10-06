@@ -76,6 +76,23 @@ export default function WorkClient() {
                       {p.description}
                     </p>
 
+                    {p.moreLinks && (
+                      <span className="cluster meta" style={{ marginTop: '0.9rem' }}>
+                        <span className="muted">Also on Instagram:</span>
+                        {p.moreLinks.map((l) => (
+                          <a
+                            key={l.url}
+                            className="ul-link"
+                            href={l.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            {l.label}
+                          </a>
+                        ))}
+                      </span>
+                    )}
+
                     {sample && (
                       <button
                         className="listen"

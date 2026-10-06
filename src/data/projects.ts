@@ -12,6 +12,8 @@ export interface Project {
   video?: string;
   audioSrc?: string;
   externalLink?: string;
+  /** Further posts or reels for the same piece, from Maryam's weblinks document. */
+  moreLinks?: { label: string; url: string }[];
   tags: string[];
 }
 
@@ -41,6 +43,7 @@ export const PROJECTS: Project[] = [
     video: '/video/rawda-water.mp4',
     audioSrc: '/audio/gemma-nj-rawda.mp3',
     externalLink: 'https://www.instagram.com/reel/DQGjQg6AAw3/',
+    moreLinks: [{ label: 'Second reel', url: 'https://www.instagram.com/reel/DPrX-A0gAWj/' }],
     tags: ['Music Production', 'Voiceover Mix', 'Brand Scoring', 'Luxury']
   },
   {
@@ -53,6 +56,10 @@ export const PROJECTS: Project[] = [
     description:
       'Created immersive sound design and tactile sonic identity for Athr Gallery’s social media campaign announcing their international contemporary artist open call.',
     externalLink: 'https://www.instagram.com/p/B47bRS3ALwa/',
+    moreLinks: [
+      { label: 'Second post', url: 'https://www.instagram.com/p/B3ZnYL0ACzE/' },
+      { label: 'Third post', url: 'https://www.instagram.com/p/B3md0tuAcj7/' },
+    ],
     tags: ['Sound Design', 'Contemporary Art', 'Spatial Texture']
   },
   {
