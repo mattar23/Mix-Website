@@ -456,10 +456,8 @@ h2 { font-size: var(--t-sub); }
   padding-left: 2rem;
 }
 
-.sheet th:nth-child(2),
-.sheet th:nth-child(3) { padding-left: 2rem; }
-
 .sheet__stock {
+  display: block;
   font-stretch: 78%;
   font-size: var(--t-fine);
   color: var(--ink-2);
@@ -759,6 +757,22 @@ input[type="range"].scrub::-moz-range-thumb {
   width: 0.3em;
   height: 0.3em;
   background: var(--ink-3);
+}
+
+/* Numbered terms, the counter set in the margin like a contract clause. */
+.terms { counter-reset: term; max-width: 44rem; }
+.terms li { position: relative; padding-left: 2.25rem; }
+.terms li + li { margin-top: 1.5rem; }
+.terms li::before {
+  counter-increment: term;
+  content: counter(term, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 0.15em;
+  font-size: var(--t-micro);
+  font-stretch: 80%;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-2);
 }
 
 /* ===== plate: moving image and typographic fallback ===== */
