@@ -25,12 +25,12 @@ export default function WorkClient() {
   return (
     <>
       <section className="wrap step">
+        <span className="accent-rule" aria-hidden="true" />
         <h1 className="hero-type" style={{ maxWidth: '11ch' }}>
           Work
         </h1>
-        <p className="prose" style={{ marginTop: '2rem' }}>
-          Commissions and collaborations across music, film, and exhibition, from
-          2019 onward.
+        <p className="prose" style={{ marginTop: '2rem', maxWidth: '34em' }}>
+          Commissions and collaborations across music, film, and exhibition.
         </p>
       </section>
 

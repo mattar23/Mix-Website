@@ -5,11 +5,11 @@ import { siteConfig } from '@/config/site';
 export const metadata: Metadata = {
   title: 'Work',
   description:
-    'Selected commissions and collaborations by Maryam Attar across music, film, and exhibition, including MDLBEAST, Athr Gallery, and Nadine Jewellery.',
+    'Selected work by Maryam Attar: mixing, voiceover, and original music for MDLBEAST, Athr Gallery, Nadine Jewellery, and Nur Taibah.',
   alternates: { canonical: `${siteConfig.url}/work` },
   openGraph: {
     title: 'Work | Maryam Attar',
-    description: 'Scoring, sound design, and mixing for records, campaigns, and exhibitions.',
+    description: 'Mixing, voiceover, and original music for records, campaigns, and exhibitions.',
     url: `${siteConfig.url}/work`,
     images: [
       {
