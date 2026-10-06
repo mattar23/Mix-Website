@@ -5,11 +5,11 @@ import { siteConfig } from '@/config/site';
 export const metadata: Metadata = {
   title: 'Contact',
   description:
-    'Start a mixing, production, sound design, or equipment hire enquiry with Maryam Attar in Jeddah, Saudi Arabia.',
+    'Get in touch with Maryam Attar for mixing, podcast and voiceover mixing, or audio equipment hire in Jeddah, Saudi Arabia. Remote sessions across the GCC.',
   alternates: { canonical: `${siteConfig.url}/contact` },
   openGraph: {
     title: 'Contact | Maryam Attar',
-    description: 'Book a session, or hire audio equipment in Jeddah.',
+    description: 'Book a mix, a voiceover session, or hire gear in Jeddah.',
     url: `${siteConfig.url}/contact`,
   },
 };
