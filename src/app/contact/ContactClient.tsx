@@ -7,7 +7,11 @@ import { SERVICES } from '@/data/services';
 
 function ContactForm() {
   const searchParams = useSearchParams();
-  const preset = searchParams.get('service') ?? SERVICES[0]?.id ?? 'mixing';
+  // Old deep links (production, sound-design, restoration) and anything
+  // unknown fall back to the first service rather than an empty select.
+  const requested = searchParams.get('service');
+  const known = SERVICES.some((s) => s.id === requested) || requested === 'rental';
+  const preset = known && requested ? requested : SERVICES[0].id;
 
   const [form, setForm] = useState({
     name: '',
@@ -96,7 +100,11 @@ function ContactForm() {
           required
           value={form.message}
           onChange={set('message')}
-          placeholder="What are you making, who is it for, and where is it going?"
+          placeholder={
+            form.service === 'rental'
+              ? 'Which items, how many, and which dates?'
+              : 'What are you making, who is it for, and where is it going?'
+          }
         />
       </label>
 
@@ -114,6 +122,7 @@ export default function ContactClient() {
   return (
     <>
       <section className="wrap step">
+        <span className="accent-rule" aria-hidden="true" />
         <h1 className="hero-type" style={{ maxWidth: '12ch' }}>
           Tell me what you are making.
         </h1>
@@ -139,8 +148,8 @@ export default function ContactClient() {
 
           <div style={{ maxWidth: '44rem' }}>
             <p className="prose" style={{ marginBottom: '3rem' }}>
-              Mixing, production, sound for film and exhibition, or gear hire in
-              Jeddah. A sentence about the project is enough to start.
+              Mixing, podcast and voiceover work, or equipment hire in Jeddah. A
+              sentence about the project is enough to start.
             </p>
             <Suspense fallback={null}>
               <ContactForm />
