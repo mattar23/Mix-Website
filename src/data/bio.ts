@@ -1,6 +1,6 @@
 export const ARTIST_INFO = {
   name: 'Maryam Attar',
-  title: 'Audio Engineer, Music Producer & Composer',
+  title: 'Mixing and Voiceover Engineer',
   location: 'Jeddah, Saudi Arabia',
   email: 'maryamattarmusic@gmail.com',
   shortBio:
@@ -10,37 +10,6 @@ export const ARTIST_INFO = {
     'Sound design and production are closely intertwined in her work. Through recording, processing, sampling, and resampling, Maryam explores how sounds can be pushed beyond their original form and repurposed as musical material. Her process moves between experimentation and intention, allowing sound itself to shape the direction of a piece while using tone, texture, and space to build an immersive environment around its narrative.',
     'Her growing involvement in audio engineering developed from this same process, expanding the technical control available within her creative work. Ultimately, her aim is to draw the listener into the world of a piece, creating an experience that is felt and followed rather than simply heard.',
     'Her practice spans artistic and commercial contexts, with projects for MDLBEAST and Athr Gallery, as well as music production for Nur Taibah’s performance piece "Blending In".'
-  ],
-  education: [
-    {
-      degree: 'BA Interdisciplinary Music Studies',
-      institution: 'Berklee College of Music',
-      period: '2023 to present',
-      honors: "GPA 4.0 | Dean's List"
-    },
-    {
-      degree: 'DipHE Cognitive & Clinical Neuroscience',
-      institution: 'University of Westminster',
-      period: '2016 to 2020'
-    }
-  ],
-  toolkit: [
-    'Ableton Live',
-    'Logic Pro',
-    'Cubase',
-    'iZotope RX Advanced',
-    'Musescore',
-    'Analog Mixers & Summing',
-    'Hardware Modulation & Reverb Pedals',
-    'Direct Box Signal Conditioning'
-  ],
-  capabilities: [
-    'Music Production & Creative Direction',
-    'Sound Design & Foley for Moving Images',
-    'Stereo & Spatial Mixing',
-    'Archival & Sample Audio Restoration',
-    'Acoustic & Vocal Tracking',
-    'Audio Branding & Sonic Identity'
   ],
   clientsAndCredits: [
     { name: 'MDLBEAST', detail: 'Expo 2020 Dubai "Cloud Walker" Campaign' },
