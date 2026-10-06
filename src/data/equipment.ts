@@ -274,7 +274,7 @@ export const RENTAL_TERMS: { heading: string; body: string }[] = [
   },
   {
     heading: 'Damage and loss',
-    body: 'The hirer is responsible for the equipment from collection to return. Repair or replacement at current retail cost is charged for damage beyond normal wear, loss, or theft, and may be deducted from the deposit.',
+    body: 'The hirer is responsible for the equipment from collection to return. Repair or replacement at current retail cost is charged for loss, theft, or damage beyond normal wear, and may be deducted from the deposit.',
   },
   {
     heading: 'Late return',

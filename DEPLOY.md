@@ -25,7 +25,7 @@ The first push triggers the workflow in `.github/workflows/deploy.yml`. It will 
 
 1. In the repository, open Settings, then Pages.
 2. Under Build and deployment, set Source to GitHub Actions.
-3. Open the Actions tab and re run the failed workflow, or push any commit. When the run finishes the site is live at `https://<her-account>.github.io/maryamattar.co/`.
+3. Open the Actions tab and re run the failed workflow, or push any commit. When the run finishes the deploy has worked. The temporary `github.io` address will look unstyled because the site is built for the root of its own domain; that resolves at the next step.
 
 ### 4. Connect the domain
 
@@ -44,7 +44,7 @@ Add one CNAME record with name `www` and value `<her-account>.github.io`.
 
 DNS can take up to an hour to settle. When the check in GitHub turns green, tick Enforce HTTPS on the same Pages settings page. The certificate is issued automatically.
 
-The file `public/CNAME` holds the domain so the setting survives every deploy. Do not delete it.
+The file `public/CNAME` records the domain alongside the code. GitHub keeps the custom domain setting itself for workflow deploys, so the file is a note for whoever hosts the site next, not a switch.
 
 ## After launch
 

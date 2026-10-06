@@ -275,9 +275,12 @@ h2 { font-size: var(--t-sub); }
 .toolbtn:hover { color: var(--ink); }
 
 .masthead__menu { display: none; }
+/* Above the menu breakpoint the tools cluster is empty, so it must not take a flex slot. */
+.masthead__tools { display: none; }
 
 @media (max-width: 860px) {
   .masthead__nav { display: none; }
+  .masthead__tools { display: flex; }
   .masthead__menu { display: inline; }
   .masthead__nav-open {
     display: flex;
@@ -419,6 +422,7 @@ h2 { font-size: var(--t-sub); }
 /* ============ rate sheet ============ */
 
 .sheet { width: 100%; border-collapse: collapse; }
+.sheet + .sheet { margin-top: 3rem; }
 
 .sheet caption {
   text-align: left;
