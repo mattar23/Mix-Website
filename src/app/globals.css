@@ -667,14 +667,17 @@ input[type="range"].scrub::-moz-range-thumb {
 /* home and about: headline or bio beside the portrait */
 .hero {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 40rem);
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
   gap: var(--gutter);
   align-items: end;
 }
-.hero__portrait { aspect-ratio: 3 / 2; }
+/* Beside the portrait the headline sets smaller, as on the mockups. At the
+   full hero size the column would wrap one word per line. */
+.hero .hero-type { font-size: clamp(2.5rem, 5vw, 4.5rem); }
+.hero__portrait { aspect-ratio: 3 / 2; max-width: 40rem; }
 @media (max-width: 1024px) {
   .hero { grid-template-columns: minmax(0, 1fr); }
-  .hero__portrait { max-width: 40rem; }
+  .hero .hero-type { font-size: var(--t-hero); }
 }
 
 /* home: three entries divided by hairlines */
