@@ -2,11 +2,9 @@ import type { Metadata, Viewport } from 'next';
 import { Archivo, Newsreader } from 'next/font/google';
 import './globals.css';
 import { AudioProvider } from '@/components/AudioPlayerContext';
-import { RentalProvider } from '@/components/RentalContext';
 import { Masthead } from '@/components/Masthead';
 import { Colophon } from '@/components/Colophon';
 import { PlayerBar } from '@/components/PlayerBar';
-import { RentalDrawer } from '@/components/RentalDrawer';
 import { JsonLd } from '@/components/JsonLd';
 import { siteConfig } from '@/config/site';
 
@@ -93,13 +91,10 @@ export default function RootLayout({
       </head>
       <body>
         <AudioProvider>
-          <RentalProvider>
-            <Masthead />
-            <main>{children}</main>
-            <Colophon />
-            <RentalDrawer />
-            <PlayerBar />
-          </RentalProvider>
+          <Masthead />
+          <main>{children}</main>
+          <Colophon />
+          <PlayerBar />
         </AudioProvider>
       </body>
     </html>

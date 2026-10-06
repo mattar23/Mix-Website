@@ -274,11 +274,6 @@ h2 { font-size: var(--t-sub); }
 
 .toolbtn:hover { color: var(--ink); }
 
-.toolbtn__count {
-  font-variant-numeric: tabular-nums;
-  color: var(--ink);
-}
-
 .masthead__menu { display: none; }
 
 @media (max-width: 860px) {
@@ -461,13 +456,6 @@ h2 { font-size: var(--t-sub); }
   padding-left: 2rem;
 }
 
-.sheet__act {
-  text-align: right;
-  width: 1%;
-  white-space: nowrap;
-  padding-left: 2.5rem;
-}
-
 .sheet th:nth-child(2),
 .sheet th:nth-child(3) { padding-left: 2rem; }
 
@@ -496,7 +484,7 @@ h2 { font-size: var(--t-sub); }
 
   .sheet td { border: 0; padding-block: 0; padding-left: 0; }
 
-  .sheet td:first-child { grid-column: 1; grid-row: 1 / span 2; }
+  .sheet td:first-child { grid-column: 1; grid-row: 1; }
 
   .sheet td:nth-child(2),
   .sheet td:nth-child(3) {
@@ -517,15 +505,6 @@ h2 { font-size: var(--t-sub); }
   .sheet td:nth-child(2)::after { content: " day"; }
   .sheet td:nth-child(3)::after { content: " week"; }
 
-  .sheet__act {
-    grid-column: 2 / span 2;
-    grid-row: 2;
-    justify-self: end;
-    /* The desktop rule squeezes this cell to width:1%; in a grid row that
-       makes the button overflow instead of shrinking the column. */
-    width: auto;
-    padding-top: 0.5rem;
-  }
 }
 
 /* ============ controls ============ */
@@ -545,8 +524,6 @@ h2 { font-size: var(--t-sub); }
 .btn-solid { background: var(--ink); color: var(--paper); }
 .btn-solid:hover { background: transparent; color: var(--ink); }
 
-.btn-sm { padding: 0.45rem 0.8rem; font-size: var(--t-micro); }
-
 .btn:disabled { opacity: 0.4; cursor: not-allowed; }
 .btn:disabled:hover { background: transparent; color: var(--ink); }
 
@@ -557,23 +534,6 @@ h2 { font-size: var(--t-sub); }
 }
 
 .ul-link:hover { color: var(--ink-2); }
-
-.chip {
-  font-stretch: 80%;
-  font-size: var(--t-fine);
-  padding: 0.4rem 0.75rem;
-  border: 1px solid var(--rule);
-  color: var(--ink-2);
-  transition: border-color 0.18s ease, color 0.18s ease;
-}
-
-.chip:hover { border-color: var(--ink); color: var(--ink); }
-
-.chip[aria-pressed="true"] {
-  border-color: var(--ink);
-  background: var(--ink);
-  color: var(--paper);
-}
 
 /* ============ forms ============ */
 
@@ -692,65 +652,6 @@ input[type="range"].scrub::-moz-range-thumb {
   border: 0;
   border-radius: 50%;
 }
-
-/* ============ drawer ============ */
-
-.drawer { position: fixed; inset: 0; z-index: 60; }
-
-.drawer__veil {
-  position: absolute;
-  inset: 0;
-  background: color-mix(in srgb, var(--ink) 35%, transparent);
-}
-
-.drawer__panel {
-  position: absolute;
-  top: 0; right: 0; bottom: 0;
-  width: min(30rem, 100%);
-  background: var(--paper);
-  border-left: 1px solid var(--ink);
-  display: flex;
-  flex-direction: column;
-  overflow-y: auto;
-}
-
-.drawer__head {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  padding: 1.5rem;
-  border-bottom: 1px solid var(--ink);
-  position: sticky;
-  top: 0;
-  background: var(--paper);
-}
-
-.drawer__body { padding: 1.5rem; flex: 1; }
-
-.drawer__foot { padding: 1.5rem; border-top: 1px solid var(--ink); }
-
-.line {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 0.35rem 1rem;
-  padding-block: 1.1rem;
-  border-bottom: 1px solid var(--rule-soft);
-}
-
-.qty { display: inline-flex; align-items: center; gap: 0.6rem; }
-
-.qty button {
-  width: 1.5rem; height: 1.5rem;
-  border: 1px solid var(--rule);
-  display: grid;
-  place-items: center;
-  font-size: var(--t-fine);
-  line-height: 1;
-}
-
-.qty button:hover { border-color: var(--ink); }
-
-.qty__n { font-variant-numeric: tabular-nums; font-stretch: 78%; min-width: 1.1rem; text-align: center; }
 
 /* ============ utilities ============ */
 
