@@ -13,8 +13,8 @@ export function Colophon() {
           <div className="split">
             <div className="stack stack-sm">
               <p className="prose prose-fine" style={{ maxWidth: '26em', color: 'var(--ink)' }}>
-                Maryam Attar records, mixes, and designs sound in Jeddah, and works
-                remotely with artists and directors elsewhere.
+                Maryam Attar mixes records and voiceovers in Jeddah, and works
+                remotely with artists and directors across the Gulf.
               </p>
               <p className="meta">
                 <a className="ul-link" href={`mailto:${ARTIST_INFO.email}`}>

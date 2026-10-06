@@ -3,110 +3,89 @@ import { siteConfig } from '@/config/site';
 import { EQUIPMENT_INVENTORY } from '@/data/equipment';
 import { SERVICES } from '@/data/services';
 
+// Two graphs: the person, and the practice as a local business with its
+// services and hire catalogue. Nothing here is stated that the pages do
+// not also show, which is what keeps it honest for search engines.
 export function JsonLd() {
-  const personSchema = {
+  const person = {
     '@context': 'https://schema.org',
     '@type': 'Person',
+    '@id': `${siteConfig.url}/#person`,
     name: 'Maryam Attar',
     alternateName: 'مريم عطار',
-    jobTitle: 'Audio Engineer, Music Producer & Sound Designer',
+    jobTitle: siteConfig.author.role,
     url: siteConfig.url,
-    image: `${siteConfig.url}/images/maryam-studio-portrait.jpg`,
+    image: `${siteConfig.url}${siteConfig.ogImage}`,
     description: siteConfig.description,
+    email: siteConfig.author.email,
     address: {
       '@type': 'PostalAddress',
       addressLocality: 'Jeddah',
       addressRegion: 'Makkah Province',
       addressCountry: 'SA',
     },
-    alumniOf: [
-      {
-        '@type': 'EducationalOrganization',
-        name: 'Berklee College of Music',
-        award: 'BA Interdisciplinary Music Studies (Dean’s List, GPA 4.0)',
-      },
-      {
-        '@type': 'EducationalOrganization',
-        name: 'University of Westminster',
-        award: 'DipHE Cognitive & Clinical Neuroscience',
-      },
-    ],
     knowsAbout: [
-      'Music Production',
-      'Audio Engineering',
-      'Analog Mixing',
-      'Sound Design',
-      'Audio Restoration',
-      'Scoring for Visuals',
+      'Mixing',
+      'Podcast and voiceover mixing',
+      'Audio engineering',
+      'Audio equipment hire',
     ],
-    sameAs: [
-      siteConfig.socials.instagram,
-      siteConfig.socials.soundcloud,
-      siteConfig.socials.linkedin,
-    ],
+    knowsLanguage: ['en', 'ar'],
+    sameAs: Object.values(siteConfig.socials),
   };
 
-  const businessSchema = {
+  const business = {
     '@context': 'https://schema.org',
     '@type': 'ProfessionalService',
-    name: 'Maryam Attar Studio & Equipment Hire',
-    image: `${siteConfig.url}/images/aesthetic/equipment-flightcase.jpg`,
     '@id': `${siteConfig.url}/#business`,
+    name: 'Maryam Attar, Mixing, Voiceover and Equipment Hire',
     url: siteConfig.url,
-    telephone: '+966 55 422 4024',
-    priceRange: '$$',
+    image: `${siteConfig.url}/images/aesthetic/equipment-flightcase.jpg`,
+    email: siteConfig.author.email,
+    founder: { '@id': `${siteConfig.url}/#person` },
     address: {
       '@type': 'PostalAddress',
       addressLocality: 'Jeddah',
       addressCountry: 'SA',
     },
-    geo: {
-      '@type': 'GeoCoordinates',
-      latitude: 21.5433,
-      longitude: 39.1728,
-    },
     areaServed: [
-      {
-        '@type': 'City',
-        name: 'Jeddah',
-      },
-      {
-        '@type': 'Country',
-        name: 'Saudi Arabia',
-      },
-      {
-        '@type': 'AdministrativeArea',
-        name: 'Worldwide (Remote Audio Sessions)',
-      },
+      ...siteConfig.areaServed.map((name) => ({ '@type': 'Country', name })),
+      { '@type': 'AdministrativeArea', name: 'Remote sessions worldwide' },
     ],
     hasOfferCatalog: {
       '@type': 'OfferCatalog',
-      name: 'Audio Production & Gear Hire Services',
+      name: 'Services and equipment hire',
       itemListElement: [
         ...SERVICES.map((s) => ({
           '@type': 'Offer',
           itemOffered: {
             '@type': 'Service',
             name: s.title,
+            serviceType: s.title,
             description: s.shortDesc,
+            provider: { '@id': `${siteConfig.url}/#business` },
+            areaServed: siteConfig.areaServed,
           },
         })),
         {
           '@type': 'OfferCatalog',
-          name: 'Equipment Rental Catalog',
-          itemListElement: EQUIPMENT_INVENTORY.slice(0, 10).map((gear) => ({
+          name: 'Equipment hire, Jeddah',
+          itemListElement: EQUIPMENT_INVENTORY.map((gear) => ({
             '@type': 'Offer',
             priceCurrency: 'SAR',
             price: gear.dayRateSAR,
-            name: gear.name,
-            description: gear.description,
+            priceSpecification: {
+              '@type': 'UnitPriceSpecification',
+              price: gear.dayRateSAR,
+              priceCurrency: 'SAR',
+              unitText: 'DAY',
+            },
+            availability: 'https://schema.org/InStock',
             itemOffered: {
               '@type': 'Product',
-              name: gear.name,
-              brand: {
-                '@type': 'Brand',
-                name: gear.brand,
-              },
+              name: `${gear.brand} ${gear.name}`,
+              description: gear.description,
+              brand: { '@type': 'Brand', name: gear.brand },
             },
           })),
         },
@@ -118,11 +97,11 @@ export function JsonLd() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(person) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(businessSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(business) }}
       />
     </>
   );

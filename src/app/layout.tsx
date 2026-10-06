@@ -56,7 +56,7 @@ export const metadata: Metadata = {
         url: siteConfig.ogImage,
         width: 1200,
         height: 630,
-        alt: 'Maryam Attar in the studio',
+        alt: 'Maryam Attar in her Jeddah studio',
       },
     ],
   },
@@ -79,6 +79,11 @@ export const metadata: Metadata = {
   },
   icons: { icon: '/favicon.ico', shortcut: '/favicon.ico', apple: '/favicon.ico' },
   manifest: '/manifest.webmanifest',
+  // Region hints for local search. Harmless where ignored.
+  other: {
+    'geo.region': 'SA-02',
+    'geo.placename': 'Jeddah',
+  },
 };
 
 export default function RootLayout({
