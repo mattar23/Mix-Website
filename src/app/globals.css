@@ -663,6 +663,39 @@ input[type="range"].scrub::-moz-range-thumb {
 .split { display: flex; align-items: baseline; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; }
 
 .two-col { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--gutter); }
+
+/* home and about: headline or bio beside the portrait */
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 40rem);
+  gap: var(--gutter);
+  align-items: end;
+}
+.hero__portrait { aspect-ratio: 3 / 2; }
+@media (max-width: 1024px) {
+  .hero { grid-template-columns: minmax(0, 1fr); }
+  .hero__portrait { max-width: 40rem; }
+}
+
+/* home: three entries divided by hairlines */
+.trio {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  padding-top: 2.5rem;
+}
+.trio > li { padding-right: var(--gutter); }
+.trio > li + li { padding-left: var(--gutter); border-left: 1px solid var(--rule); }
+.trio > li:last-child { padding-right: 0; }
+@media (max-width: 760px) {
+  .trio { grid-template-columns: minmax(0, 1fr); }
+  .trio > li { padding: 0; }
+  .trio > li + li {
+    margin-top: 2.5rem;
+    padding-top: 2.5rem;
+    border-left: 0;
+    border-top: 1px solid var(--rule);
+  }
+}
 @media (max-width: 800px) { .two-col { grid-template-columns: minmax(0, 1fr); } }
 
 .muted { color: var(--ink-2); }
@@ -722,7 +755,6 @@ input[type="range"].scrub::-moz-range-thumb {
 .title-link:hover { box-shadow: inset 0 -1px 0 0 currentColor; }
 
 /* A track listing reads as a column, not edge-to-edge. */
-.tracklist { max-width: 58rem; }
 
 /* A section title living in the margin: quiet, but still a heading. */
 .margin-head {
@@ -856,20 +888,4 @@ input[type="range"].scrub::-moz-range-thumb {
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
-
-/* ============ about: bio beside a portrait held to its native size ============ */
-
-.lead {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 20rem;
-  gap: var(--gutter);
-  align-items: start;
-}
-
-.lead__portrait { aspect-ratio: 3 / 2; }
-
-@media (max-width: 1280px) {
-  .lead { grid-template-columns: minmax(0, 1fr); }
-  .lead__portrait { max-width: 34em; }
 }
