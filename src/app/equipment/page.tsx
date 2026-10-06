@@ -55,27 +55,29 @@ export default function EquipmentPage() {
       </section>
 
       <section className="wrap step-b">
+        {/* Rows become CSS grids under 720px, which strips native table
+            semantics in some assistive tech, so the roles are explicit. */}
         {groups.map(({ category, items }) => (
-          <table className="sheet" key={category}>
+          <table className="sheet" role="table" key={category}>
             <caption>{category}</caption>
-            <thead>
-              <tr>
-                <th scope="col">Item</th>
-                <th scope="col" className="sheet__rate">Day</th>
-                <th scope="col" className="sheet__rate">Week</th>
+            <thead role="rowgroup">
+              <tr role="row">
+                <th role="columnheader" scope="col">Item</th>
+                <th role="columnheader" scope="col" className="sheet__rate">Day</th>
+                <th role="columnheader" scope="col" className="sheet__rate">Week</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody role="rowgroup">
               {items.map((item) => (
-                <tr key={item.id}>
-                  <td>
+                <tr role="row" key={item.id}>
+                  <td role="cell">
                     <span className="sheet__name">
                       {item.brand} {item.name}
                     </span>
                     <span className="sheet__stock">{item.quantity} available</span>
                   </td>
-                  <td className="sheet__rate">{item.dayRateSAR}</td>
-                  <td className="sheet__rate">{item.weekRateSAR}</td>
+                  <td role="cell" className="sheet__rate">{item.dayRateSAR}</td>
+                  <td role="cell" className="sheet__rate">{item.weekRateSAR}</td>
                 </tr>
               ))}
             </tbody>
