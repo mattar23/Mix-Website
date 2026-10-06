@@ -1,5 +1,5 @@
 /* ============
-   Maryam Attar, cream stock, near black ink, one rust accent.
+   Maryam Attar, cream stock, warm near black ink, one muted brick accent.
    The accent marks the current page, the rule above a heading,
    and audio that is playing. Nothing else.
    ============ */
@@ -7,14 +7,14 @@
 /* ============ tokens ============ */
 
 :root {
-  --paper:      #efe8dc;
-  --paper-2:    #e6ded0;
-  --ink:        #15120e;
-  --ink-2:      #5e5649;
-  --ink-3:      #8a8172;
-  --rule:       #d4cbbb;
-  --rule-soft:  #dfd7c8;
-  --spot:       #b5653a;
+  --paper:      #f0e7d7;
+  --paper-2:    #e7dcc8;
+  --ink:        #1a1510;
+  --ink-2:      #5f5548;
+  --ink-3:      #8b8070;
+  --rule:       #d5cab6;
+  --rule-soft:  #dfd5c2;
+  --spot:       #a35a46;
   --spot-ink:   #ffffff;
 
   --sans: var(--font-archivo), "Helvetica Neue", Helvetica, Arial, sans-serif;
