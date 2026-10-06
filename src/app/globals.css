@@ -679,6 +679,7 @@ input[type="range"].scrub::-moz-range-thumb {
    full hero size the column would wrap one word per line. */
 .hero .hero-type { font-size: clamp(2.5rem, 5vw, 4.5rem); }
 .hero__portrait { aspect-ratio: 3 / 2; max-width: 40rem; }
+.hero__portrait-tall { aspect-ratio: 4 / 5; max-width: 30rem; }
 @media (max-width: 1024px) {
   .hero { grid-template-columns: minmax(0, 1fr); }
   .hero .hero-type { font-size: var(--t-hero); }
