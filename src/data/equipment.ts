@@ -252,9 +252,44 @@ export const EQUIPMENT_INVENTORY: EquipmentItem[] = [
   },
 ];
 
-export const RENTAL_TERMS = {
-  periods: 'Daily and weekly rates available. Weekly rentals automatically qualify for a 3-day rate cap (get 7 days for the price of 3).',
-  pickupDelivery: 'Pickup and return windows arranged in Jeddah, Saudi Arabia. Courier delivery available upon request.',
-  deposit: 'A refundable security deposit or signed rental agreement is required before gear handover. Deposits are promptly returned following inspection.',
-  conditionTesting: 'All equipment is fully tested, cleaned, and checked for calibrated performance prior to release.',
-};
+// Draft for Maryam's approval. Her own notes read "still figuring it out"
+// for the terms, so this is a standard hire agreement summarised in plain
+// words. Nothing here has been reviewed by a lawyer.
+export const RENTAL_TERMS: { heading: string; body: string }[] = [
+  {
+    heading: 'Rental period and rates',
+    body: 'Rates are per item, per day, in Saudi riyals. A week costs the same as three days. A day runs from collection to the same time the following day. Longer periods are quoted on request.',
+  },
+  {
+    heading: 'Booking and deposit',
+    body: 'A booking is confirmed once dates are agreed in writing and a refundable security deposit is paid. The deposit is returned after the equipment has been returned and inspected.',
+  },
+  {
+    heading: 'Collection and return',
+    body: 'Collection and return are arranged in Jeddah at agreed times. Delivery by courier can be arranged on request and is charged separately.',
+  },
+  {
+    heading: 'Condition and inspection',
+    body: 'All equipment is tested and cleaned before handover and inspected together at collection. Please report any fault on the day it appears.',
+  },
+  {
+    heading: 'Damage and loss',
+    body: 'The hirer is responsible for the equipment from collection to return. Repair or replacement at current retail cost is charged for damage beyond normal wear, loss, or theft, and may be deducted from the deposit.',
+  },
+  {
+    heading: 'Late return',
+    body: 'Equipment returned after the agreed time is charged at the day rate for each day or part day until it is back.',
+  },
+  {
+    heading: 'Cancellation',
+    body: 'Cancellation with at least 48 hours notice carries no charge. Later cancellation is charged one day at the agreed rate.',
+  },
+  {
+    heading: 'Use and sub hire',
+    body: 'Equipment is for the hirer’s own use and may not be lent or sub hired. Please use it as intended and keep it out of rain, sand, and direct heat.',
+  },
+  {
+    heading: 'Governing law',
+    body: 'This agreement is governed by the laws of the Kingdom of Saudi Arabia. The full agreement is signed at handover.',
+  },
+];
