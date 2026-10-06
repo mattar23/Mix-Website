@@ -2,7 +2,8 @@ export const ARTIST_INFO = {
   name: 'Maryam Attar',
   title: 'Mixing and Voiceover Engineer',
   location: 'Jeddah, Saudi Arabia',
-  email: 'maryamattarmusic@gmail.com',
+  // Forwarding for this address must exist before launch, see DEPLOY.md.
+  email: 'info@maryamattar.co',
   shortBio:
     'Maryam Attar is a music producer, sound designer, and audio engineer based in Jeddah, Saudi Arabia. Working within experimental electronic music, her approach is rooted in experimentation and the transformation of sound, often reshaping sounds beyond their original form to create new musical material. Her work aims to build immersive environments around a narrative, creating an experience that is felt and followed rather than simply heard.',
   longBio: [
@@ -13,15 +14,12 @@ export const ARTIST_INFO = {
   ],
   clientsAndCredits: [
     { name: 'MDLBEAST', detail: 'Expo 2020 Dubai "Cloud Walker" Campaign' },
-    { name: 'Saudi Music Commission', detail: 'Cultural Sample Pack Restoration' },
     { name: 'Athr Gallery', detail: 'Sound Design for International Open Call' },
     { name: 'Nur Taibah', detail: 'Original Score for "Blending In" Exhibition' },
-    { name: 'Nadine Jewellery', detail: 'Rawda Campaign Music & Voiceover Production' },
-    { name: 'Wall of Sound', detail: 'Assistant Engineering & Studio Tracking' }
+    { name: 'Nadine Jewellery', detail: 'Rawda Campaign Music & Voiceover Production' }
   ],
   socials: [
-    { name: 'Instagram', url: 'https://www.instagram.com', handle: '@maryamattar' },
-    { name: 'SoundCloud', url: 'https://soundcloud.com', handle: 'maryamattar' },
-    { name: 'LinkedIn', url: 'https://linkedin.com', handle: 'maryam-attar' }
+    { name: 'Instagram', url: 'https://www.instagram.com/maryamattar/', handle: '@maryamattar' },
+    { name: 'SoundCloud', url: 'https://soundcloud.com/maryam-attar', handle: 'maryam-attar' }
   ]
 };

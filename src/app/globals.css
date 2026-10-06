@@ -684,6 +684,11 @@ input[type="range"].scrub::-moz-range-thumb {
   .hero .hero-type { font-size: var(--t-hero); }
 }
 
+/* links: the page a social bio points at, one narrow column */
+.linklist { max-width: 34rem; }
+.linklist__portrait { width: 7rem; aspect-ratio: 1; margin-bottom: 2rem; }
+.linklist__row { grid-template-columns: minmax(0, 1fr) auto; align-items: baseline; }
+
 /* home: three entries divided by hairlines */
 .trio {
   display: grid;

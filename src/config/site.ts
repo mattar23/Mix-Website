@@ -10,7 +10,7 @@ export const siteConfig = {
   author: {
     name: 'Maryam Attar',
     role: 'Mixing and Voiceover Engineer',
-    email: 'maryamattarmusic@gmail.com',
+    email: 'info@maryamattar.co',
     location: 'Jeddah, Saudi Arabia',
   },
   keywords: [
@@ -28,8 +28,7 @@ export const siteConfig = {
   // but these are where the work is actually sought.
   areaServed: ['Saudi Arabia', 'United Arab Emirates', 'Qatar', 'Bahrain', 'Kuwait', 'Oman'],
   socials: {
-    instagram: 'https://www.instagram.com',
-    soundcloud: 'https://soundcloud.com',
-    linkedin: 'https://linkedin.com',
+    instagram: 'https://www.instagram.com/maryamattar/',
+    soundcloud: 'https://soundcloud.com/maryam-attar',
   },
 };
