@@ -86,6 +86,17 @@ ImprovMX shows the exact records for the domain on its own setup screen. If they
 
 The free plan is reported as one domain, 25 aliases, and 500 forwarded messages a day, far beyond what the site will need.
 
+## Sending enquiries straight from the contact form
+
+The site has no server, so on its own the contact form can only open the visitor's email app with the details filled in. To send from the page itself it needs a form service. The code is ready for Web3Forms, free for 250 enquiries a month, and switches over as soon as a key is set.
+
+1. Go to web3forms.com, enter the email address that should receive enquiries, and press Create Access Key. Use an inbox that already works, which today means Maryam's personal address, since `info@maryamattar.co` has no forwarding yet.
+2. The key arrives in that inbox. Send it to Moad.
+3. Moad pastes it between the quotes on the `NEXT_PUBLIC_FORM_KEY` line in `.github/workflows/deploy.yml` and pushes. The key is public by design; it only names the inbox.
+4. Send a test enquiry from the live contact page and confirm it arrives. Check spam the first time.
+
+With the key empty the form keeps working through the email app, so nothing breaks in the meantime. To change the receiving inbox later, create a new key for the new address and replace the old one.
+
 ## After launch
 
 - Submit `https://maryamattar.co/sitemap.xml` in Google Search Console and Bing Webmaster Tools. Both ask to verify ownership: use the DNS record method at GoDaddy, which needs no change to the site.

@@ -5,6 +5,9 @@ export const siteConfig = {
     'Mixing for records, editing and mixing for podcasts and voiceovers, and audio equipment hire in Jeddah, Saudi Arabia. Maryam Attar works with artists, podcasters, and directors across the Gulf, in person and remotely.',
   url: process.env.NEXT_PUBLIC_SITE_URL || 'https://maryamattar.co',
   ogImage: '/images/og-portrait.jpg',
+  // Web3Forms access key. Public by design: it only names the inbox that
+  // receives enquiries. Empty means the contact form opens the mail client.
+  formKey: process.env.NEXT_PUBLIC_FORM_KEY || '',
   locale: 'en_US',
   alternateLocales: ['ar_SA'],
   author: {

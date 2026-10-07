@@ -133,7 +133,7 @@ The Instagram reels once linked from the Rawda campaign were deleted by the acco
 
 ## Known gaps
 
-The only enquiry path hands off to the visitor's mail client. The contact form composes a pre-filled `mailto:` with the submitted details, and the equipment page links into it with `?service=rental`. Nothing is silently dropped, but nothing is captured server-side either, so there is no record of an enquiry unless the visitor actually sends the mail. A form service would be the real fix, since there is no server.
+The contact form can send straight from the page through Web3Forms, but only once `NEXT_PUBLIC_FORM_KEY` is set in the deploy workflow (`siteConfig.formKey`). Until Maryam creates a key, see `DEPLOY.md`, it is empty and the form falls back to composing a pre-filled `mailto:`. The direct path was tested on 2026-10-07 against a stubbed response, not the real service, so send a real test enquiry when the key goes in. Every field is required and a value of only spaces is refused. The equipment page links into the form with `?service=rental`.
 
 `RENTAL_TERMS` is a plain-words draft of a standard hire agreement. Maryam has not approved it and no lawyer has read it.
 

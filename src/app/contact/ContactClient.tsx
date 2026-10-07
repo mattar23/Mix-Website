@@ -4,6 +4,7 @@ import React, { Suspense, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { ARTIST_INFO } from '@/data/bio';
 import { SERVICES } from '@/data/services';
+import { siteConfig } from '@/config/site';
 
 function ContactForm() {
   const searchParams = useSearchParams();
@@ -21,6 +22,12 @@ function ContactForm() {
     message: '',
   });
 
+  // Sending straight from the page needs a form service, since the site has
+  // no server. With a key set the form posts to it; without one it falls back
+  // to opening the visitor's mail client. See DEPLOY.md.
+  const direct = Boolean(siteConfig.formKey);
+  const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'failed'>('idle');
+
   const set = (key: keyof typeof form) => (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
@@ -29,9 +36,7 @@ function ContactForm() {
     setForm((f) => ({ ...f, [key]: e.target.value }));
   };
 
-  // There is no server behind this site, so the form hands off to the
-  // visitor's mail client with everything filled in. Nothing is silently lost.
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     // Every field is required. The browser already stops an empty one; this
@@ -59,10 +64,46 @@ function ContactForm() {
       form.message.trim(),
     ].join('\n');
 
-    window.location.href = `mailto:${ARTIST_INFO.email}?subject=${encodeURIComponent(
+    const mailto = `mailto:${ARTIST_INFO.email}?subject=${encodeURIComponent(
       `${serviceName} enquiry`
     )}&body=${encodeURIComponent(body)}`;
+
+    if (!direct) {
+      window.location.href = mailto;
+      return;
+    }
+
+    setStatus('sending');
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          access_key: siteConfig.formKey,
+          subject: `${serviceName} enquiry from ${form.name.trim()}`,
+          from_name: 'maryamattar.co',
+          name: form.name.trim(),
+          email: form.email.trim(),
+          enquiry: serviceName,
+          timeline: form.timeline.trim(),
+          message: form.message.trim(),
+        }),
+      });
+      const data: { success?: boolean } = await res.json();
+      setStatus(data.success ? 'sent' : 'failed');
+    } catch {
+      setStatus('failed');
+    }
   };
+
+  if (status === 'sent') {
+    return (
+      <p className="prose" role="status">
+        Thank you, {form.name.trim()}. Your enquiry has been sent, and Maryam will reply to{' '}
+        {form.email.trim()}.
+      </p>
+    );
+  }
 
   return (
     <form onSubmit={handleSubmit}>
@@ -131,11 +172,23 @@ function ContactForm() {
       </label>
 
       <p className="cluster cluster-lg">
-        <button className="btn btn-solid" type="submit">
-          Send enquiry
+        <button className="btn btn-solid" type="submit" disabled={status === 'sending'}>
+          {status === 'sending' ? 'Sending' : 'Send enquiry'}
         </button>
-        <span className="meta meta-micro quiet">
-          All fields are required. This opens your email app with the details filled in.
+        <span className="meta meta-micro quiet" role="status">
+          {status === 'failed' ? (
+            <>
+              The enquiry could not be sent. Please try again, or write to{' '}
+              <a className="ul-link" href={`mailto:${ARTIST_INFO.email}`}>
+                {ARTIST_INFO.email}
+              </a>
+              .
+            </>
+          ) : direct ? (
+            'All fields are required.'
+          ) : (
+            'All fields are required. This opens your email app with the details filled in.'
+          )}
         </span>
       </p>
     </form>
@@ -162,10 +215,6 @@ export default function ContactClient() {
           </div>
 
           <div style={{ maxWidth: '44rem' }}>
-            <p className="prose" style={{ marginBottom: '1.5rem' }}>
-              Mixing, podcast and voiceover work, or equipment rental in Jeddah. A
-              sentence about the project is enough to start.
-            </p>
             <Suspense fallback={null}>
               <ContactForm />
             </Suspense>
