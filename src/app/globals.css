@@ -119,10 +119,31 @@ main { flex: 1; display: flex; flex-direction: column; }
   text-wrap: balance;
 }
 
+/* The heading ladder, the same on every page:
+   page title    --t-hero  400   .hero-type
+   section       --t-head  400   a service name
+   item          --t-sub   400   .item-head: a project, an offer, a part of a service
+   small         --t-body  500   .small-head: a term, a category, a titled paragraph
+   Reading text is 300, interface text 400, and 500 is kept for small heads. */
 h1, h2, h3, h4 { font-weight: 400; }
 
-h1 { font-size: var(--t-head); }
-h2 { font-size: var(--t-sub); }
+h1 { font-size: var(--t-hero); }
+h2 { font-size: var(--t-head); }
+
+h3, .item-head {
+  font-size: var(--t-sub);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+h4, .small-head {
+  font-size: var(--t-body);
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 1.4;
+  color: var(--ink);
+}
 
 /* Prose: Roboto Light, the weight Maryam asked for, with room to breathe. */
 .prose {
@@ -146,9 +167,9 @@ h2 { font-size: var(--t-sub); }
 .meta {
   font-family: var(--sans);
   font-size: var(--t-fine);
-  letter-spacing: 0.01em;
+  letter-spacing: 0;
   color: var(--ink-2);
-  line-height: 1.45;
+  line-height: 1.5;
 }
 
 .meta-micro { font-size: var(--t-micro); }
@@ -313,7 +334,7 @@ h2 { font-size: var(--t-sub); }
   font-size: var(--t-sub);
   font-weight: 400;
   letter-spacing: -0.02em;
-  line-height: 1.15;
+  line-height: 1.2;
 }
 
 .index__sub { margin-top: 0.45rem; }
@@ -347,8 +368,8 @@ h2 { font-size: var(--t-sub); }
 
 .track__title {
   font-weight: 500;
-  font-size: 1.0625rem;
-  letter-spacing: -0.012em;
+  font-size: var(--t-body);
+  line-height: 1.4;
 }
 
 .track__dur {
@@ -377,7 +398,8 @@ h2 { font-size: var(--t-sub); }
 .sheet caption {
   text-align: left;
   padding-bottom: 0.5rem;
-  font-size: var(--t-fine);
+  font-size: var(--t-body);
+  line-height: 1.4;
   font-weight: 500;
   color: var(--ink);
   border-bottom: 1px solid var(--ink);
@@ -414,11 +436,13 @@ h2 { font-size: var(--t-sub); }
   padding-block: 1rem;
   cursor: pointer;
   list-style: none;
-  font-size: var(--t-fine);
-  font-weight: 500;
+  font-size: var(--t-sub);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
 }
 .fold summary::-webkit-details-marker { display: none; }
-.fold summary::after { content: "Read"; font-weight: 400; color: var(--ink-2); box-shadow: inset 0 -1px 0 0 currentColor; }
+.fold summary::after { content: "Read"; font-size: var(--t-fine); letter-spacing: 0; color: var(--ink-2); box-shadow: inset 0 -1px 0 0 currentColor; }
 .fold[open] summary::after { content: "Close"; }
 .fold[open] { padding-bottom: 1rem; }
 .fold__cols { columns: 2; column-gap: var(--gutter); }
@@ -599,25 +623,25 @@ input[type="range"].scrub::-moz-range-thumb {
 .spread-wide .spread__photo {
   align-self: stretch;
   width: 100%;
-  min-height: clamp(16rem, calc(50vw * 2 / 3), calc(100vh - var(--masthead-h) - 19rem));
+  min-height: clamp(16rem, calc(50vw * 2 / 3), calc(100vh - var(--masthead-h) - 19.5rem));
 }
 /* The words stand off the photo by the same margin the page keeps at its edges. */
 .spread-wide .spread__text { padding: 1.5em var(--page-x); }
 .spread__text {
-  font-size: clamp(0.9375rem, 2.05vh, 1.125rem);
-  padding: 2.4em var(--page-x) 2em clamp(1.5rem, 4.5vw, 4.5rem);
+  font-size: clamp(0.9375rem, 2.2vh, 1.125rem);
+  padding: 1.7em var(--page-x) 1.3em clamp(1.5rem, 4.5vw, 4.5rem);
 }
-.spread__text .hero-type { font-size: min(var(--t-hero), 3em); }
+.spread__text .hero-type { font-size: min(var(--t-hero), 3.12em); }
 .spread__text .accent-rule { margin-top: 0.9em; }
 .spread__text .prose { font-size: 1em; line-height: 1.55; }
 .spread__text .prose-fine { font-size: 0.94em; }
 .about__bio {
-  margin-top: 1.6em;
+  margin-top: 1.25em;
   padding-left: clamp(1.25rem, 3vw, 2.5rem);
   border-left: 1px solid var(--rule);
   max-width: 46rem;
 }
-.about__bio p + p { margin-top: 0.85em; }
+.about__bio p + p { margin-top: 0.7em; }
 
 /* home: the three things on offer, side by side under the spread */
 .offers-band { border-top: 1px solid var(--rule); }
@@ -629,7 +653,7 @@ input[type="range"].scrub::-moz-range-thumb {
 .offers > li { display: flex; flex-direction: column; padding-right: var(--gutter); }
 .offers > li + li { padding-left: var(--gutter); border-left: 1px solid var(--rule); }
 .offers > li:last-child { padding-right: 0; }
-.offers h2 { font-size: 1.375rem; }
+.offers h2 { font-size: var(--t-sub); letter-spacing: -0.02em; line-height: 1.2; }
 .offers .prose { margin-top: 0.6rem; max-width: 30ch; }
 .offers .meta { margin-top: auto; padding-top: 1rem; align-self: start; }
 @media (max-width: 760px) {
@@ -649,13 +673,11 @@ input[type="range"].scrub::-moz-range-thumb {
 .service { max-width: 46rem; padding-top: 2.25rem; }
 .service h2 { font-size: var(--t-head); }
 .service .prose { max-width: none; }
-.service__lead { margin-top: 1.25rem; font-size: 1.25rem; line-height: 1.5; }
-.service__lead + .prose { margin-top: 1rem; color: var(--ink-2); }
+.service__lead { margin-top: 1.25rem; }
+.service__lead + .prose { margin-top: 1rem; }
 .service section,
 .service__fold { margin-top: 2.25rem; padding-top: 1.5rem; border-top: 1px solid var(--rule-soft); }
-.service h3 { font-size: var(--t-sub); font-weight: 400; letter-spacing: -0.015em; line-height: 1.2; }
 .service h3 + * { margin-top: 1rem; }
-.service h4 { font-size: var(--t-body); font-weight: 500; line-height: 1.4; }
 .service h4 + p { margin-top: 0.25rem; }
 .service__items { margin-top: 1.25rem; }
 .service__items > div + div { margin-top: 1.1rem; }
@@ -720,14 +742,6 @@ input[type="range"].scrub::-moz-range-thumb {
 /* A track listing reads as a column, not edge-to-edge. */
 
 /* A section title living in the margin: quiet, but still a heading. */
-.margin-head {
-  font-size: var(--t-fine);
-  font-weight: 500;
-  line-height: 1.35;
-  color: var(--ink);
-  overflow-wrap: break-word;
-}
-
 @media (max-width: 400px) {
   .masthead__name { font-size: 1.0625rem; }
   .masthead__tools { gap: 0.85rem; }

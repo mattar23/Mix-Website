@@ -46,7 +46,7 @@ export default function LinksPage() {
             style={{ objectFit: 'cover' }}
           />
         </div>
-        <h1 className="display" style={{ fontSize: 'var(--t-head)' }}>
+        <h1 className="hero-type">
           {ARTIST_INFO.name}
         </h1>
         <span className="accent-rule" aria-hidden="true" />
