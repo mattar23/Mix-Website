@@ -12,8 +12,8 @@ export default function WorkClient() {
   return (
     <>
       <section className="wrap step">
-        <span className="accent-rule" aria-hidden="true" />
         <h1 className="hero-type">Work</h1>
+        <span className="accent-rule" aria-hidden="true" />
       </section>
 
       {/* Each row says what the job was and who it was for, nothing more. */}

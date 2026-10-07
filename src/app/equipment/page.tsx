@@ -41,8 +41,8 @@ export default function EquipmentPage() {
   return (
     <>
       <section className="wrap step">
-        <span className="accent-rule" aria-hidden="true" />
         <h1 className="hero-type">Equipment Rental</h1>
+        <span className="accent-rule" aria-hidden="true" />
         <p className="prose" style={{ marginTop: '1.25rem' }}>
           Gear Maryam records with, available to rent in Jeddah. Rates are per
           item, per day, in Saudi riyals. A week costs the same as three days.
@@ -76,7 +76,7 @@ export default function EquipmentPage() {
         </div>
       </section>
 
-      <section className="wrap step-b" id="terms" style={{ scrollMarginTop: '7.5rem' }}>
+      <section className="wrap step-b" id="terms" style={{ scrollMarginTop: '6rem' }}>
         <hr className="rule" />
         <div className="split" style={{ paddingTop: '2rem', alignItems: 'center' }}>
           <p className="prose">

@@ -26,10 +26,10 @@ export default function HomePage() {
       <section className="wrap" style={{ paddingBlock: '2rem' }}>
         <div className="hero">
           <div>
-            <span className="accent-rule" aria-hidden="true" />
             <h1 className="hero-type" style={{ maxWidth: '13ch' }}>
               Helping shape what you already set in motion
             </h1>
+            <span className="accent-rule" aria-hidden="true" />
             <p className="prose" style={{ marginTop: '1.5rem', textWrap: 'balance' }}>
               Mixing and voiceover engineer based in {ARTIST_INFO.location}.
             </p>

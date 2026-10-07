@@ -122,10 +122,10 @@ export default function ContactClient() {
   return (
     <>
       <section className="wrap step">
-        <span className="accent-rule" aria-hidden="true" />
         <h1 className="hero-type" style={{ maxWidth: '12ch' }}>
           Tell me what you are making.
         </h1>
+        <span className="accent-rule" aria-hidden="true" />
       </section>
 
       <section className="wrap step-b">

@@ -46,10 +46,10 @@ export default function LinksPage() {
             style={{ objectFit: 'cover' }}
           />
         </div>
-        <span className="accent-rule" aria-hidden="true" />
         <h1 className="display" style={{ fontSize: 'var(--t-head)' }}>
           {ARTIST_INFO.name}
         </h1>
+        <span className="accent-rule" aria-hidden="true" />
         <p className="meta" style={{ marginTop: '0.75rem' }}>
           {ARTIST_INFO.title}, {ARTIST_INFO.location}
         </p>

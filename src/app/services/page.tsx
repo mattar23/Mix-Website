@@ -35,10 +35,10 @@ export default function ServicesPage() {
   return (
     <>
       <section className="wrap step">
-        <span className="accent-rule" aria-hidden="true" />
         <h1 className="hero-type" style={{ maxWidth: '12ch' }}>
           Services
         </h1>
+        <span className="accent-rule" aria-hidden="true" />
         <p className="prose" style={{ marginTop: '2rem', maxWidth: '34em' }}>
           Two kinds of session. Each lists what is included and how to prepare
           your files, so there are no surprises once we start.
