@@ -83,7 +83,7 @@ Four typed modules are the single source of content truth. Pages import and rend
 | Module | Exports | Consumed by |
 |---|---|---|
 | `data/equipment.ts` | `EquipmentItem`, `EQUIPMENT_INVENTORY`, `RENTAL_TERMS` | equipment page, JSON-LD offer catalog |
-| `data/projects.ts` | `Project`, `PROJECTS`, `AudioSample`, `AUDIO_SAMPLES`, `Film`, `FILMS` | work page, audio player |
+| `data/projects.ts` | `Project`, `PROJECTS`, `AudioSample`, `AUDIO_SAMPLES` | work page, audio player, film viewer |
 | `data/services.ts` | `ServiceDetail`, `SERVICES` | home, services page, contact form, JSON-LD offer catalog |
 | `data/bio.ts` | `ARTIST_INFO` | about page, colophon, contact page |
 
@@ -95,7 +95,7 @@ Four typed modules are the single source of content truth. Pages import and rend
 
 Adding a piece of gear means adding one entry to `EQUIPMENT_INVENTORY`. It then appears in the rate sheet and the structured data automatically. Same for a project.
 
-A project is linked to its audio by matching `Project.audioSrc` against `AudioSample.src`, not by id. Keep those paths in sync or the listen control disappears from the work index. A `Film` carries its own `credit` line (music production and mixing) because the voiceover on the two Rawda films was not Maryam's, while the audio chapters are her voiceover mixes.
+A project is linked to its audio by matching `Project.audioSrc` against `AudioSample.src`, not by id. Keep those paths in sync or the listen control disappears from the work index. The two Rawda films are credited for music production and mixing only, because the voiceover on them was not Maryam's, while the audio chapters under the campaign row are her voiceover mixes.
 
 `year`, `description`, `category`, and `tags` are still in the project data but the Work page no longer renders them. The hover plate and its stills and loops were removed at Maryam's request, since it changed with the pointer and read as unstable.
 
@@ -105,7 +105,7 @@ A project is linked to its audio by matching `Project.audioSrc` against `AudioSa
 
 ### Server pages, two client components
 
-`/`, `/about`, `/services`, `/equipment`, and `/links` are pure server components. `/work` and `/contact` split in two: `page.tsx` exports `metadata` and renders a sibling `*Client.tsx` marked `'use client'`. Work drives the audio player; Contact reads `useSearchParams` inside a `Suspense` boundary, which the static export requires.
+`/`, `/about`, `/services`, `/equipment`, and `/links` are pure server components. `/work` and `/contact` split in two: `page.tsx` exports `metadata` and renders a sibling `*Client.tsx` marked `'use client'`. Work drives the audio player and the film viewer; Contact reads `useSearchParams` inside a `Suspense` boundary, which the static export requires.
 
 Per-route `metadata` sets `alternates.canonical` and an `openGraph` block built from `siteConfig.url`. New routes also go in `app/sitemap.ts`. Metadata routes (`sitemap.ts`, `robots.ts`, `manifest.ts`) carry `export const dynamic = 'force-static'`, which `output: 'export'` demands.
 
@@ -125,9 +125,11 @@ Web assets were derived with ffmpeg and Pillow. Stills are cropped to 3:2 to mat
 
 The portrait Maryam chose for the home page, `public/images/maryam-portrait.jpg`, is a 1264 by 843 crop of `maryam_pic.png`, a Gemini restoration of the 1024 by 683 `DSCF2076.jpeg` made on 2026-10-07 because the camera original is not to hand. The restoration kept her face but lightly resynthesised skin texture and removed a light reflection on the sweatshirt; replace it with the camera original if Maryam supplies one. It fills the left half of the Home spread, uncropped, and appears as a small square on `/links`. `public/images/og-portrait.jpg` is a 1200 by 630 crop of the same frame for Open Graph and the JSON-LD `Person` image. The About page carries `maryam-session.jpg`, the dark background session photo she asked for there, cut 4:5 around the two figures at 1440 by 1800 from `DSCF2712.jpg`, as the full height left panel in her About mockup.
 
-The two Rawda campaign films play in full, with sound, side by side under the list on the Work page. They are the finished spots carrying Maryam's music and mix, so the audio is only AAC encoded, never normalised or altered. Each is scaled to 1920px, encoded with libx264 at crf 24 capped at 5Mbps, AAC at 192k, faststart, with the camera timecode track dropped. That lands at 8 to 12MB each, which is why they use `preload="none"` behind a poster frame saved to `public/images/films/`.
+Three finished films are hosted on the site and open from their own rows on the Work page: Rawda Gemma, Rawda Botanica, and Blending In. Moad asked on 2026-10-07 for the films to stop being embedded on the page and to be listed like every other job. A row's "Watch" button opens `components/FilmViewer.tsx`, a native `dialog` holding the video with its controls; the backdrop dims to paper, never to black. Opening a film pauses the track player, and closing the viewer stops the film. A project carries its film as `Project.film` (`src`, `poster`, `duration`).
 
-`components/FilmPlate.tsx` keeps sound exclusive: a film pauses the track player when it starts, pauses itself when a track starts, and pauses any other film through a `ma:film-play` document event. Its caption reuses the `.track` row, so a playing film takes the accent like a playing track.
+They are finished pieces carrying Maryam's music and mixing, so the audio is only AAC encoded at 192k, never normalised or altered. The Rawda films are scaled to 1920px, libx264 at crf 24 capped at 5Mbps, 8 to 12MB each. Blending In is six and a half minutes of a near static white scene, so it is 1280px at crf 26 capped at 780k and lands at 16MB. Poster frames are in `public/images/films/`. Keep any single file well under GitHub's 100MB limit.
+
+The Instagram reels once linked from the Rawda campaign were deleted by the account, so those links are gone; check a link still resolves before adding one.
 
 ## Known gaps
 

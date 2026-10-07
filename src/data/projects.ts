@@ -7,6 +7,8 @@ export interface Project {
   category: 'Music' | 'Commercial' | 'Art' | 'Sound Design';
   description: string;
   audioSrc?: string;
+  /** A finished film hosted on the site, opened in the viewer from its row. */
+  film?: { src: string; poster: string; duration: string };
   externalLink?: string;
   /** Further posts or reels for the same piece, from Maryam's weblinks document. */
   moreLinks?: { label: string; url: string }[];
@@ -36,9 +38,40 @@ export const PROJECTS: Project[] = [
     description:
       'Music production and complete audio mixing for luxury campaign videos celebrating nature, heritage, and poetic storytelling. Recorded, edited, and balanced voiceover narration across multiple collection chapters.',
     audioSrc: '/audio/gemma-nj-rawda.mp3',
-    externalLink: 'https://www.instagram.com/reel/DQGjQg6AAw3/',
-    moreLinks: [{ label: 'Second reel', url: 'https://www.instagram.com/reel/DPrX-A0gAWj/' }],
     tags: ['Music Production', 'Voiceover Mixing', 'Brand Scoring', 'Luxury']
+  },
+  // The two campaign films stand as their own jobs. The voiceover on them was
+  // not Maryam's, so the credit is music production and mixing only. The
+  // Instagram reels they were once linked from have been deleted.
+  {
+    id: 'rawda-gemma',
+    title: 'Rawda Gemma',
+    clientOrArtist: 'Nadine Jewellery',
+    role: 'Music Production & Mixing',
+    year: '2022/23',
+    category: 'Commercial',
+    description: 'Campaign film for the Gemma chapter of the Rawda collection.',
+    film: {
+      src: '/video/rawda-gemma.mp4',
+      poster: '/images/films/rawda-gemma.jpg',
+      duration: '0:31',
+    },
+    tags: ['Music Production', 'Mixing', 'Campaign Film']
+  },
+  {
+    id: 'rawda-botanica',
+    title: 'Rawda Botanica',
+    clientOrArtist: 'Nadine Jewellery',
+    role: 'Music Production & Mixing',
+    year: '2022/23',
+    category: 'Commercial',
+    description: 'Campaign film for the Botanica chapter of the Rawda collection.',
+    film: {
+      src: '/video/rawda-botanica.mp4',
+      poster: '/images/films/rawda-botanica.jpg',
+      duration: '0:38',
+    },
+    tags: ['Music Production', 'Mixing', 'Campaign Film']
   },
   {
     id: 'athr-gallery',
@@ -65,6 +98,11 @@ export const PROJECTS: Project[] = [
     category: 'Art',
     description:
       'Produced original music for an audiovisual performance art piece combining spoken word, intimate field recordings, and moving video for a public exhibition.',
+    film: {
+      src: '/video/blending-in.mp4',
+      poster: '/images/films/blending-in.jpg',
+      duration: '6:28',
+    },
     tags: ['Audiovisual Art', 'Spoken Word', 'Experimental Electronic']
   },
 ];
@@ -126,39 +164,5 @@ export const AUDIO_SAMPLES: AudioSample[] = [
     src: '/audio/yasmina-nj-rawda.mp3',
     duration: '1:18',
     category: 'Commercial'
-  }
-];
-
-/** A finished film carrying Maryam's sound, shown with its audio on. */
-export interface Film {
-  id: string;
-  title: string;
-  /** Links the film to its entry in PROJECTS for the client name. */
-  projectId: string;
-  /** Maryam's credit on this film. The voiceover on the films was not hers. */
-  credit: string;
-  src: string;
-  poster: string;
-  duration: string;
-}
-
-export const FILMS: Film[] = [
-  {
-    id: 'rawda-botanica',
-    title: 'Rawda Botanica',
-    projectId: 'nadine-jewellery-rawda',
-    credit: 'Music Production & Mixing',
-    src: '/video/rawda-botanica.mp4',
-    poster: '/images/films/rawda-botanica.jpg',
-    duration: '0:38'
-  },
-  {
-    id: 'rawda-gemma',
-    title: 'Rawda Gemma',
-    projectId: 'nadine-jewellery-rawda',
-    credit: 'Music Production & Mixing',
-    src: '/video/rawda-gemma.mp4',
-    poster: '/images/films/rawda-gemma.jpg',
-    duration: '0:31'
   }
 ];

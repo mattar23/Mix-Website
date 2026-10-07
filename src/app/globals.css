@@ -347,42 +347,6 @@ h4, .small-head {
   }
 }
 
-/* ============ tracks ============ */
-
-.track {
-  display: grid;
-  grid-template-columns: 1.75rem minmax(0, 1fr) auto;
-  gap: 1.25rem;
-  align-items: center;
-  width: 100%;
-  text-align: left;
-  padding-block: 1.05rem;
-  border-bottom: 1px solid var(--rule-soft);
-  transition: color 0.18s ease;
-}
-
-.track:first-child { border-top: 1px solid var(--rule); }
-
-.track__glyph { color: var(--ink-2); transition: color 0.18s ease; }
-.track:hover .track__glyph { color: var(--ink); }
-
-.track__title {
-  font-weight: 500;
-  font-size: var(--t-body);
-  line-height: 1.4;
-}
-
-.track__dur {
-  font-size: var(--t-fine);
-  font-variant-numeric: tabular-nums;
-  color: var(--ink-2);
-}
-
-/* The accent earns its keep here: the track that is playing. */
-.track-on .track__title,
-.track-on .track__glyph,
-.track-on .track__dur { color: var(--spot); }
-
 /* ============ rate sheet ============ */
 
 /* Categories flow into two balanced columns, as on her rental mockup. */
@@ -815,24 +779,33 @@ input[type="range"].scrub::-moz-range-thumb {
 
 .listen:hover { color: var(--ink); }
 
-/* ============ films: finished pieces, played with their sound ============ */
+/* ============ viewer: a film opened from its row on the Work page ============ */
 
-.film__frame { aspect-ratio: 16 / 9; }
-
-.film__frame video {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  cursor: pointer;
+.viewer {
+  width: min(92vw, 64rem);
+  max-width: none;
+  padding: 0;
+  border: 0;
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: 0 0 0 1px var(--rule);
 }
 
-.film__frame video[controls] { cursor: auto; }
+/* The page dims to paper, not to black: the site stays light throughout. */
+.viewer::backdrop { background: color-mix(in srgb, var(--paper) 92%, transparent); }
 
-.figure__video {
-  position: absolute;
-  inset: 0;
+.viewer__video {
+  display: block;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  max-height: calc(100vh - 9rem);
+  aspect-ratio: 16 / 9;
+  background: var(--paper-2);
+}
+
+.viewer__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 0.9rem 1.25rem;
 }
