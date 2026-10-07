@@ -10,8 +10,6 @@ export interface ServiceDetail {
   notes?: string[];
   requirements?: { heading: string; body: string }[];
   delivery?: string[];
-  extrasIntro?: string;
-  extras?: { heading: string; body: string }[];
 }
 
 // Every sentence below is Maryam's own, word for word, from
@@ -55,29 +53,6 @@ export const SERVICES: ServiceDetail[] = [
       'Turnaround is based on the size and complexity of the session and will be confirmed before the project begins.',
       'Mastering is not included.',
     ],
-    extrasIntro: 'Optional services are available depending on the needs of the project.',
-    extras: [
-      {
-        heading: 'Rush Delivery',
-        body: 'Faster turnaround dependent on availability and project requirements.',
-      },
-      {
-        heading: 'Additional Revisions',
-        body: 'Additional revision rounds beyond the three included with the mix.',
-      },
-      {
-        heading: 'Mixed Stems',
-        body: 'Processed stem groups from the final mix, such as drums, instruments, lead vocals and background vocals.',
-      },
-      {
-        heading: 'Alternate Versions',
-        body: 'Additional versions of the final mix, including instrumental, a cappella, clean, performance/TV and vocal-up mixes.',
-      },
-      {
-        heading: 'Vocal Editing / Tuning',
-        body: 'Extensive vocal comping, editing, pitch correction or cleanup beyond the minor corrective work included in the mix.',
-      },
-    ],
   },
   {
     id: 'voiceover',
@@ -102,3 +77,33 @@ export const SERVICES: ServiceDetail[] = [
     ],
   },
 ];
+
+// Her document lists these under Mixing. She asked on 2026-10-07 for them to
+// stand as their own section at the end of the page, after both services.
+export const ADDITIONAL_SERVICES = {
+  id: 'additional',
+  title: 'Additional Services & Deliverables',
+  intro: 'Optional services are available depending on the needs of the project.',
+  items: [
+    {
+      heading: 'Rush Delivery',
+      body: 'Faster turnaround dependent on availability and project requirements.',
+    },
+    {
+      heading: 'Additional Revisions',
+      body: 'Additional revision rounds beyond the three included with the mix.',
+    },
+    {
+      heading: 'Mixed Stems',
+      body: 'Processed stem groups from the final mix, such as drums, instruments, lead vocals and background vocals.',
+    },
+    {
+      heading: 'Alternate Versions',
+      body: 'Additional versions of the final mix, including instrumental, a cappella, clean, performance/TV and vocal-up mixes.',
+    },
+    {
+      heading: 'Vocal Editing / Tuning',
+      body: 'Extensive vocal comping, editing, pitch correction or cleanup beyond the minor corrective work included in the mix.',
+    },
+  ],
+};

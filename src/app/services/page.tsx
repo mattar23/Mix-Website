@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Metadata } from 'next';
-import { SERVICES } from '@/data/services';
+import { SERVICES, ADDITIONAL_SERVICES } from '@/data/services';
 import { siteConfig } from '@/config/site';
 
 export const metadata: Metadata = {
@@ -98,14 +98,6 @@ export default function ServicesPage() {
               </section>
             )}
 
-            {service.extras && (
-              <section>
-                <h3>Additional Services & Deliverables</h3>
-                <p className="prose prose-fine">{service.extrasIntro}</p>
-                <Titled items={service.extras} />
-              </section>
-            )}
-
             <p className="service__cta">
               <Link className="btn" href={`/contact?service=${service.id}`}>
                 Request a quote
@@ -114,6 +106,24 @@ export default function ServicesPage() {
           </article>
         </section>
       ))}
+
+      <section
+        className="wrap step-b"
+        id={ADDITIONAL_SERVICES.id}
+        style={{ scrollMarginTop: '6rem' }}
+      >
+        <hr className="rule" />
+        <article className="service">
+          <h2 className="display">{ADDITIONAL_SERVICES.title}</h2>
+          <p className="prose service__lead">{ADDITIONAL_SERVICES.intro}</p>
+          <Titled items={ADDITIONAL_SERVICES.items} />
+          <p className="service__cta">
+            <Link className="btn" href="/contact">
+              Request a quote
+            </Link>
+          </p>
+        </article>
+      </section>
     </>
   );
 }
