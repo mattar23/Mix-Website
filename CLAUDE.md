@@ -52,7 +52,7 @@ Colour, type scale, and rhythm are all custom properties on `:root`. Components 
 
 Class names are semantic and BEM-ish (`.index__row`, `.sheet__rate`, `.doc__margin`). Inline `style` is used sparingly for one-off measures like a `maxWidth` on a single heading; anything reused belongs in the stylesheet.
 
-The Services page keeps what is included, revisions, and extras in view and folds the file preparation requirements into a `details` element (`.fold`). The masthead order is Home, Services, Work, Equipment, About, Contact, as on her mockups.
+The Services page is one reading column (`.service`, 46rem) with three heading levels used the same way for both services: the service name, a headed section for each part in the order of her document, and titled paragraphs inside a section. Moad asked on 2026-10-07 for the two column layout and the margin label to go. "Mix Delivery Requirements" is a `details` element (`.fold`) styled as one more section heading, closed by default. The masthead order is Home, Services, Work, Equipment, About, Contact, as on her mockups.
 
 The equipment page is a two column rate sheet (`.sheets`, CSS columns, one column under 900px) showing the day rate only. A week is always three days, which is now stated only in the first rental term, since Moad asked on 2026-10-07 for the intro lines under the Services and Equipment titles to go. Page headers are a title and the accent bar, nothing else. The rental terms sit in a native `details` element (`.fold`), closed by default. Visible labels say "rental", Maryam's own word; the terms text keeps "hirer".
 

@@ -16,44 +16,40 @@ export const metadata: Metadata = {
   },
 };
 
-function List({ heading, items }: { heading: string; items: string[] }) {
+/** A run of titled paragraphs, as her document sets requirements and extras. */
+function Titled({ items }: { items: { heading: string; body: string }[] }) {
   return (
-    <div>
-      <p className="meta">{heading}</p>
-      <ul className="speclist" style={{ marginTop: '0.75rem' }}>
-        {items.map((i) => (
-          <li className="prose prose-fine" key={i}>
-            {i}
-          </li>
-        ))}
-      </ul>
+    <div className="service__items">
+      {items.map((i) => (
+        <div key={i.heading}>
+          <h4>{i.heading}</h4>
+          <p className="prose prose-fine">{i.body}</p>
+        </div>
+      ))}
     </div>
   );
 }
 
-/** A run of headed paragraphs, as her document sets requirements and extras. */
-function Headed({ items }: { items: { heading: string; body: string }[] }) {
+function Bullets({ items }: { items: string[] }) {
   return (
-    <>
+    <ul className="speclist">
       {items.map((i) => (
-        <div key={i.heading}>
-          <p className="meta">{i.heading}</p>
-          <p className="prose prose-fine" style={{ marginTop: '0.35rem' }}>
-            {i.body}
-          </p>
-        </div>
+        <li className="prose prose-fine" key={i}>
+          {i}
+        </li>
       ))}
-    </>
+    </ul>
   );
 }
 
+// One column, in the order of her document: what the service is, then a
+// headed section for each part of it. Every service uses the same three
+// heading levels, so the page reads the same way top to bottom.
 export default function ServicesPage() {
   return (
     <>
       <section className="wrap step">
-        <h1 className="hero-type" style={{ maxWidth: '12ch' }}>
-          Services
-        </h1>
+        <h1 className="hero-type">Services</h1>
         <span className="accent-rule" aria-hidden="true" />
       </section>
 
@@ -65,63 +61,57 @@ export default function ServicesPage() {
           style={{ scrollMarginTop: '6rem' }}
         >
           <hr className="rule" />
-          <div className="doc" style={{ paddingTop: '2.5rem' }}>
-            <h2 className="margin-head doc__margin">{service.title}</h2>
-            <div>
-              <p
-                className="prose"
-                style={{ fontSize: 'var(--t-sub)', lineHeight: 1.32, maxWidth: '26em' }}
-              >
-                {service.shortDesc}
-              </p>
-              {service.fullDesc && (
-                <p className="prose prose-fine" style={{ marginTop: '1.75rem', maxWidth: '44em' }}>
-                  {service.fullDesc}
-                </p>
-              )}
+          <article className="service">
+            <h2 className="display">{service.title}</h2>
+            <p className="prose service__lead">{service.shortDesc}</p>
+            {service.fullDesc && <p className="prose">{service.fullDesc}</p>}
 
-              <div className="two-col" style={{ marginTop: '2rem' }}>
-                {service.includes && <List heading="Services Include" items={service.includes} />}
-                {service.notes && (
-                  <div className="prose prose-fine">
-                    {service.notes.map((n) => (
-                      <p key={n}>{n}</p>
-                    ))}
-                  </div>
-                )}
-                {service.delivery && (
-                  <List heading="Revisions & Delivery" items={service.delivery} />
-                )}
-                {service.extras && (
-                  <div>
-                    <p className="meta">Additional Services & Deliverables</p>
-                    <p className="prose prose-fine" style={{ marginTop: '0.75rem' }}>
-                      {service.extrasIntro}
-                    </p>
-                    <div className="stack" style={{ marginTop: '1rem' }}>
-                      <Headed items={service.extras} />
-                    </div>
-                  </div>
-                )}
-              </div>
+            {service.includes && (
+              <section>
+                <h3>Services Include</h3>
+                <Bullets items={service.includes} />
+              </section>
+            )}
 
-              {/* Needed once a project is agreed, so it opens on request. */}
-              {service.requirements && (
-                <details className="fold">
-                  <summary>Mix Delivery Requirements</summary>
-                  <div className="fold__cols">
-                    <Headed items={service.requirements} />
-                  </div>
-                </details>
-              )}
+            {service.notes && (
+              <section className="prose prose-fine service__notes">
+                {service.notes.map((n) => (
+                  <p key={n}>{n}</p>
+                ))}
+              </section>
+            )}
 
-              <p style={{ marginTop: '2rem' }}>
-                <Link className="btn" href={`/contact?service=${service.id}`}>
-                  Request a quote
-                </Link>
-              </p>
-            </div>
-          </div>
+            {/* Needed once a project is agreed, so it opens on request. */}
+            {service.requirements && (
+              <details className="fold service__fold">
+                <summary>
+                  <h3>Mix Delivery Requirements</h3>
+                </summary>
+                <Titled items={service.requirements} />
+              </details>
+            )}
+
+            {service.delivery && (
+              <section>
+                <h3>Revisions & Delivery</h3>
+                <Bullets items={service.delivery} />
+              </section>
+            )}
+
+            {service.extras && (
+              <section>
+                <h3>Additional Services & Deliverables</h3>
+                <p className="prose prose-fine">{service.extrasIntro}</p>
+                <Titled items={service.extras} />
+              </section>
+            )}
+
+            <p className="service__cta">
+              <Link className="btn" href={`/contact?service=${service.id}`}>
+                Request a quote
+              </Link>
+            </p>
+          </article>
         </section>
       ))}
     </>
