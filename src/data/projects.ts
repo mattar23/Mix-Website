@@ -74,6 +74,17 @@ export const PROJECTS: Project[] = [
     tags: ['Music Production', 'Mixing', 'Campaign Film']
   },
   {
+    id: 'rawda-yasmina',
+    title: 'Rawda Yasmina',
+    clientOrArtist: 'Nadine Jewellery',
+    role: 'Voiceover Mixing',
+    year: '2022/23',
+    category: 'Commercial',
+    description: 'Voiceover for the Yasmina chapter of the Rawda collection.',
+    audioSrc: '/audio/yasmina-nj-rawda.mp3',
+    tags: ['Voiceover Mixing']
+  },
+  {
     id: 'athr-gallery',
     title: 'Artist Open Call Campaign',
     clientOrArtist: 'Athr Gallery',
@@ -160,7 +171,7 @@ export const AUDIO_SAMPLES: AudioSample[] = [
   {
     id: 'yasmina',
     title: 'Yasmina Chapter, Rawda Campaign',
-    subtitle: 'Nadine Jewellery · Intimate Spoken Voiceover & Sonic Space',
+    subtitle: 'Nadine Jewellery · Voiceover Mixing',
     src: '/audio/yasmina-nj-rawda.mp3',
     duration: '1:18',
     category: 'Commercial'
