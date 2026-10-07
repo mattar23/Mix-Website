@@ -590,8 +590,16 @@ input[type="range"].scrub::-moz-range-thumb {
 /* Home gives the photo half the page at its own 3:2 shape, so the whole
    picture shows with nothing cropped. The words centre beside it. */
 .spread-wide { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; }
-.spread-wide .spread__photo { aspect-ratio: 3 / 2; max-height: calc(100vh - var(--masthead-h) - 17rem); min-height: 16rem; }
-.spread-wide .spread__text { padding-block: 1.5em; padding-left: clamp(1.5rem, 3.5vw, 3.5rem); }
+/* The photo always fills its half. On a short window the height cap trims
+   a little off the top and bottom instead of leaving a gap beside it. */
+.spread-wide .spread__photo {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  max-height: calc(100vh - var(--masthead-h) - 19rem);
+  min-height: 16rem;
+}
+/* The words stand off the photo by the same margin the page keeps at its edges. */
+.spread-wide .spread__text { padding: 1.5em var(--page-x); }
 .spread__text {
   font-size: clamp(0.9375rem, 2.05vh, 1.125rem);
   padding: 2.4em var(--page-x) 2em clamp(1.5rem, 4.5vw, 4.5rem);
@@ -609,19 +617,21 @@ input[type="range"].scrub::-moz-range-thumb {
 .about__bio p + p { margin-top: 0.85em; }
 
 /* home: the three things on offer, side by side under the spread */
+.offers-band { border-top: 1px solid var(--rule); }
 .offers {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  padding-block: 1.5rem;
+  padding-block: 2rem;
 }
 .offers > li { display: flex; flex-direction: column; padding-right: var(--gutter); }
 .offers > li + li { padding-left: var(--gutter); border-left: 1px solid var(--rule); }
 .offers > li:last-child { padding-right: 0; }
 .offers h2 { font-size: 1.375rem; }
-.offers .prose { margin-top: 0.5rem; }
-.offers .meta { margin-top: auto; padding-top: 0.75rem; align-self: start; }
+.offers .prose { margin-top: 0.6rem; max-width: 30ch; }
+.offers .meta { margin-top: auto; padding-top: 1rem; align-self: start; }
 @media (max-width: 760px) {
   .offers { grid-template-columns: minmax(0, 1fr); padding-block: 0.5rem; }
+  .offers .prose { max-width: none; }
   .offers > li { padding: 1.25rem 0; }
   .offers > li + li { padding-left: 0; border-left: 0; border-top: 1px solid var(--rule-soft); }
 }
