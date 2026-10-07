@@ -33,7 +33,7 @@ export const PROJECTS: Project[] = [
     id: 'nadine-jewellery-rawda',
     title: 'Rawda Collection Campaign',
     clientOrArtist: 'Nadine Jewellery',
-    role: 'Music Production, Voiceover Recording & Mixing',
+    role: 'Voiceover Recording & Mixing',
     year: '2022/23',
     category: 'Commercial',
     description:
