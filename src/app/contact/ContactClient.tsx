@@ -23,25 +23,41 @@ function ContactForm() {
 
   const set = (key: keyof typeof form) => (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
-  ) => setForm((f) => ({ ...f, [key]: e.target.value }));
+  ) => {
+    // A message set by the blank check below must not outlive the fix.
+    e.target.setCustomValidity('');
+    setForm((f) => ({ ...f, [key]: e.target.value }));
+  };
 
   // There is no server behind this site, so the form hands off to the
   // visitor's mail client with everything filled in. Nothing is silently lost.
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    // Every field is required. The browser already stops an empty one; this
+    // also stops one that holds only spaces.
+    const fields = Array.from(e.currentTarget.elements).filter(
+      (el): el is HTMLInputElement | HTMLTextAreaElement =>
+        el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement
+    );
+    for (const field of fields) {
+      if (field.value.trim() === '') {
+        field.setCustomValidity('Please fill in this field.');
+        field.reportValidity();
+        return;
+      }
+    }
     const serviceName =
       SERVICES.find((s) => s.id === form.service)?.title ?? form.service;
 
     const body = [
-      `Name: ${form.name}`,
-      `Email: ${form.email}`,
+      `Name: ${form.name.trim()}`,
+      `Email: ${form.email.trim()}`,
       `Enquiry: ${serviceName}`,
-      form.timeline ? `Timeline: ${form.timeline}` : '',
+      `Timeline: ${form.timeline.trim()}`,
       '',
-      form.message,
-    ]
-      .filter(Boolean)
-      .join('\n');
+      form.message.trim(),
+    ].join('\n');
 
     window.location.href = `mailto:${ARTIST_INFO.email}?subject=${encodeURIComponent(
       `${serviceName} enquiry`
@@ -71,7 +87,12 @@ function ContactForm() {
       <div className="field-pair">
         <label className="field">
           <span className="field__label">What do you need</span>
-          <select className="field__select" value={form.service} onChange={set('service')}>
+          <select
+            className="field__select"
+            required
+            value={form.service}
+            onChange={set('service')}
+          >
             {SERVICES.map((s) => (
               <option key={s.id} value={s.id}>
                 {s.title}
@@ -86,6 +107,7 @@ function ContactForm() {
           <span className="field__label">Rough timeline</span>
           <input
             className="field__input"
+            required
             value={form.timeline}
             onChange={set('timeline')}
             placeholder="e.g. mixing in April"
@@ -113,7 +135,7 @@ function ContactForm() {
           Send enquiry
         </button>
         <span className="meta meta-micro quiet">
-          This opens your email app with the details filled in.
+          All fields are required. This opens your email app with the details filled in.
         </span>
       </p>
     </form>
@@ -137,13 +159,6 @@ export default function ContactClient() {
               </a>
             </p>
             <p className="meta">{ARTIST_INFO.location}</p>
-            {ARTIST_INFO.socials.map((s) => (
-              <p className="meta" key={s.name}>
-                <a className="ul-link" href={s.url} target="_blank" rel="noopener noreferrer">
-                  {s.name}
-                </a>
-              </p>
-            ))}
           </div>
 
           <div style={{ maxWidth: '44rem' }}>
