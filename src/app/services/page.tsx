@@ -42,9 +42,9 @@ function Bullets({ items }: { items: string[] }) {
   );
 }
 
-// One column, in the order of her document: what the service is, then a
-// headed section for each part of it. Every service uses the same three
-// heading levels, so the page reads the same way top to bottom.
+// Each service opens with its name across the page, then splits in two:
+// what it is on the left, its headed parts on the right. All three sections
+// use the same heading levels.
 export default function ServicesPage() {
   return (
     <>
@@ -53,35 +53,40 @@ export default function ServicesPage() {
         <span className="accent-rule" aria-hidden="true" />
       </section>
 
-      {/* The reading column on the left; on wide screens a short rail on the
-          right lists the sections and keeps the enquiry one click away. */}
-      <div className="wrap services">
-        <div>
-          {SERVICES.map((service) => (
-            <section
-              className="step-b"
-              key={service.id}
-              id={service.id}
-              style={{ scrollMarginTop: '6rem' }}
-            >
-              <hr className="rule" />
-              <article className="service">
-                <h2 className="display">{service.title}</h2>
-                <p className="prose service__lead">{service.shortDesc}</p>
-                {service.fullDesc && <p className="prose">{service.fullDesc}</p>}
+      {SERVICES.map((service) => (
+        <section
+          className="wrap step-b"
+          key={service.id}
+          id={service.id}
+          style={{ scrollMarginTop: '6rem' }}
+        >
+          <hr className="rule" />
+          <article className="service">
+            <h2 className="display">{service.title}</h2>
 
+            <div className="service__cols">
+              <div>
+                <p className="prose">{service.shortDesc}</p>
+                {service.fullDesc && <p className="prose">{service.fullDesc}</p>}
+                {service.notes && (
+                  <div className="prose prose-fine service__notes">
+                    {service.notes.map((n) => (
+                      <p key={n}>{n}</p>
+                    ))}
+                  </div>
+                )}
+                <p className="service__cta">
+                  <Link className="btn" href={`/contact?service=${service.id}`}>
+                    Request a quote
+                  </Link>
+                </p>
+              </div>
+
+              <div>
                 {service.includes && (
                   <section>
                     <h3>Services Include</h3>
                     <Bullets items={service.includes} />
-                  </section>
-                )}
-
-                {service.notes && (
-                  <section className="prose prose-fine service__notes">
-                    {service.notes.map((n) => (
-                      <p key={n}>{n}</p>
-                    ))}
                   </section>
                 )}
 
@@ -101,48 +106,29 @@ export default function ServicesPage() {
                     <Bullets items={service.delivery} />
                   </section>
                 )}
+              </div>
+            </div>
+          </article>
+        </section>
+      ))}
 
-                <p className="service__cta">
-                  <Link className="btn" href={`/contact?service=${service.id}`}>
-                    Request a quote
-                  </Link>
-                </p>
-              </article>
-            </section>
-          ))}
-
-          <section
-            className="step-b"
-            id={ADDITIONAL_SERVICES.id}
-            style={{ scrollMarginTop: '6rem' }}
-          >
-            <hr className="rule" />
-            <article className="service">
-              <h2 className="display">{ADDITIONAL_SERVICES.title}</h2>
-              <p className="prose service__lead">{ADDITIONAL_SERVICES.intro}</p>
-              <Titled items={ADDITIONAL_SERVICES.items} />
-              <p className="service__cta">
-                <Link className="btn" href="/contact">
-                  Request a quote
-                </Link>
-              </p>
-            </article>
-          </section>
-        </div>
-
-        <aside className="services__rail" aria-label="On this page">
-          <nav>
-            {[...SERVICES, ADDITIONAL_SERVICES].map((s) => (
-              <a key={s.id} href={`#${s.id}`}>
-                {s.title}
-              </a>
-            ))}
-          </nav>
-          <Link className="btn btn-solid" href="/contact">
-            Request a quote
-          </Link>
-        </aside>
-      </div>
+      <section
+        className="wrap step-b"
+        id={ADDITIONAL_SERVICES.id}
+        style={{ scrollMarginTop: '6rem' }}
+      >
+        <hr className="rule" />
+        <article className="service">
+          <h2 className="display">{ADDITIONAL_SERVICES.title}</h2>
+          <p className="prose service__intro">{ADDITIONAL_SERVICES.intro}</p>
+          <Titled items={ADDITIONAL_SERVICES.items} />
+          <p className="service__cta">
+            <Link className="btn" href="/contact">
+              Request a quote
+            </Link>
+          </p>
+        </article>
+      </section>
     </>
   );
 }
