@@ -39,7 +39,7 @@ The workflow currently builds for that address. The two `env` lines under the bu
 
 A domain purchase does not include a mailbox, and GoDaddy no longer includes free forwarding with a domain. The site shows `info@maryamattar.co`, so before launch that address has to deliver somewhere, or enquiries bounce.
 
-The decision, 2026-10-07: forward `info@` to Maryam's personal inbox for free with ImprovMX. No Microsoft 365. Replies will come from her personal address. If she later wants to send as `info@maryamattar.co`, Google Workspace replaces the forwarding with a DNS change and the site does not change.
+The decision, 2026-10-07: forward `info@` to Maryam's personal inbox for free with ImprovMX. Her own Microsoft subscription is Microsoft 365 Personal, which cannot take a custom domain address (Microsoft closed that to new addresses in November 2023), so it cannot host `info@`. Forwarding delivers to the Outlook inbox she already uses every day. Replies will come from her personal address. If she later wants to send as `info@maryamattar.co`, Google Workspace replaces the forwarding with a DNS change and the site does not change.
 
 ### Before changing anything
 
