@@ -8,11 +8,11 @@ import { siteConfig } from '@/config/site';
 export const metadata: Metadata = {
   title: 'About',
   description:
-    'Maryam Attar is a mixing and voiceover engineer in Jeddah, Saudi Arabia, with credits for MDLBEAST, Athr Gallery, Nadine Jewellery, and Nur Taibah.',
+    'Maryam Attar is a mixing engineer in Jeddah, Saudi Arabia, with credits for MDLBEAST, Athr Gallery, Nadine Jewellery, and Nur Taibah.',
   alternates: { canonical: `${siteConfig.url}/about` },
   openGraph: {
     title: 'About | Maryam Attar',
-    description: 'A mixing and voiceover engineer in Jeddah, and the work behind the credits.',
+    description: 'A mixing engineer in Jeddah, and the work behind the credits.',
     url: `${siteConfig.url}/about`,
     images: [
       {
