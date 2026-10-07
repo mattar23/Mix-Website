@@ -22,34 +22,38 @@ const ENTRIES = [
 
 export default function HomePage() {
   return (
-    <section className="spread">
-      {/* Cropped to the column around her face, which sits right of centre
-          in the frame. */}
-      <div className="figure spread__photo spread__photo-wide">
-        <Image
-          src={asset('/images/maryam-portrait.jpg')}
-          alt="Maryam Attar at her desk in the studio"
-          fill
-          priority
-          sizes="(max-width: 880px) 100vw, 40vw"
-          style={{ objectFit: 'cover', objectPosition: '70% center' }}
-        />
-      </div>
-      <div className="spread__text">
-        <h1 className="hero-type" style={{ maxWidth: '13ch' }}>
-          Helping shape what you already set in motion
-        </h1>
-        <span className="accent-rule" aria-hidden="true" />
-        <p className="prose" style={{ marginTop: '1.4em' }}>
-          Mixing and voiceover engineer based in {ARTIST_INFO.location}.
-        </p>
-        <p style={{ marginTop: '1.5em' }}>
-          <Link className="btn" href="/work">
-            Explore work
-          </Link>
-        </p>
+    <>
+      <section className="spread spread-wide">
+        {/* The whole frame, uncropped: the picture is a close shot, so
+            nothing of it is spared. */}
+        <div className="figure spread__photo">
+          <Image
+            src={asset('/images/maryam-portrait.jpg')}
+            alt="Maryam Attar at her desk in the studio"
+            fill
+            priority
+            sizes="(max-width: 880px) 100vw, 50vw"
+            style={{ objectFit: 'cover' }}
+          />
+        </div>
+        <div className="spread__text">
+          <h1 className="hero-type" style={{ maxWidth: '13ch' }}>
+            Helping shape what you already set in motion
+          </h1>
+          <span className="accent-rule" aria-hidden="true" />
+          <p className="prose" style={{ marginTop: '1.4em' }}>
+            Mixing and voiceover engineer based in {ARTIST_INFO.location}.
+          </p>
+          <p style={{ marginTop: '1.5em' }}>
+            <Link className="btn" href="/work">
+              Explore work
+            </Link>
+          </p>
+        </div>
+      </section>
 
-        <ul className="entries">
+      <section className="wrap">
+        <ul className="offers">
           {ENTRIES.map((e) => (
             <li key={e.title}>
               <h2 className="display">{e.title}</h2>
@@ -60,7 +64,7 @@ export default function HomePage() {
             </li>
           ))}
         </ul>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }

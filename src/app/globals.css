@@ -587,6 +587,11 @@ input[type="range"].scrub::-moz-range-thumb {
   display: grid;
   grid-template-columns: minmax(0, 40fr) minmax(0, 60fr);
 }
+/* Home gives the photo half the page at its own 3:2 shape, so the whole
+   picture shows with nothing cropped. The words centre beside it. */
+.spread-wide { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; }
+.spread-wide .spread__photo { aspect-ratio: 3 / 2; max-height: calc(100vh - var(--masthead-h) - 17rem); min-height: 16rem; }
+.spread-wide .spread__text { padding-block: 1.5em; padding-left: clamp(1.5rem, 3.5vw, 3.5rem); }
 .spread__text {
   font-size: clamp(0.9375rem, 2.05vh, 1.125rem);
   padding: 2.4em var(--page-x) 2em clamp(1.5rem, 4.5vw, 4.5rem);
@@ -603,29 +608,30 @@ input[type="range"].scrub::-moz-range-thumb {
 }
 .about__bio p + p { margin-top: 0.85em; }
 
-/* home: the three things on offer, one row each under the introduction */
-.entries { margin-top: 2em; border-top: 1px solid var(--rule); max-width: 46rem; }
-.entries > li {
+/* home: the three things on offer, side by side under the spread */
+.offers {
   display: grid;
-  grid-template-columns: 11.5em minmax(0, 1fr) auto;
-  gap: 0.25em 1.75em;
-  align-items: baseline;
-  padding-block: 1em;
-  border-bottom: 1px solid var(--rule-soft);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  padding-block: 1.5rem;
 }
-.entries h2 { font-size: 1.3em; letter-spacing: -0.015em; line-height: 1.2; }
-.entries .meta { font-size: 0.86em; white-space: nowrap; justify-self: start; }
+.offers > li { display: flex; flex-direction: column; padding-right: var(--gutter); }
+.offers > li + li { padding-left: var(--gutter); border-left: 1px solid var(--rule); }
+.offers > li:last-child { padding-right: 0; }
+.offers h2 { font-size: 1.375rem; }
+.offers .prose { margin-top: 0.5rem; }
+.offers .meta { margin-top: auto; padding-top: 0.75rem; align-self: start; }
+@media (max-width: 760px) {
+  .offers { grid-template-columns: minmax(0, 1fr); padding-block: 0.5rem; }
+  .offers > li { padding: 1.25rem 0; }
+  .offers > li + li { padding-left: 0; border-left: 0; border-top: 1px solid var(--rule-soft); }
+}
 
 @media (max-width: 880px) {
-  .spread { grid-template-columns: minmax(0, 1fr); }
+  .spread, .spread-wide { grid-template-columns: minmax(0, 1fr); }
   .spread__photo { aspect-ratio: 4 / 5; max-height: 34rem; }
-  .spread__photo-wide { aspect-ratio: 3 / 2; }
+  .spread-wide .spread__photo { max-height: none; min-height: 0; }
   .spread__text { font-size: 1.0625rem; padding-left: var(--page-x); }
 }
-@media (max-width: 560px) {
-  .entries > li { grid-template-columns: minmax(0, 1fr); }
-}
-
 /* colophon: one line, links together on the left, place and year on the right */
 .colophon {
   display: flex;
