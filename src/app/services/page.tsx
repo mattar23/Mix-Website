@@ -39,10 +39,6 @@ export default function ServicesPage() {
           Services
         </h1>
         <span className="accent-rule" aria-hidden="true" />
-        <p className="prose" style={{ marginTop: '2rem', maxWidth: '34em' }}>
-          Two kinds of session. Each lists what is included and how to prepare
-          your files.
-        </p>
       </section>
 
       {SERVICES.map((service) => (
