@@ -419,6 +419,9 @@ h2 { font-size: var(--t-sub); }
 .fold summary::after { content: "Read"; font-weight: 400; color: var(--ink-2); box-shadow: inset 0 -1px 0 0 currentColor; }
 .fold[open] summary::after { content: "Close"; }
 .fold[open] { padding-bottom: 1rem; }
+.fold__cols { columns: 2; column-gap: var(--gutter); }
+.fold__cols > * { break-inside: avoid; padding-bottom: 1.5rem; }
+@media (max-width: 800px) { .fold__cols { columns: 1; } }
 
 /* ============ controls ============ */
 
@@ -449,7 +452,7 @@ h2 { font-size: var(--t-sub); }
 
 /* ============ forms ============ */
 
-.field { display: block; margin-bottom: 1.6rem; }
+.field { display: block; margin-bottom: 1.1rem; }
 
 .field__label {
   display: block;
@@ -476,7 +479,7 @@ h2 { font-size: var(--t-sub); }
   border-bottom-color: var(--spot);
 }
 
-.field__area { resize: vertical; min-height: 7rem; line-height: 1.6; }
+.field__area { resize: vertical; min-height: 4.5rem; line-height: 1.5; }
 
 .field__select {
   appearance: none;

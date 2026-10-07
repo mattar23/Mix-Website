@@ -56,13 +56,10 @@ export default function HomePage() {
 
       <section className="wrap step-b">
         <hr className="rule" />
-        <ol className="trio">
-          {ENTRIES.map((e, i) => (
+        <ul className="trio">
+          {ENTRIES.map((e) => (
             <li key={e.title}>
-              <p className="meta num">0{i + 1}</p>
-              <h2 className="display" style={{ marginTop: '0.5rem' }}>
-                {e.title}
-              </h2>
+              <h2 className="display">{e.title}</h2>
               <p className="prose prose-fine" style={{ marginTop: '0.75rem' }}>
                 {e.body}
               </p>
@@ -73,7 +70,7 @@ export default function HomePage() {
               </p>
             </li>
           ))}
-        </ol>
+        </ul>
       </section>
     </>
   );

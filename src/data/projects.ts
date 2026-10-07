@@ -6,10 +6,6 @@ export interface Project {
   year: string;
   category: 'Music' | 'Commercial' | 'Art' | 'Sound Design';
   description: string;
-  /** Optional: several projects have no usable source imagery yet. */
-  image?: string;
-  /** Short muted loop shown in place of the still while a row is hovered. */
-  video?: string;
   audioSrc?: string;
   externalLink?: string;
   /** Further posts or reels for the same piece, from Maryam's weblinks document. */
@@ -39,8 +35,6 @@ export const PROJECTS: Project[] = [
     category: 'Commercial',
     description:
       'Music production and complete audio mixing for luxury campaign videos celebrating nature, heritage, and poetic storytelling. Recorded, edited, and balanced voiceover narration across multiple collection chapters.',
-    image: '/images/projects/rawda-water.jpg',
-    video: '/video/rawda-water.mp4',
     audioSrc: '/audio/gemma-nj-rawda.mp3',
     externalLink: 'https://www.instagram.com/reel/DQGjQg6AAw3/',
     moreLinks: [{ label: 'Second reel', url: 'https://www.instagram.com/reel/DPrX-A0gAWj/' }],
@@ -71,8 +65,6 @@ export const PROJECTS: Project[] = [
     category: 'Art',
     description:
       'Produced original music for an audiovisual performance art piece combining spoken word, intimate field recordings, and moving video for a public exhibition.',
-    image: '/images/projects/blending-in.jpg',
-    video: '/video/blending-in.mp4',
     tags: ['Audiovisual Art', 'Spoken Word', 'Experimental Electronic']
   },
 ];
