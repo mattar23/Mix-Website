@@ -57,7 +57,9 @@ In GoDaddy, open My Products and look under Email & Office. If a Microsoft plan 
 
 ### Set up Google Workspace
 
-1. Sign up at workspace.google.com with the domain `maryamattar.co`. Either make `info@maryamattar.co` the first user, or make the first user her name and add `info@` to that user as an alias (Admin console, Directory, Users, the user, Add alternate emails). An alias costs nothing extra and lands in the same inbox.
+1. Sign up at workspace.google.com with the domain `maryamattar.co` and create the user `maryam@maryamattar.co`. That is her account and her sign in. Then add `info@maryamattar.co` to that user as an alias (Admin console, Directory, Users, her user, Add alternate emails). An alias costs nothing and lands in the same inbox. A second user for `info@` would cost a second licence and give her a second inbox to check, so do not create one.
+
+   To reply as `info@`, in Gmail open Settings, Accounts, Send mail as, and add `info@maryamattar.co`. She can then pick either address in the From line, and set Gmail to reply from the address a message was sent to.
 2. Verify the domain. Google gives one TXT record to add at GoDaddy, name `@`, value starting `google-site-verification=`. Google may offer to sign in to GoDaddy and add records itself. That is fine for the verification and mail records, but see the warning below.
 3. Point mail at Google. In GoDaddy DNS:
 
