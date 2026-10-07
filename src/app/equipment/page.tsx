@@ -43,14 +43,10 @@ export default function EquipmentPage() {
       <section className="wrap step">
         <h1 className="hero-type">Equipment Rental</h1>
         <span className="accent-rule" aria-hidden="true" />
-        <p className="prose" style={{ marginTop: '1.25rem' }}>
-          Gear Maryam records with, available to rent in Jeddah. Rates are per
-          item, per day, in Saudi riyals. A week costs the same as three days.
-        </p>
       </section>
 
-      {/* One rate per row. The week rate is always three days, so the
-          sentence above carries it and the sheet stays a single column of prices. */}
+      {/* One rate per row. The week rate is always three days, which the
+          first rental term states, so the sheet stays a single column of prices. */}
       <section className="wrap step-b">
         <div className="sheets">
           {groups.map(({ category, items }) => (

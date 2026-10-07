@@ -54,7 +54,7 @@ Class names are semantic and BEM-ish (`.index__row`, `.sheet__rate`, `.doc__marg
 
 The Services page keeps what is included, revisions, and extras in view and folds the file preparation requirements into a `details` element (`.fold`). The masthead order is Home, Services, Work, Equipment, About, Contact, as on her mockups.
 
-The equipment page is a two column rate sheet (`.sheets`, CSS columns, one column under 900px) showing the day rate only, since a week is always three days and the intro says so. The rental terms sit in a native `details` element (`.fold`), closed by default. Visible labels say "rental", Maryam's own word; the terms text keeps "hirer".
+The equipment page is a two column rate sheet (`.sheets`, CSS columns, one column under 900px) showing the day rate only. A week is always three days, which is now stated only in the first rental term, since Moad asked on 2026-10-07 for the intro lines under the Services and Equipment titles to go. Page headers are a title and the accent bar, nothing else. The rental terms sit in a native `details` element (`.fold`), closed by default. Visible labels say "rental", Maryam's own word; the terms text keeps "hirer".
 
 Home and About are meant to fit one laptop screen without scrolling, checked at 1440 by 820 and 1280 by 720. Both size their text from the window height. On About the photo takes its height from the text; on Home the photo height is capped by the window height so the offers and colophon stay on the first screen. Recheck both after touching spacing or type sizes.
 
