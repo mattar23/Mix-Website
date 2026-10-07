@@ -37,29 +37,29 @@ The workflow currently builds for that address. The two `env` lines under the bu
 
 ## Email at the domain
 
-A domain purchase does not include a mailbox, and GoDaddy no longer includes free forwarding with a domain. The site shows `info@maryamattar.co`, so before launch that address has to deliver somewhere, or enquiries bounce.
+The decision, 2026-10-07: Maryam is taking Google Workspace, so `info@maryamattar.co` becomes a real mailbox she can send from. Her own Microsoft subscription is Microsoft 365 Personal, which cannot take a custom domain address, and GoDaddy's Microsoft email renews at a higher price than Google. The free forwarding route through ImprovMX was considered and is no longer needed.
 
-The decision, 2026-10-07: forward `info@` to Maryam's personal inbox for free with ImprovMX. Her own Microsoft subscription is Microsoft 365 Personal, which cannot take a custom domain address (Microsoft closed that to new addresses in November 2023), so it cannot host `info@`. Forwarding delivers to the Outlook inbox she already uses every day. Replies will come from her personal address. If she later wants to send as `info@maryamattar.co`, Google Workspace replaces the forwarding with a DNS change and the site does not change.
+The site shows `info@maryamattar.co`, so mail to it must arrive before launch.
 
 ### Before changing anything
 
-As checked on 2026-10-07 the domain already carries Microsoft 365 mail records, which means a Microsoft email product was attached to it in her GoDaddy account at some point, possibly as a trial at checkout:
+As checked on 2026-10-07 the domain carries Microsoft 365 mail records from an account GoDaddy set up, which she did not knowingly buy:
 
 ```
 MX    @              maryamattar-co.mail.protection.outlook.com   priority 0
 TXT   @              v=spf1 include:secureserver.net -all
 TXT   @              NETORGFT21196915.onmicrosoft.com
 CNAME autodiscover   autodiscover.outlook.com
+TXT   _dmarc         v=DMARC1; p=quarantine; ... rua=mailto:dmarc_rua@onsecureserver.net
 ```
 
-In GoDaddy, open My Products and look under Email. If a Microsoft 365 or Professional Email plan is listed, check whether it is billing or set to renew, and cancel it if she does not want it. Nothing has been using that mailbox for the site.
+In GoDaddy, open My Products and look under Email & Office. If a Microsoft plan is listed, check whether it is billing or set to renew, and cancel it.
 
-### Set up forwarding, about ten minutes
+### Set up Google Workspace
 
-Do this in the same GoDaddy sitting as the website DNS in Stage 2.
-
-1. Maryam creates a free account at improvmx.com, adds the domain `maryamattar.co`, and enters her personal email as the destination. ImprovMX creates a catch all alias, so `info@` and any other address at the domain forward to her.
-2. At GoDaddy, open the domain, then DNS, and make these changes:
+1. Sign up at workspace.google.com with the domain `maryamattar.co`. Either make `info@maryamattar.co` the first user, or make the first user her name and add `info@` to that user as an alias (Admin console, Directory, Users, the user, Add alternate emails). An alias costs nothing extra and lands in the same inbox.
+2. Verify the domain. Google gives one TXT record to add at GoDaddy, name `@`, value starting `google-site-verification=`. Google may offer to sign in to GoDaddy and add records itself. That is fine for the verification and mail records, but see the warning below.
+3. Point mail at Google. In GoDaddy DNS:
 
    Delete:
 
@@ -72,25 +72,32 @@ Do this in the same GoDaddy sitting as the website DNS in Stage 2.
    Add:
 
    ```
-   MX    @    mx1.improvmx.com    priority 10
-   MX    @    mx2.improvmx.com    priority 20
-   TXT   @    v=spf1 include:spf.improvmx.com ~all
+   MX    @    smtp.google.com    priority 1
+   TXT   @    v=spf1 include:_spf.google.com ~all
    ```
 
-   Leave the `_dmarc` record and the `NETORGFT` text record alone; neither affects forwarding. A domain may hold only one text record starting `v=spf1`, which is why the old one is deleted and not kept beside the new one.
+   A domain may hold only one text record starting `v=spf1`, which is why the old one is deleted and not kept beside the new one.
 
-3. Back in ImprovMX the domain shows a green "Email forwarding active" once the records are seen, usually within minutes and at most an hour.
-4. Send a message from a different account to `info@maryamattar.co` and confirm it reaches her inbox. Check the spam folder the first time. Then send one through the contact form on the site.
+4. Turn on DKIM so her mail is not marked as spam. In the Admin console go to Apps, Google Workspace, Gmail, Authenticate email, press Generate new record, and add the TXT record it shows at GoDaddy (name `google._domainkey`). Then press Start authentication. Google can take up to 48 hours to offer this on a new account.
+5. Update the `_dmarc` record, which still reports to GoDaddy's Microsoft service. Change its value to:
 
-ImprovMX shows the exact records for the domain on its own setup screen. If they differ from the ones above, use theirs.
+   ```
+   v=DMARC1; p=none; rua=mailto:info@maryamattar.co
+   ```
 
-The free plan is reported as one domain, 25 aliases, and 500 forwarded messages a day, far beyond what the site will need.
+   Once DKIM shows as authenticating, `p=none` can be raised to `p=quarantine`.
+
+6. Test both directions. Send to `info@maryamattar.co` from another account and confirm it arrives, then reply from it and confirm the reply is not in the recipient's spam.
+
+Google shows the exact records for her account on its setup screens. If they differ from the ones above, use theirs.
+
+**Do not let any of this touch the website records.** The four `@` A records and the `www` CNAME from Stage 2 serve the site. Mail uses only MX and TXT records, so nothing in this section needs an A record or the `www` CNAME changed or deleted.
 
 ## Sending enquiries straight from the contact form
 
 The site has no server, so on its own the contact form can only open the visitor's email app with the details filled in. To send from the page itself it needs a form service. The code is ready for Web3Forms, free for 250 enquiries a month, and switches over as soon as a key is set.
 
-1. Go to web3forms.com, enter the email address that should receive enquiries, and press Create Access Key. Use an inbox that already works, which today means Maryam's personal address, since `info@maryamattar.co` has no forwarding yet.
+1. Go to web3forms.com, enter the email address that should receive enquiries, and press Create Access Key. Use `info@maryamattar.co` once the Google Workspace mailbox is receiving mail; before that, a key sent there would never arrive.
 2. The key arrives in that inbox. Send it to Moad.
 3. Moad pastes it between the quotes on the `NEXT_PUBLIC_FORM_KEY` line in `.github/workflows/deploy.yml` and pushes. The key is public by design; it only names the inbox.
 4. Send a test enquiry from the live contact page and confirm it arrives. Check spam the first time.
