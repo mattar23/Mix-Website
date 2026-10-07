@@ -4,71 +4,79 @@ export interface ServiceDetail {
   /** One line for the home page, taken from Maryam's home mockup. */
   teaser: string;
   shortDesc: string;
-  fullDesc: string;
+  fullDesc?: string;
   includes?: string[];
-  excludes?: string[];
-  extras?: string[];
-  requirements?: { heading: string; points: string[] }[];
+  /** Closing paragraphs that carry no heading in her document. */
+  notes?: string[];
+  requirements?: { heading: string; body: string }[];
   delivery?: string[];
+  extrasIntro?: string;
+  extras?: { heading: string; body: string }[];
 }
 
-// Copy below is Maryam's own, from "Wesbite Services.pages", lightly
-// punctuated. Keep it in her voice when editing.
+// Every sentence below is Maryam's own, word for word, from
+// "Wesbite Services.pages". She asked for her wording to be used as written,
+// so do not tidy, shorten, or respell it. Headings in the page come from the
+// same document.
 export const SERVICES: ServiceDetail[] = [
   {
     id: 'mixing',
     title: 'Mixing',
     teaser: 'Detailed, intentional mixes for artists, songs and audio projects.',
     shortDesc:
-      'Build on what is already there: a finished mix ready for mastering that keeps the creative direction and the character of the track intact.',
+      'My approach to mixing is to build on what is already there, bringing the production to a finished mix ready for mastering while keeping the artist’s creative direction and the character of the track intact.',
     fullDesc:
       'I work with singles, EPs and albums. Sessions are preferably supplied as consolidated WAV multitracks. Ableton Live or Logic Pro project files can also be accepted.',
     requirements: [
       {
-        heading: 'Session and file format',
-        points: [
-          'Supply consolidated WAV multitracks, exported from the same start point at the session’s native sample rate and bit depth.',
-          'Alternatively, Ableton Live or Logic Pro sessions can be supplied as a zipped project folder containing all required audio files.',
-        ],
+        heading: 'Session / File Format',
+        body: 'Supply consolidated WAV multitracks, exported from the same start point at the session’s native sample rate and bit depth. Alternatively, Ableton Live or Logic Pro sessions can be supplied as a zipped project folder containing all required audio files.',
       },
       {
-        heading: 'Session organisation',
-        points: [
-          'Tracks should be clearly named and organised. Remove unused tracks, takes and files that are not intended to be part of the final mix.',
-        ],
+        heading: 'Session Organization',
+        body: 'Tracks should be clearly named and organized. Remove unused tracks, takes and files that are not intended to be part of the final mix.',
       },
       {
-        heading: 'Rough mix and references',
-        points: [
-          'Include the latest producer or rough mix as a reference for the existing balance, production choices and effects.',
-          'Provide a short playlist of reference tracks that reflect the sound, feel or overall direction you have in mind for the final mix.',
-        ],
+        heading: 'Rough Mix / References',
+        body: 'Include the latest producer or rough mix as a reference for the existing balance, production choices and effects. Please also provide a short playlist of reference tracks that reflect the sound, feel or overall direction you have in mind for the final mix.',
       },
       {
-        heading: 'Effects and processing',
-        points: [
-          'Any effects or processing that are important to the production should be included. Where applicable, supply both wet and dry versions so the original choices can be referenced while keeping flexibility during the mix.',
-        ],
+        heading: 'Effects & Processing',
+        body: 'Any effects or processing that are important to the production should be included. Where applicable, supply both wet and dry versions so the original production choices can be referenced while retaining flexibility during the mix.',
       },
       {
-        heading: 'Vocals and editing',
-        points: [
-          'Vocals should arrive comped, edited, cleaned and tuned where required. Minor corrective work is handled during the mix. Extensive comping, editing, pitch correction or cleanup is charged separately.',
-        ],
+        heading: 'Vocals / Editing',
+        body: 'Vocals should arrive comped, edited, cleaned and tuned where required. Minor corrective work can be handled during the mix, but extensive comping, editing, pitch correction or cleanup will incur an additional cost.',
       },
     ],
     delivery: [
-      'Three rounds of revisions are included. Send revision notes as one consolidated list, with timestamps where applicable. Additional rounds are charged separately.',
-      'The final approved mix is delivered as a high resolution WAV file ready for mastering.',
-      'Turnaround depends on the size and complexity of the session and is confirmed before the project begins.',
+      'Three rounds of revisions are included. Revision notes should be sent as one consolidated list, with timestamps where applicable. Additional revision rounds are charged separately.',
+      'The final approved mix is delivered as a high-resolution WAV file ready for mastering.',
+      'Turnaround is based on the size and complexity of the session and will be confirmed before the project begins.',
       'Mastering is not included.',
     ],
+    extrasIntro: 'Optional services are available depending on the needs of the project.',
     extras: [
-      'Rush delivery, dependent on availability.',
-      'Additional revision rounds beyond the three included.',
-      'Mixed stems: processed stem groups such as drums, instruments, lead vocals and background vocals.',
-      'Alternate versions: instrumental, a cappella, clean, performance or TV, and vocal up mixes.',
-      'Vocal editing and tuning beyond the minor corrective work included in the mix.',
+      {
+        heading: 'Rush Delivery',
+        body: 'Faster turnaround dependent on availability and project requirements.',
+      },
+      {
+        heading: 'Additional Revisions',
+        body: 'Additional revision rounds beyond the three included with the mix.',
+      },
+      {
+        heading: 'Mixed Stems',
+        body: 'Processed stem groups from the final mix, such as drums, instruments, lead vocals and background vocals.',
+      },
+      {
+        heading: 'Alternate Versions',
+        body: 'Additional versions of the final mix, including instrumental, a cappella, clean, performance/TV and vocal-up mixes.',
+      },
+      {
+        heading: 'Vocal Editing / Tuning',
+        body: 'Extensive vocal comping, editing, pitch correction or cleanup beyond the minor corrective work included in the mix.',
+      },
     ],
   },
   {
@@ -76,9 +84,7 @@ export const SERVICES: ServiceDetail[] = [
     title: 'Podcast & Voiceover Mixing',
     teaser: 'Editing, mixing and sync for podcast, voiceover and spoken word.',
     shortDesc:
-      'Editing, cleanup and mixing for podcasts, voiceovers and other spoken word recordings. Clear, consistent dialogue with a natural sound throughout.',
-    fullDesc:
-      'Audio can also be mixed and synced to supplied video where required. Turnaround and final delivery specifications are confirmed based on the requirements of each project.',
+      'Editing, cleanup and mixing for podcasts, voiceovers and other spoken-word recordings. The focus is on clear, consistent dialogue while maintaining a natural sound throughout the recording.',
     includes: [
       'Dialogue editing',
       'EQ and compression',
@@ -89,9 +95,10 @@ export const SERVICES: ServiceDetail[] = [
       'Mixing of supplied music and sound effects',
       'Final audio delivery to the required format',
     ],
-    excludes: [
-      'Source recordings should be clean and properly recorded before delivery.',
-      'Extensive audio restoration and editorial or content editing are not included.',
+    notes: [
+      'Audio can also be mixed and synced to supplied video where required.',
+      'Source recordings should be clean and properly recorded before delivery. Extensive audio restoration and editorial/content editing are not included.',
+      'Turnaround and final delivery specifications are confirmed based on the requirements of each project.',
     ],
   },
 ];

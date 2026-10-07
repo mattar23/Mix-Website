@@ -31,6 +31,22 @@ function List({ heading, items }: { heading: string; items: string[] }) {
   );
 }
 
+/** A run of headed paragraphs, as her document sets requirements and extras. */
+function Headed({ items }: { items: { heading: string; body: string }[] }) {
+  return (
+    <>
+      {items.map((i) => (
+        <div key={i.heading}>
+          <p className="meta">{i.heading}</p>
+          <p className="prose prose-fine" style={{ marginTop: '0.35rem' }}>
+            {i.body}
+          </p>
+        </div>
+      ))}
+    </>
+  );
+}
+
 export default function ServicesPage() {
   return (
     <>
@@ -39,6 +55,10 @@ export default function ServicesPage() {
           Services
         </h1>
         <span className="accent-rule" aria-hidden="true" />
+        <p className="prose" style={{ marginTop: '1.25rem' }}>
+          Two kinds of session. Each lists what is included and how to prepare
+          your files.
+        </p>
       </section>
 
       {SERVICES.map((service) => (
@@ -54,33 +74,47 @@ export default function ServicesPage() {
             <div>
               <p
                 className="prose"
-                style={{ fontSize: 'var(--t-sub)', lineHeight: 1.32, maxWidth: '20em' }}
+                style={{ fontSize: 'var(--t-sub)', lineHeight: 1.32, maxWidth: '26em' }}
               >
                 {service.shortDesc}
               </p>
-              <p className="prose prose-fine" style={{ marginTop: '1.75rem', maxWidth: '44em' }}>
-                {service.fullDesc}
-              </p>
+              {service.fullDesc && (
+                <p className="prose prose-fine" style={{ marginTop: '1.75rem', maxWidth: '44em' }}>
+                  {service.fullDesc}
+                </p>
+              )}
 
               <div className="two-col" style={{ marginTop: '2rem' }}>
-                {service.includes && <List heading="Included" items={service.includes} />}
-                {service.excludes && (
-                  <List heading="Before you send" items={service.excludes} />
+                {service.includes && <List heading="Services Include" items={service.includes} />}
+                {service.notes && (
+                  <div className="prose prose-fine">
+                    {service.notes.map((n) => (
+                      <p key={n}>{n}</p>
+                    ))}
+                  </div>
                 )}
                 {service.delivery && (
-                  <List heading="Revisions and delivery" items={service.delivery} />
+                  <List heading="Revisions & Delivery" items={service.delivery} />
                 )}
-                {service.extras && <List heading="Optional extras" items={service.extras} />}
+                {service.extras && (
+                  <div>
+                    <p className="meta">Additional Services & Deliverables</p>
+                    <p className="prose prose-fine" style={{ marginTop: '0.75rem' }}>
+                      {service.extrasIntro}
+                    </p>
+                    <div className="stack" style={{ marginTop: '1rem' }}>
+                      <Headed items={service.extras} />
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* Needed once a project is agreed, so it opens on request. */}
               {service.requirements && (
                 <details className="fold">
-                  <summary>Preparing your session</summary>
+                  <summary>Mix Delivery Requirements</summary>
                   <div className="fold__cols">
-                    {service.requirements.map((r) => (
-                      <List key={r.heading} heading={r.heading} items={r.points} />
-                    ))}
+                    <Headed items={service.requirements} />
                   </div>
                 </details>
               )}
