@@ -23,7 +23,7 @@ const ENTRIES = [
 export default function HomePage() {
   return (
     <>
-      <section className="wrap step">
+      <section className="wrap" style={{ paddingBlock: '2rem' }}>
         <div className="hero">
           <div>
             <span className="accent-rule" aria-hidden="true" />

@@ -29,7 +29,7 @@ const ROWS = [
   })),
   { label: 'Listen to the work', detail: 'Rawda chapters and films', href: '/work', external: false },
   { label: 'Mixing and voiceover', detail: 'What a session includes', href: '/services', external: false },
-  { label: 'Equipment hire', detail: 'Rate sheet, Jeddah', href: '/equipment', external: false },
+  { label: 'Equipment rental', detail: 'Rate sheet, Jeddah', href: '/equipment', external: false },
   { label: 'Email', detail: ARTIST_INFO.email, href: `mailto:${ARTIST_INFO.email}`, external: true },
 ];
 

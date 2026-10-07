@@ -41,8 +41,8 @@ export default function AboutPage() {
         />
       </div>
       <div className="about__text">
-        <span className="accent-rule" aria-hidden="true" />
         <h1 className="hero-type">About</h1>
+        <span className="accent-rule" aria-hidden="true" />
         <div className="prose about__bio">
           {ARTIST_INFO.longBio.map((paragraph) => (
             <p key={paragraph.slice(0, 32)}>{paragraph}</p>
