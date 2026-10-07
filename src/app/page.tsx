@@ -22,44 +22,49 @@ const ENTRIES = [
 
 export default function HomePage() {
   return (
-    <section className="spread spread-wide">
-      {/* Held a little right of centre so her face stays in the column. */}
-      <div className="figure spread__photo">
-        <Image
-          src={asset('/images/maryam-portrait.jpg')}
-          alt="Maryam Attar at her desk in the studio"
-          fill
-          priority
-          sizes="(max-width: 880px) 100vw, 50vw"
-          style={{ objectFit: 'cover', objectPosition: '60% center' }}
-        />
-      </div>
-      <div className="spread__text">
-        <h1 className="hero-type" style={{ maxWidth: '13ch' }}>
-          Helping shape what you already set in motion
-        </h1>
-        <span className="accent-rule" aria-hidden="true" />
-        <p className="prose" style={{ marginTop: '1.25em' }}>
-          Mixing engineer based in {ARTIST_INFO.location}.
-        </p>
-        <p style={{ marginTop: '1.5em' }}>
-          <Link className="btn" href="/work">
-            Explore work
-          </Link>
-        </p>
+    <>
+      <section className="spread spread-wide">
+        {/* The whole frame, uncropped: the picture is a close shot, so
+            nothing of it is spared. */}
+        <div className="figure spread__photo">
+          <Image
+            src={asset('/images/maryam-portrait.jpg')}
+            alt="Maryam Attar at her desk in the studio"
+            fill
+            priority
+            sizes="(max-width: 880px) 100vw, 50vw"
+            style={{ objectFit: 'cover' }}
+          />
+        </div>
+        <div className="spread__text">
+          <h1 className="hero-type" style={{ maxWidth: '13ch' }}>
+            Helping shape what you already set in motion
+          </h1>
+          <span className="accent-rule" aria-hidden="true" />
+          <p className="prose" style={{ marginTop: '1.25em' }}>
+            Mixing engineer based in {ARTIST_INFO.location}.
+          </p>
+          <p style={{ marginTop: '1.75em' }}>
+            <Link className="btn" href="/work">
+              Explore work
+            </Link>
+          </p>
+        </div>
+      </section>
 
-        <ul className="offers">
+      <section className="offers-band">
+        <ul className="wrap offers">
           {ENTRIES.map((e) => (
             <li key={e.title}>
               <h2 className="display">{e.title}</h2>
+              <p className="prose prose-fine">{e.body}</p>
               <Link className="ul-link meta" href={e.href}>
                 {e.cta}
               </Link>
-              <p className="prose prose-fine">{e.body}</p>
             </li>
           ))}
         </ul>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }
