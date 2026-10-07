@@ -36,16 +36,13 @@ The site is built as a print document, closer to an album insert or exhibition c
 - **Light only.** Maryam asked for the dark theme to go. There is no theme attribute on the document, no toggle, and no dark token block. Do not bring one back.
 - **Metadata goes in the margin**, via the `.doc` grid, not in a label stacked above the content. This is why the site has no uppercase eyebrow labels, and it should stay that way.
 - **No invented instrumentation.** An earlier version displayed a VU meter, a "tape running" light, and a sample-rate readout, none of which reflected anything real. Do not add indicators that are not driven by actual state.
-- **Lists over grids.** Work is a typeset index, equipment is a rate sheet, terms are a numbered list. All beat a card grid for scanning and are more honest about the content being a list.
+- **Lists over grids.** Work is a typeset index, equipment is a rate sheet, terms are a numbered list. A Work row says what the job was and who it was for, with its links on the right, and nothing else: Maryam asked on 2026-10-07 for the years, descriptions, category labels, and the hover plate to go. All beat a card grid for scanning and are more honest about the content being a list.
 
-Type is two variable families with distinct jobs, loaded in `app/layout.tsx`:
+Type is one family, Roboto, loaded as a variable font in `app/layout.tsx`. Maryam asked on 2026-10-07 for consistent fonts and recommended Roboto Light, so the earlier Archivo and Newsreader pairing is gone and should not come back. Weight does the work: reading text (`.prose`) sets at 300, headings and interface at 400, and 500 is kept for small emphasis such as a track title or a rate sheet item. There is no `font-stretch` anywhere.
 
-| Family | Role | Axis used |
-|---|---|---|
-| Archivo | display, interface, metadata | `wdth` 62 to 125, via `font-stretch` |
-| Newsreader | prose and reading text | `opsz`, via `font-variation-settings` |
+The paper is `#f4f0e7`, the exact value she gave. Her name in the masthead is set in spaced capitals as on her mockups, the one place capitals are used.
 
-The width axis is where the personality lives. Headings set around `font-stretch: 118%`, metadata around `80%`. Do not swap in a static font and lose it.
+Home and About are side by side layouts taken from her mockups. Home puts the headline, one line, and a button beside the portrait in `.hero`. About (`.about`) runs the session photo edge to edge on the left with the heading and bio on the right, the bio behind a hairline; it has no credits list, the Work page carries those. The colophon is a single row: Instagram, SoundCloud, and Contact together on the left, place and year on the right.
 
 ### Styling
 
@@ -82,7 +79,7 @@ Adding a piece of gear means adding one entry to `EQUIPMENT_INVENTORY`. It then 
 
 A project is linked to its audio by matching `Project.audioSrc` against `AudioSample.src`, not by id. Keep those paths in sync or the listen control disappears from the work index. A `Film` carries its own `credit` line (music production and mix) because the voiceover on the two Rawda films was not Maryam's, while the audio chapters are her voiceover mixes.
 
-`Project.image` is optional, and `Project.video` is an optional short muted loop. The work plate handles all three cases: a still, a still with a loop that plays while the row is hovered, or a typeset card built from the project's tags when there is no imagery at all. Never fill a gap by stretching a small file, which is what the card exists to prevent.
+`Project.image`, `Project.video`, `year`, `description`, `category`, and `tags` are still in the data but the Work page no longer renders them. The hover plate that used them was removed at Maryam's request, since it changed with the pointer and read as unstable. Never fill a gap by stretching a small file.
 
 ### One global context, mounted once in the root layout
 
@@ -90,7 +87,7 @@ A project is linked to its audio by matching `Project.audioSrc` against `AudioSa
 
 ### Server pages, two client components
 
-`/`, `/about`, `/services`, `/equipment`, and `/links` are pure server components. `/work` and `/contact` split in two: `page.tsx` exports `metadata` and renders a sibling `*Client.tsx` marked `'use client'`. Work drives the audio player and the hover plate; Contact reads `useSearchParams` inside a `Suspense` boundary, which the static export requires.
+`/`, `/about`, `/services`, `/equipment`, and `/links` are pure server components. `/work` and `/contact` split in two: `page.tsx` exports `metadata` and renders a sibling `*Client.tsx` marked `'use client'`. Work drives the audio player; Contact reads `useSearchParams` inside a `Suspense` boundary, which the static export requires.
 
 Per-route `metadata` sets `alternates.canonical` and an `openGraph` block built from `siteConfig.url`. New routes also go in `app/sitemap.ts`. Metadata routes (`sitemap.ts`, `robots.ts`, `manifest.ts`) carry `export const dynamic = 'force-static'`, which `output: 'export'` demands.
 
@@ -108,13 +105,11 @@ Source material lives outside the repo in `maryam_web_info/media_content`, inclu
 
 Web assets were derived with ffmpeg and Pillow. Stills are cropped to 3:2 to match the footage, resized to roughly 1800px wide, and saved as progressive JPEG at quality 80. Hover loops are five or six seconds, cropped to the same 3:2 frame, scaled to 1000px, stripped of audio, and encoded with libx264 at crf 31 with faststart.
 
-The portrait Maryam chose for the home page, `public/images/maryam-portrait.jpg`, is a 1024 by 682 crop of `DSCF2076.jpeg` and the only copy that exists. It sits beside the headline on Home inside the `.hero` grid, capped at 40rem so it is never requested wider than its source, and as a small square on `/links`. `public/images/og-portrait.jpg` is a 1200 by 630 crop of the same frame for Open Graph and the JSON-LD `Person` image. The About page carries `maryam-session.jpg`, the dark background session photo she asked for there, cut 4:5 around the two figures at 1440 by 1800 from `DSCF2712.jpg`, as the tall panel in her About mockup.
+The portrait Maryam chose for the home page, `public/images/maryam-portrait.jpg`, is a 1024 by 682 crop of `DSCF2076.jpeg` and the only copy that exists. It sits beside the headline on Home inside the `.hero` grid, capped at 40rem so it is never requested wider than its source, and as a small square on `/links`. `public/images/og-portrait.jpg` is a 1200 by 630 crop of the same frame for Open Graph and the JSON-LD `Person` image. The About page carries `maryam-session.jpg`, the dark background session photo she asked for there, cut 4:5 around the two figures at 1440 by 1800 from `DSCF2712.jpg`, as the full height left panel in her About mockup.
 
-The two Rawda campaign films play in full, with sound, in the Films section at the foot of the Work page. They are the finished spots carrying Maryam's music and mix, so the audio is only AAC encoded, never normalised or altered. Each is scaled to 1920px, encoded with libx264 at crf 24 capped at 5Mbps, AAC at 192k, faststart, with the camera timecode track dropped. That lands at 8 to 12MB each, which is why they use `preload="none"` behind a poster frame saved to `public/images/films/`.
+The two Rawda campaign films play in full, with sound, side by side under the list on the Work page. They are the finished spots carrying Maryam's music and mix, so the audio is only AAC encoded, never normalised or altered. Each is scaled to 1920px, encoded with libx264 at crf 24 capped at 5Mbps, AAC at 192k, faststart, with the camera timecode track dropped. That lands at 8 to 12MB each, which is why they use `preload="none"` behind a poster frame saved to `public/images/films/`.
 
 `components/FilmPlate.tsx` keeps sound exclusive: a film pauses the track player when it starts, pauses itself when a track starts, and pauses any other film through a `ma:film-play` document event. Its caption reuses the `.track` row, so a playing film takes the accent like a playing track.
-
-The plate is 3:2 because the sources are widescreen. The earlier 4:5 portrait plate discarded most of every frame, which is part of why the old images looked poor. The other part is that the original project files were roughly 220 by 110 pixel thumbnails being scaled up.
 
 ## Known gaps
 
@@ -124,7 +119,7 @@ The only enquiry path hands off to the visitor's mail client. The contact form c
 
 Several `EquipmentItem` entries have no `image` field. The rate sheet does not show images, so this currently costs nothing, but the data is incomplete.
 
-Two projects have no imagery and fall back to the tag card: Cloud Walker and the Athr Gallery open call. Cloud Walker's YouTube thumbnail crop was tried and rejected as too soft. Each needs a still or a clip from Maryam before it can carry a plate. The Music Commission restoration and the Wall of Sound sessions were removed from the Work page at Maryam's request on 2026-10-06.
+The Music Commission restoration and the Wall of Sound sessions were removed from the Work page at Maryam's request on 2026-10-06.
 
 `AudioSample.duration` is a hardcoded display string, not read from the file. Check it against `ffprobe` when adding a track; the first five were once listed at roughly half their real length.
 

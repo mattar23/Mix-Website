@@ -27,60 +27,28 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <>
-      <section className="wrap step">
+    <section className="about">
+      {/* The dark background session photo Maryam chose for this page,
+          cut 4:5 around the two figures from the 40 megapixel original. */}
+      <div className="figure about__photo">
+        <Image
+          src={asset('/images/maryam-session.jpg')}
+          alt="Maryam Attar listening back with a collaborator during a session"
+          fill
+          priority
+          sizes="(max-width: 880px) 100vw, 42vw"
+          style={{ objectFit: 'cover' }}
+        />
+      </div>
+      <div className="about__text">
         <span className="accent-rule" aria-hidden="true" />
-        <h1 className="hero-type" style={{ maxWidth: '10ch' }}>
-          Maryam Attar
-        </h1>
-
-        <div
-          className="hero"
-          style={{ marginTop: 'clamp(2.5rem, 6vw, 5rem)', alignItems: 'start' }}
-        >
-          <div className="doc">
-            <p className="meta doc__margin">
-              {ARTIST_INFO.title}
-              <br />
-              {ARTIST_INFO.location}
-            </p>
-            <div className="prose">
-              {ARTIST_INFO.longBio.map((paragraph) => (
-                <p key={paragraph.slice(0, 32)}>{paragraph}</p>
-              ))}
-            </div>
-          </div>
-          {/* The dark background session photo Maryam chose for this page,
-              cut 4:5 around the two figures from the 40 megapixel original. */}
-          <div className="figure hero__portrait hero__portrait-tall">
-            <Image
-              src={asset('/images/maryam-session.jpg')}
-              alt="Maryam Attar listening back with a collaborator during a session"
-              fill
-              sizes="(max-width: 880px) 100vw, 30rem"
-              style={{ objectFit: 'cover' }}
-            />
-          </div>
+        <h1 className="hero-type">About</h1>
+        <div className="prose about__bio">
+          {ARTIST_INFO.longBio.map((paragraph) => (
+            <p key={paragraph.slice(0, 32)}>{paragraph}</p>
+          ))}
         </div>
-      </section>
-
-      <section className="wrap step-b">
-        <hr className="rule" />
-        <div className="doc" style={{ paddingTop: '2.5rem' }}>
-          <p className="meta doc__margin">Credits</p>
-          <div className="index" style={{ borderTop: 0 }}>
-            {ARTIST_INFO.clientsAndCredits.map((credit) => (
-              <div className="index__row index__row-static" key={credit.name}>
-                <span className="index__year">{credit.name}</span>
-                <span className="prose prose-fine" style={{ maxWidth: '40ch' }}>
-                  {credit.detail}
-                </span>
-                <span />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-    </>
+      </div>
+    </section>
   );
 }
