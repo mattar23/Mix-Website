@@ -1,13 +1,14 @@
 'use client';
 
-import React from 'react';
-import { PROJECTS, AUDIO_SAMPLES, FILMS } from '@/data/projects';
+import React, { useState } from 'react';
+import { PROJECTS, AUDIO_SAMPLES, type Project } from '@/data/projects';
 import { useAudio } from '@/components/AudioPlayerContext';
 import { Glyph } from '@/components/Glyph';
-import { FilmPlate } from '@/components/FilmPlate';
+import { FilmViewer } from '@/components/FilmViewer';
 
 export default function WorkClient() {
   const { currentTrack, isPlaying, playTrack } = useAudio();
+  const [watching, setWatching] = useState<Project | null>(null);
 
   return (
     <>
@@ -54,6 +55,17 @@ export default function WorkClient() {
                       {l.label}
                     </a>
                   ))}
+                  {p.film && (
+                    <button
+                      className="listen"
+                      style={{ marginTop: 0 }}
+                      onClick={() => setWatching(p)}
+                    >
+                      <Glyph playing={false} size={10} />
+                      Watch
+                      <span className="num">{p.film.duration}</span>
+                    </button>
+                  )}
                   {sample && (
                     <button
                       className="listen"
@@ -72,17 +84,7 @@ export default function WorkClient() {
         </div>
       </section>
 
-      <section className="wrap step-b" id="films">
-        <div className="two-col">
-          {FILMS.map((film) => (
-            <FilmPlate
-              key={film.id}
-              film={film}
-              project={PROJECTS.find((p) => p.id === film.projectId)}
-            />
-          ))}
-        </div>
-      </section>
+      <FilmViewer project={watching} onClose={() => setWatching(null)} />
     </>
   );
 }
