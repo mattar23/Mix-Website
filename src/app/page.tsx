@@ -41,10 +41,10 @@ export default function HomePage() {
             Helping shape what you already set in motion
           </h1>
           <span className="accent-rule" aria-hidden="true" />
-          <p className="prose" style={{ marginTop: '1.4em' }}>
-            Mixing and voiceover engineer based in {ARTIST_INFO.location}.
+          <p className="prose" style={{ marginTop: '1.25em' }}>
+            Mixing engineer based in {ARTIST_INFO.location}.
           </p>
-          <p style={{ marginTop: '1.5em' }}>
+          <p style={{ marginTop: '1.75em' }}>
             <Link className="btn" href="/work">
               Explore work
             </Link>
@@ -52,8 +52,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="wrap">
-        <ul className="offers">
+      <section className="offers-band">
+        <ul className="wrap offers">
           {ENTRIES.map((e) => (
             <li key={e.title}>
               <h2 className="display">{e.title}</h2>
