@@ -19,7 +19,7 @@ There is no test runner and no test files. CI is the deploy workflow only, see D
 
 ## What this is
 
-A portfolio and equipment hire site for Maryam Attar, a mixing and voiceover engineer in Jeddah, Saudi Arabia. Seven static routes: home, work, services, equipment, about, contact, and `/links`, the page a social bio points at, which stays out of the masthead. Next.js 16 App Router, React 19, TypeScript strict, exported as static files. No database, no API routes, no backend.
+A portfolio and equipment hire site for Maryam Attar, a mixing engineer in Jeddah, Saudi Arabia. Seven static routes: home, work, services, equipment, about, contact, and `/links`, the page a social bio points at, which stays out of the masthead. Next.js 16 App Router, React 19, TypeScript strict, exported as static files. No database, no API routes, no backend.
 
 Dependencies are deliberately minimal: `next`, `react`, `react-dom` and nothing else. There is no CSS framework, no icon library, no component library. Adding one needs a real reason.
 
@@ -81,7 +81,7 @@ Four typed modules are the single source of content truth. Pages import and rend
 
 Adding a piece of gear means adding one entry to `EQUIPMENT_INVENTORY`. It then appears in the rate sheet and the structured data automatically. Same for a project.
 
-A project is linked to its audio by matching `Project.audioSrc` against `AudioSample.src`, not by id. Keep those paths in sync or the listen control disappears from the work index. A `Film` carries its own `credit` line (music production and mix) because the voiceover on the two Rawda films was not Maryam's, while the audio chapters are her voiceover mixes.
+A project is linked to its audio by matching `Project.audioSrc` against `AudioSample.src`, not by id. Keep those paths in sync or the listen control disappears from the work index. A `Film` carries its own `credit` line (music production and mixing) because the voiceover on the two Rawda films was not Maryam's, while the audio chapters are her voiceover mixes.
 
 `year`, `description`, `category`, and `tags` are still in the project data but the Work page no longer renders them. The hover plate and its stills and loops were removed at Maryam's request, since it changed with the pointer and read as unstable.
 

@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   alternates: { canonical: `${siteConfig.url}/contact` },
   openGraph: {
     title: 'Contact | Maryam Attar',
-    description: 'Book a mix, a voiceover session, or hire gear in Jeddah.',
+    description: 'Book a mixing session, a voiceover session, or hire gear in Jeddah.',
     url: `${siteConfig.url}/contact`,
   },
 };

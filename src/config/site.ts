@@ -1,6 +1,6 @@
 export const siteConfig = {
   name: 'Maryam Attar',
-  title: 'Maryam Attar, Mixing and Voiceover Engineer in Jeddah',
+  title: 'Maryam Attar, Mixing Engineer in Jeddah',
   description:
     'Mixing for records, editing and mixing for podcasts and voiceovers, and audio equipment hire in Jeddah, Saudi Arabia. Maryam Attar works with artists, podcasters, and directors across the Gulf, in person and remotely.',
   url: process.env.NEXT_PUBLIC_SITE_URL || 'https://maryamattar.co',
@@ -9,7 +9,7 @@ export const siteConfig = {
   alternateLocales: ['ar_SA'],
   author: {
     name: 'Maryam Attar',
-    role: 'Mixing and Voiceover Engineer',
+    role: 'Mixing Engineer',
     email: 'info@maryamattar.co',
     location: 'Jeddah, Saudi Arabia',
   },

@@ -30,7 +30,7 @@ export const PROJECTS: Project[] = [
     id: 'nadine-jewellery-rawda',
     title: 'Rawda Collection Campaign',
     clientOrArtist: 'Nadine Jewellery',
-    role: 'Music Production, Voiceover Recording & Mix',
+    role: 'Music Production, Voiceover Recording & Mixing',
     year: '2022/23',
     category: 'Commercial',
     description:
@@ -38,7 +38,7 @@ export const PROJECTS: Project[] = [
     audioSrc: '/audio/gemma-nj-rawda.mp3',
     externalLink: 'https://www.instagram.com/reel/DQGjQg6AAw3/',
     moreLinks: [{ label: 'Second reel', url: 'https://www.instagram.com/reel/DPrX-A0gAWj/' }],
-    tags: ['Music Production', 'Voiceover Mix', 'Brand Scoring', 'Luxury']
+    tags: ['Music Production', 'Voiceover Mixing', 'Brand Scoring', 'Luxury']
   },
   {
     id: 'athr-gallery',
@@ -82,7 +82,7 @@ export const AUDIO_SAMPLES: AudioSample[] = [
   {
     id: 'gemma',
     title: 'Gemma Chapter, Rawda Campaign',
-    subtitle: 'Nadine Jewellery · Voiceover Mix & Original Production',
+    subtitle: 'Nadine Jewellery · Voiceover Mixing & Original Production',
     src: '/audio/gemma-nj-rawda.mp3',
     duration: '1:40',
     category: 'Commercial'
@@ -90,7 +90,7 @@ export const AUDIO_SAMPLES: AudioSample[] = [
   {
     id: 'haya',
     title: 'Haya Chapter, Rawda Campaign',
-    subtitle: 'Nadine Jewellery · Voiceover Mix & Sound Design',
+    subtitle: 'Nadine Jewellery · Voiceover Mixing & Sound Design',
     src: '/audio/haya-nj-rawda.mp3',
     duration: '2:07',
     category: 'Commercial'
@@ -98,7 +98,7 @@ export const AUDIO_SAMPLES: AudioSample[] = [
   {
     id: 'manna',
     title: 'Manna Chapter, Rawda Campaign',
-    subtitle: 'Nadine Jewellery · Voiceover Mix & Atmosphere',
+    subtitle: 'Nadine Jewellery · Voiceover Mixing & Atmosphere',
     src: '/audio/manna-nj-rawda.mp3',
     duration: '2:16',
     category: 'Commercial'
@@ -106,7 +106,7 @@ export const AUDIO_SAMPLES: AudioSample[] = [
   {
     id: 'palma',
     title: 'Palma Chapter, Rawda Campaign',
-    subtitle: 'Nadine Jewellery · Voiceover Mix',
+    subtitle: 'Nadine Jewellery · Voiceover Mixing',
     src: '/audio/palma-nj-rawda.mp3',
     duration: '1:50',
     category: 'Commercial'
@@ -114,7 +114,7 @@ export const AUDIO_SAMPLES: AudioSample[] = [
   {
     id: 'rosa',
     title: 'Rosa Chapter, Rawda Campaign',
-    subtitle: 'Nadine Jewellery · Spatial Tone & Voiceover Mix',
+    subtitle: 'Nadine Jewellery · Spatial Tone & Voiceover Mixing',
     src: '/audio/rosa-nj-rawda.mp3',
     duration: '1:34',
     category: 'Commercial'
@@ -147,7 +147,7 @@ export const FILMS: Film[] = [
     id: 'rawda-botanica',
     title: 'Rawda Botanica',
     projectId: 'nadine-jewellery-rawda',
-    credit: 'Music Production & Mix',
+    credit: 'Music Production & Mixing',
     src: '/video/rawda-botanica.mp4',
     poster: '/images/films/rawda-botanica.jpg',
     duration: '0:38'
@@ -156,7 +156,7 @@ export const FILMS: Film[] = [
     id: 'rawda-gemma',
     title: 'Rawda Gemma',
     projectId: 'nadine-jewellery-rawda',
-    credit: 'Music Production & Mix',
+    credit: 'Music Production & Mixing',
     src: '/video/rawda-gemma.mp4',
     poster: '/images/films/rawda-gemma.jpg',
     duration: '0:31'

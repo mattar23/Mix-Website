@@ -1,6 +1,6 @@
 export const ARTIST_INFO = {
   name: 'Maryam Attar',
-  title: 'Mixing and Voiceover Engineer',
+  title: 'Mixing Engineer',
   location: 'Jeddah, Saudi Arabia',
   // Forwarding for this address must exist before launch, see DEPLOY.md.
   email: 'info@maryamattar.co',
