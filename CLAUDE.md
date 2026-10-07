@@ -38,7 +38,21 @@ The site is built as a print document, closer to an album insert or exhibition c
 - **No invented instrumentation.** An earlier version displayed a VU meter, a "tape running" light, and a sample-rate readout, none of which reflected anything real. Do not add indicators that are not driven by actual state.
 - **Lists over grids.** Work is a typeset index, equipment is a rate sheet, terms are a numbered list. A Work row says what the job was and who it was for, with its links on the right, and nothing else: Maryam asked on 2026-10-07 for the years, descriptions, category labels, and the hover plate to go. All beat a card grid for scanning and are more honest about the content being a list.
 
-Type is one family, Roboto, loaded as a variable font in `app/layout.tsx`. Maryam asked on 2026-10-07 for consistent fonts and recommended Roboto Light, so the earlier Archivo and Newsreader pairing is gone and should not come back. Weight does the work: reading text (`.prose`) sets at 300, headings and interface at 400, and 500 is kept for small emphasis such as a track title or a rate sheet item. There is no `font-stretch` anywhere except the masthead name.
+Type is one family, Roboto, loaded as a variable font in `app/layout.tsx`. Maryam asked on 2026-10-07 for consistent fonts and recommended Roboto Light, so the earlier Archivo and Newsreader pairing is gone and should not come back. Weight does the work: reading text (`.prose`) sets at 300, headings and interface at 400, and 500 is kept for small heads.
+
+There is one type ladder, defined at the top of the typography block in `globals.css` and audited on 2026-10-07 after Moad noticed mismatches. Every text element on the site lands on one of these, and a new one should too:
+
+| Role | Size | Weight | Where |
+|---|---|---|---|
+| Page title | 56px (`--t-hero`) | 400 | every `h1` |
+| Section | 40px (`--t-head`) | 400 | a service name |
+| Item | 26px (`--t-sub`) | 400 | `h3`, a project, an offer, a fold heading |
+| Small head | 17px (`--t-body`) | 500 | `h4`, a category, a term, a track title |
+| Reading text | 18px, then 17px grey for detail | 300 | `.prose`, `.prose-fine` |
+| Interface | 17px nav, 15px links, labels, buttons | 400 | `.meta`, `.btn` |
+| Fine print | 13px | 400 | `.meta-micro` |
+
+On Home and About the text scales down with the window height below about 820px tall so the page stays on one screen; at that height and above it matches the ladder exactly. There is no `font-stretch` anywhere except the masthead name.
 
 The paper is `#f4f0e7`, the exact value she gave. Her name in the masthead is the one exception to Roboto: it keeps the wide, semi bold Archivo from the earlier design (`font-stretch: 112%`), which Moad asked to bring back on 2026-10-07.
 

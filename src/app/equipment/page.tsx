@@ -85,14 +85,14 @@ export default function EquipmentPage() {
         </div>
 
         <details className="fold">
-          <summary>Rental terms</summary>
+          <summary>Rental Terms</summary>
           <p className="prose prose-fine" style={{ marginTop: '1rem' }}>
             The terms are summarised here. The full agreement is signed at handover.
           </p>
           <ol className="terms">
             {RENTAL_TERMS.map((t) => (
               <li key={t.heading}>
-                <p className="margin-head">{t.heading}</p>
+                <h4>{t.heading}</h4>
                 <p className="prose prose-fine" style={{ marginTop: '0.25rem' }}>
                   {t.body}
                 </p>
