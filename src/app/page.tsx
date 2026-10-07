@@ -3,19 +3,20 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { asset } from '@/lib/asset';
 import { SERVICES } from '@/data/services';
+import { ARTIST_INFO } from '@/data/bio';
 
 const ENTRIES = [
   ...SERVICES.map((s) => ({
     title: s.title,
-    body: s.shortDesc,
+    body: s.teaser,
     href: `/services#${s.id}`,
-    cta: `About ${s.title.toLowerCase()}`,
+    cta: 'What is included',
   })),
   {
     title: 'Equipment Rental',
-    body: 'Microphones, recorders, DI boxes, pedals, and amplifiers for hire in Jeddah, with day and week rates published in full.',
+    body: 'A selection of audio equipment available for short and long term rental.',
     href: '/equipment',
-    cta: 'See the rate sheet',
+    cta: 'See the rates',
   },
 ];
 
@@ -26,13 +27,16 @@ export default function HomePage() {
         <div className="hero">
           <div>
             <span className="accent-rule" aria-hidden="true" />
-            <h1 className="hero-type" style={{ maxWidth: '12ch' }}>
-              Sound for music, spaces, and moving images.
+            <h1 className="hero-type" style={{ maxWidth: '13ch' }}>
+              Helping shape what you already set in motion
             </h1>
-            <p className="prose" style={{ marginTop: '2rem', maxWidth: '34em' }}>
-              Maryam Attar is a mixing and voiceover engineer in Jeddah, Saudi
-              Arabia, working with artists, podcasters, and directors here and
-              remotely across the Gulf.
+            <p className="prose" style={{ marginTop: '1.5rem', textWrap: 'balance' }}>
+              Mixing and voiceover engineer based in {ARTIST_INFO.location}.
+            </p>
+            <p style={{ marginTop: '2rem' }}>
+              <Link className="btn" href="/work">
+                Explore work
+              </Link>
             </p>
           </div>
           {/* The only portrait is 1024px wide, so it is held to a size it can
@@ -56,13 +60,13 @@ export default function HomePage() {
           {ENTRIES.map((e, i) => (
             <li key={e.title}>
               <p className="meta num">0{i + 1}</p>
-              <h2 className="display" style={{ marginTop: '0.75rem' }}>
+              <h2 className="display" style={{ marginTop: '0.5rem' }}>
                 {e.title}
               </h2>
-              <p className="prose prose-fine" style={{ marginTop: '1rem' }}>
+              <p className="prose prose-fine" style={{ marginTop: '0.75rem' }}>
                 {e.body}
               </p>
-              <p style={{ marginTop: '1.5rem' }}>
+              <p>
                 <Link className="ul-link meta" href={e.href}>
                   {e.cta}
                 </Link>

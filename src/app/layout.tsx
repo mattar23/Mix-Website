@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Archivo, Newsreader } from 'next/font/google';
+import { Roboto } from 'next/font/google';
 import './globals.css';
 import { AudioProvider } from '@/components/AudioPlayerContext';
 import { Masthead } from '@/components/Masthead';
@@ -9,25 +9,16 @@ import { JsonLd } from '@/components/JsonLd';
 import { siteConfig } from '@/config/site';
 import { asset } from '@/lib/asset';
 
-// Display and interface. The width axis, 62 to 125, carries the personality.
-const archivo = Archivo({
+// One family for the whole site, at Maryam's request. The variable file
+// covers every weight; reading text sets at 300, Roboto Light.
+const roboto = Roboto({
   subsets: ['latin'],
-  axes: ['wdth'],
-  variable: '--font-archivo',
-  display: 'swap',
-});
-
-// Reading text. Optical sizing keeps prose warm at length.
-const newsreader = Newsreader({
-  subsets: ['latin'],
-  axes: ['opsz'],
-  style: ['normal', 'italic'],
-  variable: '--font-newsreader',
+  variable: '--font-roboto',
   display: 'swap',
 });
 
 export const viewport: Viewport = {
-  themeColor: '#f0e7d7',
+  themeColor: '#f4f0e7',
   width: 'device-width',
   initialScale: 1,
 };
@@ -90,7 +81,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${archivo.variable} ${newsreader.variable}`}>
+    <html lang="en" className={roboto.variable}>
       <head>
         <JsonLd />
       </head>

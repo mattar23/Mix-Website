@@ -1,6 +1,8 @@
 export interface ServiceDetail {
   id: string;
   title: string;
+  /** One line for the home page, taken from Maryam's home mockup. */
+  teaser: string;
   shortDesc: string;
   fullDesc: string;
   includes?: string[];
@@ -16,6 +18,7 @@ export const SERVICES: ServiceDetail[] = [
   {
     id: 'mixing',
     title: 'Mixing',
+    teaser: 'Detailed, intentional mixes for artists, songs and audio projects.',
     shortDesc:
       'Build on what is already there: a finished mix ready for mastering that keeps the creative direction and the character of the track intact.',
     fullDesc:
@@ -71,6 +74,7 @@ export const SERVICES: ServiceDetail[] = [
   {
     id: 'voiceover',
     title: 'Podcast & Voiceover Mixing',
+    teaser: 'Editing, mixing and sync for podcast, voiceover and spoken word.',
     shortDesc:
       'Editing, cleanup and mixing for podcasts, voiceovers and other spoken word recordings. Clear, consistent dialogue with a natural sound throughout.',
     fullDesc:

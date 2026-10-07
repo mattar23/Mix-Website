@@ -1,5 +1,6 @@
 /* ============
    Maryam Attar, cream stock, warm near black ink, one muted brick accent.
+   One family throughout, Roboto, light for reading and regular for marks.
    The accent marks the current page, the rule above a heading,
    and audio that is playing. Nothing else.
    ============ */
@@ -7,34 +8,35 @@
 /* ============ tokens ============ */
 
 :root {
-  --paper:      #f0e7d7;
-  --paper-2:    #e7dcc8;
+  --paper:      #f4f0e7;
+  --paper-2:    #ebe6da;
   --ink:        #1a1510;
   --ink-2:      #5f5548;
   --ink-3:      #8b8070;
-  --rule:       #d5cab6;
-  --rule-soft:  #dfd5c2;
+  --rule:       #d8d2c4;
+  --rule-soft:  #e3ded1;
   --spot:       #a35a46;
   --spot-ink:   #ffffff;
 
-  --sans: var(--font-archivo), "Helvetica Neue", Helvetica, Arial, sans-serif;
-  --serif: var(--font-newsreader), Georgia, "Times New Roman", serif;
+  --sans: var(--font-roboto), "Helvetica Neue", Helvetica, Arial, sans-serif;
 
   /* type scale */
-  --t-micro: 0.6875rem;
-  --t-fine:  0.8125rem;
+  /* Six sizes, each a clear step from the next, so nothing reads as a jump. */
+  --t-micro: 0.8125rem;
+  --t-fine:  0.9375rem;
   --t-body:  1.0625rem;
-  --t-lead:  1.3125rem;
-  --t-sub:   clamp(1.5rem, 2.6vw, 2.125rem);
-  --t-head:  clamp(2.25rem, 6vw, 4rem);
-  --t-hero:  clamp(2.75rem, 9.5vw, 8.25rem);
+  --t-lead:  1.125rem;
+  --t-sub:   clamp(1.375rem, 1.9vw, 1.625rem);
+  --t-head:  clamp(1.875rem, 3.2vw, 2.5rem);
+  --t-hero:  clamp(2.25rem, 4.4vw, 3.5rem);
 
   /* measure + rhythm */
   --margin-col: 9.5rem;
   --gutter: 2.5rem;
   --page-x: clamp(1.25rem, 5vw, 4.5rem);
   --page-max: 84rem;
-  --step: clamp(3.5rem, 9vw, 8rem);
+  --step: clamp(2rem, 4vw, 3.25rem);
+  --masthead-h: 5.75rem;
 
   --player-h: 0px;
   color-scheme: light;
@@ -70,7 +72,7 @@ a { color: inherit; text-decoration: none; }
 /* ============ base ============ */
 
 /* Anchor jumps land below the sticky masthead, not under it. */
-html { height: 100%; scroll-padding-top: 6.5rem; }
+html { height: 100%; scroll-padding-top: 7.5rem; }
 
 body {
   min-height: 100%;
@@ -99,37 +101,35 @@ main { flex: 1; }
 
 /* ============ typography ============ */
 
-/* Display: Archivo pushed wide. The width axis is the personality. */
+/* Display: Roboto at regular weight, set close. Size carries it, not weight. */
 .display {
   font-family: var(--sans);
-  font-weight: 500;
-  font-stretch: 118%;
-  letter-spacing: -0.028em;
-  line-height: 0.92;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.08;
   text-wrap: balance;
 }
 
 .hero-type {
   font-size: var(--t-hero);
-  font-weight: 500;
-  font-stretch: 120%;
-  letter-spacing: -0.035em;
-  line-height: 0.88;
+  font-weight: 400;
+  letter-spacing: -0.025em;
+  line-height: 1.06;
   text-wrap: balance;
 }
 
-h1, h2, h3, h4 { font-weight: 500; }
+h1, h2, h3, h4 { font-weight: 400; }
 
 h1 { font-size: var(--t-head); }
 h2 { font-size: var(--t-sub); }
 
-/* Prose: Newsreader, optical-sized for reading. */
+/* Prose: Roboto Light, the weight Maryam asked for, with room to breathe. */
 .prose {
-  font-family: var(--serif);
-  font-variation-settings: "opsz" 28;
+  font-family: var(--sans);
+  font-weight: 300;
   font-size: var(--t-lead);
-  line-height: 1.62;
-  max-width: 34em;
+  line-height: 1.6;
+  max-width: 36em;
   color: var(--ink);
 }
 
@@ -137,29 +137,24 @@ h2 { font-size: var(--t-sub); }
 
 .prose-fine {
   font-size: var(--t-body);
-  font-variation-settings: "opsz" 20;
-  line-height: 1.66;
+  line-height: 1.6;
   color: var(--ink-2);
 }
 
-/* Metadata: Archivo narrowed. Small, quiet, never shouted in caps. */
+/* Metadata: small and quiet, never shouted in caps. */
 .meta {
   font-family: var(--sans);
-  font-stretch: 80%;
   font-size: var(--t-fine);
-  letter-spacing: 0.005em;
+  letter-spacing: 0.01em;
   color: var(--ink-2);
-  line-height: 1.4;
+  line-height: 1.45;
 }
 
 .meta-micro { font-size: var(--t-micro); }
 
 .num {
   font-variant-numeric: tabular-nums lining-nums;
-  font-stretch: 78%;
 }
-
-.em { font-family: var(--serif); font-style: italic; font-weight: 400; }
 
 /* ============ layout ============ */
 
@@ -184,7 +179,7 @@ h2 { font-size: var(--t-sub); }
 
 .doc__margin {
   position: sticky;
-  top: 6.5rem;
+  top: 7.5rem;
   color: var(--ink-2);
 }
 
@@ -224,31 +219,31 @@ h2 { font-size: var(--t-sub); }
 
 .masthead__bar {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
-  gap: 1.5rem;
-  height: 4.5rem;
+  gap: 2rem;
+  height: var(--masthead-h);
 }
 
+/* Her name in spaced capitals, as on every one of her mockups. */
 .masthead__name {
-  font-stretch: 112%;
-  font-weight: 600;
-  font-size: 1.0625rem;
-  letter-spacing: -0.02em;
+  font-weight: 400;
+  font-size: 1.3125rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   white-space: nowrap;
 }
 
 .masthead__nav {
   display: flex;
   align-items: baseline;
-  gap: 1.75rem;
+  gap: clamp(2rem, 4.2vw, 4rem);
 }
 
 .navlink {
-  font-stretch: 84%;
-  font-size: var(--t-fine);
+  font-size: 1.0625rem;
   color: var(--ink-2);
-  padding-block: 0.35rem;
+  padding-block: 0.5rem;
   transition: color 0.18s ease;
 }
 
@@ -266,8 +261,7 @@ h2 { font-size: var(--t-sub); }
 }
 
 .toolbtn {
-  font-stretch: 84%;
-  font-size: var(--t-fine);
+  font-size: 1rem;
   color: var(--ink-2);
   transition: color 0.18s ease;
 }
@@ -290,7 +284,6 @@ h2 { font-size: var(--t-sub); }
   }
   .masthead__nav-open .navlink {
     font-size: 1.5rem;
-    font-stretch: 100%;
     padding-block: 0.4rem;
     box-shadow: none;
   }
@@ -307,37 +300,21 @@ h2 { font-size: var(--t-sub); }
   align-items: baseline;
   width: 100%;
   text-align: left;
-  padding-block: 1.6rem;
+  padding-block: 1.1rem;
   border-bottom: 1px solid var(--rule-soft);
   transition: background-color 0.2s ease;
 }
 
 .index__row:hover { background: var(--paper-2); }
 
-.index__year {
-  font-stretch: 78%;
-  font-variant-numeric: tabular-nums;
-  font-size: var(--t-fine);
-  color: var(--ink-2);
-}
-
 .index__title {
-  font-size: clamp(1.35rem, 3.1vw, 2.125rem);
-  font-weight: 500;
-  font-stretch: 110%;
-  letter-spacing: -0.024em;
-  line-height: 1.05;
+  font-size: var(--t-sub);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
 }
 
 .index__sub { margin-top: 0.45rem; }
-
-.index__end {
-  font-stretch: 78%;
-  font-size: var(--t-fine);
-  color: var(--ink-2);
-  font-variant-numeric: tabular-nums;
-  white-space: nowrap;
-}
 
 @media (max-width: 800px) {
   .index__row {
@@ -345,40 +322,6 @@ h2 { font-size: var(--t-sub); }
     gap: 1rem 1.25rem;
     padding-block: 1.25rem;
   }
-  .index__year { grid-column: 1 / -1; }
-}
-
-/* The one bold move: the plate that fades in beside a hovered row. */
-.plate {
-  position: sticky;
-  top: 8rem;
-  aspect-ratio: 3 / 2;
-  width: 100%;
-  overflow: hidden;
-  background: var(--paper-2);
-}
-
-.plate__img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0;
-  transform: scale(1.03);
-  transition: opacity 0.45s ease, transform 0.9s ease;
-}
-
-.plate__img-on { opacity: 1; transform: scale(1); }
-
-.plate__caption {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  padding: 0.75rem 0.9rem;
-  background: var(--paper);
-  border-top: 1px solid var(--rule);
 }
 
 /* ============ tracks ============ */
@@ -401,20 +344,18 @@ h2 { font-size: var(--t-sub); }
 .track:hover .track__glyph { color: var(--ink); }
 
 .track__title {
-  font-stretch: 100%;
   font-weight: 500;
   font-size: 1.0625rem;
   letter-spacing: -0.012em;
 }
 
 .track__dur {
-  font-stretch: 78%;
   font-size: var(--t-fine);
   font-variant-numeric: tabular-nums;
   color: var(--ink-2);
 }
 
-/* Reflex Blue earns its keep here and nowhere else. */
+/* The accent earns its keep here: the track that is playing. */
 .track-on .track__title,
 .track-on .track__glyph,
 .track-on .track__dur { color: var(--spot); }
@@ -422,19 +363,17 @@ h2 { font-size: var(--t-sub); }
 /* ============ rate sheet ============ */
 
 .sheet { width: 100%; border-collapse: collapse; }
-.sheet + .sheet { margin-top: 3rem; }
+.sheet + .sheet { margin-top: 2rem; }
 
 .sheet caption {
   text-align: left;
   padding-bottom: 0.9rem;
   color: var(--ink-2);
-  font-stretch: 80%;
   font-size: var(--t-fine);
 }
 
 .sheet th {
   text-align: left;
-  font-stretch: 78%;
   font-size: var(--t-micro);
   font-weight: 500;
   color: var(--ink-2);
@@ -443,7 +382,7 @@ h2 { font-size: var(--t-sub); }
 }
 
 .sheet td {
-  padding-block: 1.05rem;
+  padding-block: 0.75rem;
   border-bottom: 1px solid var(--rule-soft);
   vertical-align: baseline;
 }
@@ -455,14 +394,12 @@ h2 { font-size: var(--t-sub); }
 .sheet__rate {
   text-align: right;
   font-variant-numeric: tabular-nums;
-  font-stretch: 78%;
   white-space: nowrap;
   padding-left: 2rem;
 }
 
 .sheet__stock {
   display: block;
-  font-stretch: 78%;
   font-size: var(--t-fine);
   color: var(--ink-2);
   font-variant-numeric: tabular-nums;
@@ -480,7 +417,7 @@ h2 { font-size: var(--t-sub); }
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto auto;
     gap: 0.2rem 1rem;
-    padding-block: 1.1rem;
+    padding-block: 0.8rem;
     border-bottom: 1px solid var(--rule-soft);
   }
 
@@ -513,7 +450,6 @@ h2 { font-size: var(--t-sub); }
 
 .btn {
   display: inline-block;
-  font-stretch: 84%;
   font-size: var(--t-fine);
   line-height: 1;
   padding: 0.85rem 1.4rem;
@@ -543,7 +479,6 @@ h2 { font-size: var(--t-sub); }
 
 .field__label {
   display: block;
-  font-stretch: 80%;
   font-size: var(--t-fine);
   color: var(--ink-2);
   margin-bottom: 0.4rem;
@@ -607,7 +542,6 @@ h2 { font-size: var(--t-sub); }
 }
 
 .player__title {
-  font-stretch: 84%;
   font-size: var(--t-fine);
   white-space: nowrap;
   overflow: hidden;
@@ -619,7 +553,6 @@ h2 { font-size: var(--t-sub); }
 .player__scrub { flex: 1; display: flex; align-items: center; gap: 0.9rem; min-width: 0; }
 
 .player__time {
-  font-stretch: 78%;
   font-size: var(--t-micro);
   font-variant-numeric: tabular-nums;
   color: var(--ink-2);
@@ -668,22 +601,51 @@ input[type="range"].scrub::-moz-range-thumb {
 
 .two-col { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--gutter); }
 
-/* home and about: headline or bio beside the portrait */
+/* home: the headline beside the portrait, as on her mockups */
 .hero {
   display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
   gap: var(--gutter);
-  align-items: end;
+  align-items: center;
 }
-/* Beside the portrait the headline sets smaller, as on the mockups. At the
-   full hero size the column would wrap one word per line. */
-.hero .hero-type { font-size: clamp(2.5rem, 5vw, 4.5rem); }
-.hero__portrait { aspect-ratio: 3 / 2; max-width: 40rem; }
-.hero__portrait-tall { aspect-ratio: 4 / 5; max-width: 30rem; }
+.hero__portrait { aspect-ratio: 3 / 2; width: 100%; max-width: 40rem; justify-self: end; }
 @media (max-width: 880px) {
   .hero { grid-template-columns: minmax(0, 1fr); }
-  .hero .hero-type { font-size: var(--t-hero); }
+  .hero__portrait { justify-self: start; }
 }
+
+/* about: the session photo runs edge to edge on the left, the bio beside it */
+.about {
+  display: grid;
+  grid-template-columns: minmax(0, 42fr) minmax(0, 58fr);
+}
+.about__photo { min-height: min(46rem, calc(100vh - var(--masthead-h))); }
+.about__text {
+  padding: clamp(2.5rem, 6vw, 5.5rem) var(--page-x) clamp(2.5rem, 6vw, 5rem) clamp(1.5rem, 4.5vw, 4.5rem);
+}
+.about__bio {
+  margin-top: clamp(2rem, 4vw, 3.5rem);
+  padding-left: clamp(1.25rem, 3vw, 2.75rem);
+  border-left: 1px solid var(--rule);
+  max-width: 44rem;
+}
+@media (max-width: 880px) {
+  .about { grid-template-columns: minmax(0, 1fr); }
+  .about__photo { min-height: 0; aspect-ratio: 4 / 5; max-height: 34rem; }
+  .about__text { padding-left: var(--page-x); }
+}
+
+/* colophon: one line, links together on the left, place and year on the right */
+.colophon {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem 2.5rem;
+  padding-block: 1.75rem;
+}
+.colophon__links { display: flex; flex-wrap: wrap; gap: 0.5rem 2.25rem; }
+.colophon__place { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; }
 
 /* links: the page a social bio points at, one narrow column */
 .linklist { max-width: 34rem; }
@@ -694,17 +656,20 @@ input[type="range"].scrub::-moz-range-thumb {
 .trio {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  padding-top: 2.5rem;
+  padding-top: 2rem;
 }
-.trio > li { padding-right: var(--gutter); }
+.trio > li { padding-right: var(--gutter); display: flex; flex-direction: column; }
+.trio > li > :last-child { margin-top: auto; padding-top: 1.25rem; }
 .trio > li + li { padding-left: var(--gutter); border-left: 1px solid var(--rule); }
 .trio > li:last-child { padding-right: 0; }
 @media (max-width: 760px) {
   .trio { grid-template-columns: minmax(0, 1fr); }
   .trio > li { padding: 0; }
+  .trio > li > :last-child { padding-top: 1rem; }
   .trio > li + li {
-    margin-top: 2.5rem;
-    padding-top: 2.5rem;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    padding-left: 0;
     border-left: 0;
     border-top: 1px solid var(--rule);
   }
@@ -732,30 +697,11 @@ input[type="range"].scrub::-moz-range-thumb {
   }
 }
 
-/* ============ work: index beside a sticky plate ============ */
-
-.work {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 26rem;
-  gap: var(--gutter);
-  align-items: start;
+/* work: the job and who it was for on the left, its links on the right */
+.index__row-two { grid-template-columns: minmax(0, 1fr) auto; align-items: center; }
+@media (max-width: 800px) {
+  .index__row-two { grid-template-columns: minmax(0, 1fr); gap: 0.6rem; }
 }
-
-.work__plate { position: relative; }
-
-.index__thumb { display: none; }
-
-@media (max-width: 1100px) {
-  .work { grid-template-columns: minmax(0, 1fr); }
-  .work__plate { display: none; }
-  .index__thumb {
-    display: block;
-    grid-column: 1 / -1;
-    margin-top: 1rem;
-    aspect-ratio: 3 / 2;
-  }
-}
-
 .index__row-static { display: grid; }
 .index__row-static:hover { background: none; }
 
@@ -771,7 +717,6 @@ input[type="range"].scrub::-moz-range-thumb {
 
 /* A section title living in the margin: quiet, but still a heading. */
 .margin-head {
-  font-stretch: 84%;
   font-size: var(--t-fine);
   font-weight: 500;
   line-height: 1.35;
@@ -780,10 +725,9 @@ input[type="range"].scrub::-moz-range-thumb {
 }
 
 @media (max-width: 400px) {
-  .masthead__name { font-size: 1rem; }
+  .masthead__name { font-size: 1.0625rem; }
   .masthead__tools { gap: 0.85rem; }
   .masthead__bar { gap: 0.75rem; }
-  .toolbtn { font-size: var(--t-micro); }
 }
 
 /* Spec lists get a printed square, never a dash. */
@@ -815,55 +759,8 @@ input[type="range"].scrub::-moz-range-thumb {
   left: 0;
   top: 0.15em;
   font-size: var(--t-micro);
-  font-stretch: 80%;
   font-variant-numeric: tabular-nums;
   color: var(--ink-2);
-}
-
-/* ===== plate: moving image and typographic fallback ===== */
-
-.plate__vid {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0;
-  transition: opacity 0.5s ease;
-}
-
-.plate__vid-on { opacity: 1; }
-
-/* Projects with no source imagery get a printed index card, not a stretched
-   thumbnail. The tags are real information, so the plate still says something. */
-.plate__card {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 1.4rem;
-  padding-bottom: 3.4rem;
-  background: var(--paper-2);
-  box-shadow: inset 0 0 0 1px var(--rule);
-}
-
-.plate__tag {
-  font-stretch: 84%;
-  font-size: var(--t-fine);
-  line-height: 1.5;
-  color: var(--ink-2);
-}
-
-/* The first tag carries the card, so it is set like a heading. */
-.plate__tag:first-child {
-  font-stretch: 112%;
-  font-weight: 500;
-  font-size: clamp(1.5rem, 2.1vw, 1.9rem);
-  letter-spacing: -0.026em;
-  line-height: 1.08;
-  color: var(--ink);
-  margin-bottom: 0.7rem;
 }
 
 /* The listen control sits under a project's description. */
@@ -872,7 +769,6 @@ input[type="range"].scrub::-moz-range-thumb {
   align-items: center;
   gap: 0.5rem;
   margin-top: 0.9rem;
-  font-stretch: 80%;
   font-size: var(--t-fine);
   color: var(--ink-2);
   box-shadow: inset 0 -1px 0 0 currentColor;
