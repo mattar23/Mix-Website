@@ -52,7 +52,9 @@ Colour, type scale, and rhythm are all custom properties on `:root`. Components 
 
 Class names are semantic and BEM-ish (`.index__row`, `.sheet__rate`, `.doc__margin`). Inline `style` is used sparingly for one-off measures like a `maxWidth` on a single heading; anything reused belongs in the stylesheet.
 
-One trap worth knowing, already hit once: the equipment table turns its rows into CSS grids under 720px, so a desktop cell rule such as a fixed `width` still applies there and will push content out of the viewport unless explicitly reset.
+The equipment page is a two column rate sheet (`.sheets`, CSS columns, one column under 900px) showing the day rate only, since a week is always three days and the intro says so. The rental terms sit in a native `details` element (`.fold`), closed by default. Visible labels say "rental", Maryam's own word; the terms text keeps "hirer".
+
+Home and About are meant to fit one laptop screen without scrolling, checked at 1440 by 820 and 1280 by 720. About sizes its text from the window height and the photo takes its height from the text; the Home portrait height is tied to the window height. Recheck both after touching spacing or type sizes.
 
 When changing layout, check for horizontal overflow at 414px, 360px, and 320px. Comparing `documentElement.scrollWidth` against `clientWidth` in an iframe catches it quickly; headless screenshots at small window sizes do not, because the layout viewport can be wider than the captured image.
 

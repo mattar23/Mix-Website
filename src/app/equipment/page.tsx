@@ -42,85 +42,68 @@ export default function EquipmentPage() {
     <>
       <section className="wrap step">
         <span className="accent-rule" aria-hidden="true" />
-        <h1 className="hero-type" style={{ maxWidth: '13ch' }}>
-          Equipment for hire
-        </h1>
-        <div className="doc" style={{ marginTop: 'clamp(2rem, 5vw, 4rem)' }}>
-          <p className="meta doc__margin">Jeddah</p>
-          <p className="prose">
-            Gear Maryam records with, available to hire in Jeddah. Rates are per
-            item, in Saudi riyals. A week costs the same as three days.
-          </p>
-        </div>
+        <h1 className="hero-type">Equipment Rental</h1>
+        <p className="prose" style={{ marginTop: '1.25rem' }}>
+          Gear Maryam records with, available to rent in Jeddah. Rates are per
+          item, per day, in Saudi riyals. A week costs the same as three days.
+        </p>
       </section>
 
+      {/* One rate per row. The week rate is always three days, so the
+          sentence above carries it and the sheet stays a single column of prices. */}
       <section className="wrap step-b">
-        {/* Rows become CSS grids under 720px, which strips native table
-            semantics in some assistive tech, so the roles are explicit. */}
-        {groups.map(({ category, items }) => (
-          <table className="sheet" role="table" key={category}>
-            <caption>{category}</caption>
-            <thead role="rowgroup">
-              <tr role="row">
-                <th role="columnheader" scope="col">Item</th>
-                <th role="columnheader" scope="col" className="sheet__rate">Day</th>
-                <th role="columnheader" scope="col" className="sheet__rate">Week</th>
-              </tr>
-            </thead>
-            <tbody role="rowgroup">
-              {items.map((item) => (
-                <tr role="row" key={item.id}>
-                  <td role="cell">
-                    <span className="sheet__name">
+        <div className="sheets">
+          {groups.map(({ category, items }) => (
+            <table className="sheet" key={category}>
+              <caption>{category}</caption>
+              <tbody>
+                {items.map((item) => (
+                  <tr key={item.id}>
+                    <th scope="row" className="sheet__name">
                       {item.brand} {item.name}
-                    </span>
-                    <span className="sheet__stock">{item.quantity} available</span>
-                  </td>
-                  <td role="cell" className="sheet__rate">{item.dayRateSAR}</td>
-                  <td role="cell" className="sheet__rate">{item.weekRateSAR}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        ))}
-      </section>
-
-      <section className="wrap step-b">
-        <hr className="rule" />
-        <div className="doc" style={{ paddingTop: '2.5rem' }}>
-          <p className="meta doc__margin">Hire</p>
-          <div className="stack stack-lg">
-            <p className="prose">
-              Tell us which items and which dates, and we will confirm availability,
-              the deposit, and a collection time.
-            </p>
-            <Link className="btn btn-solid" href="/contact?service=rental">
-              Enquire about hire
-            </Link>
-          </div>
+                      {item.quantity > 1 && (
+                        <span className="sheet__stock"> {item.quantity} available</span>
+                      )}
+                    </th>
+                    <td className="sheet__rate">
+                      {item.dayRateSAR} <span className="sheet__unit">SAR / day</span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          ))}
         </div>
       </section>
 
-      <section className="wrap step-b" id="terms" style={{ scrollMarginTop: '6rem' }}>
+      <section className="wrap step-b" id="terms" style={{ scrollMarginTop: '7.5rem' }}>
         <hr className="rule" />
-        <div className="doc" style={{ paddingTop: '2.5rem' }}>
-          <p className="meta doc__margin">Terms</p>
-          <div style={{ maxWidth: '44rem' }}>
-            <p className="prose" style={{ marginBottom: '2rem' }}>
-              The terms are summarised here. The full agreement is signed at handover.
-            </p>
-            <ol className="terms">
-              {RENTAL_TERMS.map((t) => (
-                <li key={t.heading}>
-                  <p className="meta">{t.heading}</p>
-                  <p className="prose prose-fine" style={{ marginTop: '0.35rem' }}>
-                    {t.body}
-                  </p>
-                </li>
-              ))}
-            </ol>
-          </div>
+        <div className="split" style={{ paddingTop: '2rem', alignItems: 'center' }}>
+          <p className="prose">
+            Tell us which items and which dates, and we will confirm availability,
+            the deposit, and a collection time.
+          </p>
+          <Link className="btn btn-solid" href="/contact?service=rental">
+            Enquire about rental
+          </Link>
         </div>
+
+        <details className="fold">
+          <summary>Rental terms</summary>
+          <p className="prose prose-fine" style={{ marginTop: '1rem' }}>
+            The terms are summarised here. The full agreement is signed at handover.
+          </p>
+          <ol className="terms">
+            {RENTAL_TERMS.map((t) => (
+              <li key={t.heading}>
+                <p className="margin-head">{t.heading}</p>
+                <p className="prose prose-fine" style={{ marginTop: '0.25rem' }}>
+                  {t.body}
+                </p>
+              </li>
+            ))}
+          </ol>
+        </details>
       </section>
     </>
   );

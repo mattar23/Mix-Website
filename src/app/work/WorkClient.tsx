@@ -26,24 +26,23 @@ export default function WorkClient() {
             return (
               <div key={p.id} className="index__row index__row-static index__row-two">
                 <span>
-                  {p.externalLink ? (
-                    <a
-                      className="index__title title-link"
-                      href={p.externalLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {p.title}
-                    </a>
-                  ) : (
-                    <span className="index__title">{p.title}</span>
-                  )}
+                  <span className="index__title">{p.title}</span>
                   <span className="meta index__sub" style={{ display: 'block' }}>
                     {p.role} for {p.clientOrArtist}
                   </span>
                 </span>
 
                 <span className="cluster cluster-lg meta">
+                  {p.externalLink && (
+                    <a
+                      className="ul-link"
+                      href={p.externalLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {p.externalLink.includes('youtube') ? 'Watch on YouTube' : 'View on Instagram'}
+                    </a>
+                  )}
                   {p.moreLinks?.map((l) => (
                     <a
                       key={l.url}

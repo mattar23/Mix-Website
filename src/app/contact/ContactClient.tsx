@@ -77,7 +77,7 @@ function ContactForm() {
                 {s.title}
               </option>
             ))}
-            <option value="rental">Equipment hire</option>
+            <option value="rental">Equipment rental</option>
             <option value="other">Something else</option>
           </select>
         </label>
@@ -148,7 +148,7 @@ export default function ContactClient() {
 
           <div style={{ maxWidth: '44rem' }}>
             <p className="prose" style={{ marginBottom: '3rem' }}>
-              Mixing, podcast and voiceover work, or equipment hire in Jeddah. A
+              Mixing, podcast and voiceover work, or equipment rental in Jeddah. A
               sentence about the project is enough to start.
             </p>
             <Suspense fallback={null}>
