@@ -54,7 +54,7 @@ Class names are semantic and BEM-ish (`.index__row`, `.sheet__rate`, `.doc__marg
 
 The Services page keeps what is included, revisions, and extras in view and folds the file preparation requirements into a `details` element (`.fold`). The masthead order is Home, Services, Work, Equipment, About, Contact, as on her mockups.
 
-The equipment page is a two column rate sheet (`.sheets`, CSS columns, one column under 900px) showing the day rate only. A week is always three days, which is now stated only in the first rental term, since Moad asked on 2026-10-07 for the intro lines under the Services and Equipment titles to go. Page headers are a title and the accent bar, nothing else. The rental terms sit in a native `details` element (`.fold`), closed by default. Visible labels say "rental", Maryam's own word; the terms text keeps "hirer".
+The equipment page is a two column rate sheet (`.sheets`, CSS columns, one column under 900px) showing the day rate only. A week is always three days, which is now stated only in the first rental term, since Moad asked on 2026-10-07 for the intro lines under the Services and Equipment titles to go. Equipment and Work headers are a title and the accent bar; Services keeps its one line under the title. The rental terms sit in a native `details` element (`.fold`), closed by default. Visible labels say "rental", Maryam's own word; the terms text keeps "hirer".
 
 Home and About are meant to fit one laptop screen without scrolling, checked at 1440 by 820 and 1280 by 720. Both size their text from the window height. On About the photo takes its height from the text; on Home the photo height is capped by the window height so the offers and colophon stay on the first screen. Recheck both after touching spacing or type sizes.
 
@@ -73,7 +73,7 @@ Four typed modules are the single source of content truth. Pages import and rend
 | `data/services.ts` | `ServiceDetail`, `SERVICES` | home, services page, contact form, JSON-LD offer catalog |
 | `data/bio.ts` | `ARTIST_INFO` | about page, colophon, contact page |
 
-`SERVICES` holds exactly two entries, `mixing` and `voiceover`, and the copy is Maryam's own from her services document. Production, sound design, and restoration were removed as services at her request; they survive only as credits and projects. `RENTAL_TERMS` is a numbered list of `{ heading, body }` and is a draft she has not yet approved.
+`SERVICES` holds exactly two entries, `mixing` and `voiceover`. Since 2026-10-07 every sentence and heading on the Services page is word for word from her services document, at her request, including her American spellings and hyphens. Do not tidy, shorten, or respell it. The one line under the page title ("Two kinds of session...") is the only sentence there that is not hers. Production, sound design, and restoration were removed as services at her request; they survive only as credits and projects. `RENTAL_TERMS` is a numbered list of `{ heading, body }` and is a draft she has not yet approved.
 
 `src/config/site.ts` holds site-level identity: canonical URL, description, keywords, `areaServed`, socials. The URL reads `NEXT_PUBLIC_SITE_URL` and falls back to `https://maryamattar.co`. Metadata, sitemap, robots, manifest, and JSON-LD all derive from it. The contact address is `info@maryamattar.co` in both `site.ts` and `bio.ts`; it has no mailbox yet, see `DEPLOY.md`.
 
