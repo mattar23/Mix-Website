@@ -22,56 +22,45 @@ const ENTRIES = [
 
 export default function HomePage() {
   return (
-    <>
-      <section className="wrap" style={{ paddingBlock: '2rem' }}>
-        <div className="hero">
-          <div>
-            <h1 className="hero-type" style={{ maxWidth: '13ch' }}>
-              Helping shape what you already set in motion
-            </h1>
-            <span className="accent-rule" aria-hidden="true" />
-            <p className="prose" style={{ marginTop: '1.5rem', textWrap: 'balance' }}>
-              Mixing and voiceover engineer based in {ARTIST_INFO.location}.
-            </p>
-            <p style={{ marginTop: '2rem' }}>
-              <Link className="btn" href="/work">
-                Explore work
-              </Link>
-            </p>
-          </div>
-          {/* The only portrait is 1024px wide, so it is held to a size it can
-              carry rather than run full bleed. */}
-          <div className="figure hero__portrait">
-            <Image
-              src={asset('/images/maryam-portrait.jpg')}
-              alt="Maryam Attar at her desk in the studio"
-              fill
-              priority
-              sizes="(max-width: 880px) 100vw, 40rem"
-              style={{ objectFit: 'cover' }}
-            />
-          </div>
-        </div>
-      </section>
+    <section className="spread">
+      {/* Cropped to the column around her face, which sits right of centre
+          in the frame. */}
+      <div className="figure spread__photo spread__photo-wide">
+        <Image
+          src={asset('/images/maryam-portrait.jpg')}
+          alt="Maryam Attar at her desk in the studio"
+          fill
+          priority
+          sizes="(max-width: 880px) 100vw, 40vw"
+          style={{ objectFit: 'cover', objectPosition: '70% center' }}
+        />
+      </div>
+      <div className="spread__text">
+        <h1 className="hero-type" style={{ maxWidth: '13ch' }}>
+          Helping shape what you already set in motion
+        </h1>
+        <span className="accent-rule" aria-hidden="true" />
+        <p className="prose" style={{ marginTop: '1.4em' }}>
+          Mixing and voiceover engineer based in {ARTIST_INFO.location}.
+        </p>
+        <p style={{ marginTop: '1.5em' }}>
+          <Link className="btn" href="/work">
+            Explore work
+          </Link>
+        </p>
 
-      <section className="wrap step-b">
-        <hr className="rule" />
-        <ul className="trio">
+        <ul className="entries">
           {ENTRIES.map((e) => (
             <li key={e.title}>
               <h2 className="display">{e.title}</h2>
-              <p className="prose prose-fine" style={{ marginTop: '0.75rem' }}>
-                {e.body}
-              </p>
-              <p>
-                <Link className="ul-link meta" href={e.href}>
-                  {e.cta}
-                </Link>
-              </p>
+              <p className="prose prose-fine">{e.body}</p>
+              <Link className="ul-link meta" href={e.href}>
+                {e.cta}
+              </Link>
             </li>
           ))}
         </ul>
-      </section>
-    </>
+      </div>
+    </section>
   );
 }

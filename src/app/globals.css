@@ -579,52 +579,51 @@ input[type="range"].scrub::-moz-range-thumb {
 
 .two-col { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--gutter); }
 
-/* home: the headline beside the portrait, as on her mockups */
-.hero {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
-  gap: var(--gutter);
-  align-items: center;
-}
-/* The portrait gives way on a short window so the three entries and the
-   colophon stay on the first screen. */
-.hero__portrait {
-  aspect-ratio: 3 / 2;
-  height: clamp(15rem, 40vh, 26.5rem);
-  max-width: 100%;
-  justify-self: end;
-}
-@media (max-width: 880px) {
-  .hero { grid-template-columns: minmax(0, 1fr); }
-  .hero__portrait { height: auto; width: 100%; justify-self: start; }
-}
-
-/* about: the session photo runs edge to edge on the left, the bio beside it.
-   The photo takes its height from the text, and the text sizes itself to the
-   window height, so the whole page reads without scrolling on a laptop. */
-.about {
+/* home and about share one spread: a photo edge to edge on the left, the
+   words beside it. The photo takes its height from the text, and the text
+   sizes itself to the window height, so each page reads without scrolling
+   on a laptop. */
+.spread {
   display: grid;
   grid-template-columns: minmax(0, 40fr) minmax(0, 60fr);
 }
-.about__text {
+.spread__text {
   font-size: clamp(0.9375rem, 2.05vh, 1.125rem);
   padding: 2.4em var(--page-x) 2em clamp(1.5rem, 4.5vw, 4.5rem);
 }
-.about__text .hero-type { font-size: min(var(--t-hero), 3em); }
-.about__text .accent-rule { margin-top: 0.9em; }
+.spread__text .hero-type { font-size: min(var(--t-hero), 3em); }
+.spread__text .accent-rule { margin-top: 0.9em; }
+.spread__text .prose { font-size: 1em; line-height: 1.55; }
+.spread__text .prose-fine { font-size: 0.94em; }
 .about__bio {
   margin-top: 1.6em;
   padding-left: clamp(1.25rem, 3vw, 2.5rem);
   border-left: 1px solid var(--rule);
-  font-size: 1em;
-  line-height: 1.55;
   max-width: 46rem;
 }
 .about__bio p + p { margin-top: 0.85em; }
+
+/* home: the three things on offer, one row each under the introduction */
+.entries { margin-top: 2em; border-top: 1px solid var(--rule); max-width: 46rem; }
+.entries > li {
+  display: grid;
+  grid-template-columns: 11.5em minmax(0, 1fr) auto;
+  gap: 0.25em 1.75em;
+  align-items: baseline;
+  padding-block: 1em;
+  border-bottom: 1px solid var(--rule-soft);
+}
+.entries h2 { font-size: 1.3em; letter-spacing: -0.015em; line-height: 1.2; }
+.entries .meta { font-size: 0.86em; white-space: nowrap; justify-self: start; }
+
 @media (max-width: 880px) {
-  .about { grid-template-columns: minmax(0, 1fr); }
-  .about__photo { aspect-ratio: 4 / 5; max-height: 34rem; }
-  .about__text { font-size: 1.0625rem; padding-left: var(--page-x); }
+  .spread { grid-template-columns: minmax(0, 1fr); }
+  .spread__photo { aspect-ratio: 4 / 5; max-height: 34rem; }
+  .spread__photo-wide { aspect-ratio: 3 / 2; }
+  .spread__text { font-size: 1.0625rem; padding-left: var(--page-x); }
+}
+@media (max-width: 560px) {
+  .entries > li { grid-template-columns: minmax(0, 1fr); }
 }
 
 /* colophon: one line, links together on the left, place and year on the right */
@@ -644,28 +643,6 @@ input[type="range"].scrub::-moz-range-thumb {
 .linklist__portrait { width: 7rem; aspect-ratio: 1; margin-bottom: 2rem; }
 .linklist__row { grid-template-columns: minmax(0, 1fr) auto; align-items: baseline; }
 
-/* home: three entries divided by hairlines */
-.trio {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  padding-top: 2rem;
-}
-.trio > li { padding-right: var(--gutter); display: flex; flex-direction: column; }
-.trio > li > :last-child { margin-top: auto; padding-top: 1.25rem; }
-.trio > li + li { padding-left: var(--gutter); border-left: 1px solid var(--rule); }
-.trio > li:last-child { padding-right: 0; }
-@media (max-width: 760px) {
-  .trio { grid-template-columns: minmax(0, 1fr); }
-  .trio > li { padding: 0; }
-  .trio > li > :last-child { padding-top: 1rem; }
-  .trio > li + li {
-    margin-top: 2rem;
-    padding-top: 2rem;
-    padding-left: 0;
-    border-left: 0;
-    border-top: 1px solid var(--rule);
-  }
-}
 @media (max-width: 800px) { .two-col { grid-template-columns: minmax(0, 1fr); } }
 
 .muted { color: var(--ink-2); }

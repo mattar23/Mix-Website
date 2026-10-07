@@ -27,20 +27,20 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <section className="about">
+    <section className="spread">
       {/* The dark background session photo Maryam chose for this page,
           cut 4:5 around the two figures from the 40 megapixel original. */}
-      <div className="figure about__photo">
+      <div className="figure spread__photo">
         <Image
           src={asset('/images/maryam-session.jpg')}
           alt="Maryam Attar listening back with a collaborator during a session"
           fill
           priority
-          sizes="(max-width: 880px) 100vw, 42vw"
+          sizes="(max-width: 880px) 100vw, 40vw"
           style={{ objectFit: 'cover' }}
         />
       </div>
-      <div className="about__text">
+      <div className="spread__text">
         <h1 className="hero-type">About</h1>
         <span className="accent-rule" aria-hidden="true" />
         <div className="prose about__bio">
