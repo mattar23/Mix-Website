@@ -41,7 +41,7 @@ export default function ServicesPage() {
         <span className="accent-rule" aria-hidden="true" />
         <p className="prose" style={{ marginTop: '2rem', maxWidth: '34em' }}>
           Two kinds of session. Each lists what is included and how to prepare
-          your files, so there are no surprises once we start.
+          your files.
         </p>
       </section>
 
@@ -66,29 +66,30 @@ export default function ServicesPage() {
                 {service.fullDesc}
               </p>
 
-              <div className="two-col" style={{ marginTop: '3rem' }}>
+              <div className="two-col" style={{ marginTop: '2rem' }}>
                 {service.includes && <List heading="Included" items={service.includes} />}
                 {service.excludes && (
                   <List heading="Before you send" items={service.excludes} />
                 )}
-                {service.requirements && (
-                  <div className="stack stack-lg">
+                {service.delivery && (
+                  <List heading="Revisions and delivery" items={service.delivery} />
+                )}
+                {service.extras && <List heading="Optional extras" items={service.extras} />}
+              </div>
+
+              {/* Needed once a project is agreed, so it opens on request. */}
+              {service.requirements && (
+                <details className="fold">
+                  <summary>Preparing your session</summary>
+                  <div className="fold__cols">
                     {service.requirements.map((r) => (
                       <List key={r.heading} heading={r.heading} items={r.points} />
                     ))}
                   </div>
-                )}
-                {(service.delivery || service.extras) && (
-                  <div className="stack stack-lg">
-                    {service.delivery && (
-                      <List heading="Revisions and delivery" items={service.delivery} />
-                    )}
-                    {service.extras && <List heading="Optional extras" items={service.extras} />}
-                  </div>
-                )}
-              </div>
+                </details>
+              )}
 
-              <p style={{ marginTop: '2.5rem' }}>
+              <p style={{ marginTop: '2rem' }}>
                 <Link className="btn" href={`/contact?service=${service.id}`}>
                   Request a quote
                 </Link>

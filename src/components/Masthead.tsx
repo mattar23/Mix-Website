@@ -4,11 +4,13 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
+// The order on Maryam's mockups.
 const LINKS = [
-  { name: 'About', href: '/about' },
-  { name: 'Work', href: '/work' },
+  { name: 'Home', href: '/' },
   { name: 'Services', href: '/services' },
+  { name: 'Work', href: '/work' },
   { name: 'Equipment', href: '/equipment' },
+  { name: 'About', href: '/about' },
   { name: 'Contact', href: '/contact' },
 ];
 

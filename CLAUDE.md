@@ -52,6 +52,8 @@ Colour, type scale, and rhythm are all custom properties on `:root`. Components 
 
 Class names are semantic and BEM-ish (`.index__row`, `.sheet__rate`, `.doc__margin`). Inline `style` is used sparingly for one-off measures like a `maxWidth` on a single heading; anything reused belongs in the stylesheet.
 
+The Services page keeps what is included, revisions, and extras in view and folds the file preparation requirements into a `details` element (`.fold`). The masthead order is Home, Services, Work, Equipment, About, Contact, as on her mockups.
+
 The equipment page is a two column rate sheet (`.sheets`, CSS columns, one column under 900px) showing the day rate only, since a week is always three days and the intro says so. The rental terms sit in a native `details` element (`.fold`), closed by default. Visible labels say "rental", Maryam's own word; the terms text keeps "hirer".
 
 Home and About are meant to fit one laptop screen without scrolling, checked at 1440 by 820 and 1280 by 720. About sizes its text from the window height and the photo takes its height from the text; the Home portrait height is tied to the window height. Recheck both after touching spacing or type sizes.
@@ -81,7 +83,7 @@ Adding a piece of gear means adding one entry to `EQUIPMENT_INVENTORY`. It then 
 
 A project is linked to its audio by matching `Project.audioSrc` against `AudioSample.src`, not by id. Keep those paths in sync or the listen control disappears from the work index. A `Film` carries its own `credit` line (music production and mix) because the voiceover on the two Rawda films was not Maryam's, while the audio chapters are her voiceover mixes.
 
-`Project.image`, `Project.video`, `year`, `description`, `category`, and `tags` are still in the data but the Work page no longer renders them. The hover plate that used them was removed at Maryam's request, since it changed with the pointer and read as unstable. Never fill a gap by stretching a small file.
+`year`, `description`, `category`, and `tags` are still in the project data but the Work page no longer renders them. The hover plate and its stills and loops were removed at Maryam's request, since it changed with the pointer and read as unstable.
 
 ### One global context, mounted once in the root layout
 
@@ -105,7 +107,7 @@ The site is a static export served by GitHub Pages from `mattar23/Mix-Website`, 
 
 Source material lives outside the repo in `maryam_web_info/media_content`, including two 4K Nadine Jewellery campaign films under `NJ_PROD_MIX`, the 1080p `Blend in.mp4`, a 40 megapixel studio photograph, `DSCF2712.jpg`, and the red studio portrait `DSCF2076.jpeg`. The originals run to hundreds of megabytes, so nothing there is committed directly.
 
-Web assets were derived with ffmpeg and Pillow. Stills are cropped to 3:2 to match the footage, resized to roughly 1800px wide, and saved as progressive JPEG at quality 80. Hover loops are five or six seconds, cropped to the same 3:2 frame, scaled to 1000px, stripped of audio, and encoded with libx264 at crf 31 with faststart.
+Web assets were derived with ffmpeg and Pillow. Stills are cropped to 3:2 to match the footage, resized to roughly 1800px wide, and saved as progressive JPEG at quality 80.
 
 The portrait Maryam chose for the home page, `public/images/maryam-portrait.jpg`, is a 1024 by 682 crop of `DSCF2076.jpeg` and the only copy that exists. It sits beside the headline on Home inside the `.hero` grid, capped at 40rem so it is never requested wider than its source, and as a small square on `/links`. `public/images/og-portrait.jpg` is a 1200 by 630 crop of the same frame for Open Graph and the JSON-LD `Person` image. The About page carries `maryam-session.jpg`, the dark background session photo she asked for there, cut 4:5 around the two figures at 1440 by 1800 from `DSCF2712.jpg`, as the full height left panel in her About mockup.
 

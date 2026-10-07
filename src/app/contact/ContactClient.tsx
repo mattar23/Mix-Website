@@ -108,11 +108,13 @@ function ContactForm() {
         />
       </label>
 
-      <button className="btn btn-solid" type="submit">
-        Send enquiry
-      </button>
-      <p className="meta meta-micro quiet" style={{ marginTop: '0.75rem' }}>
-        This opens your email app with the details filled in.
+      <p className="cluster cluster-lg">
+        <button className="btn btn-solid" type="submit">
+          Send enquiry
+        </button>
+        <span className="meta meta-micro quiet">
+          This opens your email app with the details filled in.
+        </span>
       </p>
     </form>
   );
@@ -121,10 +123,8 @@ function ContactForm() {
 export default function ContactClient() {
   return (
     <>
-      <section className="wrap step">
-        <h1 className="hero-type" style={{ maxWidth: '12ch' }}>
-          Tell me what you are making.
-        </h1>
+      <section className="wrap step-t" style={{ paddingBottom: '1.75rem' }}>
+        <h1 className="hero-type">Tell me what you are making</h1>
         <span className="accent-rule" aria-hidden="true" />
       </section>
 
@@ -147,7 +147,7 @@ export default function ContactClient() {
           </div>
 
           <div style={{ maxWidth: '44rem' }}>
-            <p className="prose" style={{ marginBottom: '3rem' }}>
+            <p className="prose" style={{ marginBottom: '1.5rem' }}>
               Mixing, podcast and voiceover work, or equipment rental in Jeddah. A
               sentence about the project is enough to start.
             </p>
