@@ -6,7 +6,8 @@ export interface Project {
   year: string;
   category: 'Music' | 'Commercial' | 'Art' | 'Sound Design';
   description: string;
-  audioSrc?: string;
+  /** Audio examples for the job, each matched to an AudioSample by its src. */
+  audioSrcs?: string[];
   /** A finished film hosted on the site, opened in the viewer from its row. */
   film?: { src: string; poster: string; duration: string };
   externalLink?: string;
@@ -37,7 +38,7 @@ export const PROJECTS: Project[] = [
     category: 'Commercial',
     description:
       'Music production and complete audio mixing for luxury campaign videos celebrating nature, heritage, and poetic storytelling. Recorded, edited, and balanced voiceover narration across multiple collection chapters.',
-    audioSrc: '/audio/gemma-nj-rawda.mp3',
+    audioSrcs: ['/audio/gemma-nj-rawda.mp3', '/audio/yasmina-nj-rawda.mp3'],
     tags: ['Music Production', 'Voiceover Mixing', 'Brand Scoring', 'Luxury']
   },
   // The two campaign films stand as their own jobs. The voiceover on them was
@@ -72,17 +73,6 @@ export const PROJECTS: Project[] = [
       duration: '0:38',
     },
     tags: ['Music Production', 'Mixing', 'Campaign Film']
-  },
-  {
-    id: 'rawda-yasmina',
-    title: 'Rawda Yasmina',
-    clientOrArtist: 'Nadine Jewellery',
-    role: 'Voiceover Mixing',
-    year: '2022/23',
-    category: 'Commercial',
-    description: 'Voiceover for the Yasmina chapter of the Rawda collection.',
-    audioSrc: '/audio/yasmina-nj-rawda.mp3',
-    tags: ['Voiceover Mixing']
   },
   {
     id: 'athr-gallery',
