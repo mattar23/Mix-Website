@@ -669,54 +669,43 @@ input[type="range"].scrub::-moz-range-thumb {
   .spread-wide .spread__photo { min-height: 0; aspect-ratio: 3 / 2; }
   .spread__text { font-size: 1.0625rem; padding-left: var(--page-x); }
 }
-/* services: the reading column, and beside it on wide screens a rail that
-   lists the sections and stays in view while the page scrolls */
-.services {
+/* services: the name across the page, then two columns. What the service is
+   sits on the left, its headed parts on the right. */
+.service { padding-top: 2.25rem; }
+.service__cols {
   display: grid;
-  grid-template-columns: minmax(0, 46rem) minmax(0, 1fr);
-  column-gap: var(--gutter);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: clamp(2.5rem, 6vw, 5rem);
+  margin-top: 1.5rem;
   align-items: start;
 }
-.services__rail {
-  position: sticky;
-  top: 6.5rem;
-  justify-self: end;
-  width: 17rem;
-  margin-top: 2.25rem;
-  padding-left: var(--gutter);
-  border-left: 1px solid var(--rule);
-}
-.services__rail nav a {
-  display: block;
-  padding-block: 0.55rem;
-  color: var(--ink-2);
-  transition: color 0.18s ease;
-}
-.services__rail nav a:hover { color: var(--ink); }
-.services__rail .btn { margin-top: 1.25rem; }
-@media (max-width: 1000px) {
-  .services { grid-template-columns: minmax(0, 1fr); }
-  .services__rail { display: none; }
-}
-
-/* services: one reading column, three heading levels, the same for every service */
-.service { max-width: 46rem; padding-top: 2.25rem; }
-.service h2 { font-size: var(--t-head); }
-.service .prose { max-width: none; }
-.service__lead { margin-top: 1.25rem; }
-.service__lead + .prose { margin-top: 1rem; }
+.service__cols .prose + .prose { margin-top: 1rem; }
+.service__notes { margin-top: 1.5rem; }
 .service section,
-.service__fold { margin-top: 2.25rem; padding-top: 1.5rem; border-top: 1px solid var(--rule-soft); }
+.service__fold { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--rule-soft); }
+/* The right column starts level with the text on the left. */
+.service__cols > div > :first-child { margin-top: 0; padding-top: 0; border-top: 0; }
 .service h3 + * { margin-top: 1rem; }
 .service h4 + p { margin-top: 0.25rem; }
 .service__items { margin-top: 1.25rem; }
-.service__lead + .service__items { margin-top: 1.75rem; }
 .service__items > div + div { margin-top: 1.1rem; }
-.service section.service__notes { border-top: 0; padding-top: 0; margin-top: 1.5rem; }
-.service__cta { margin-top: 2.5rem; }
+.service__intro { margin-top: 1.5rem; }
+/* The additional services run in the same two columns. */
+.service__intro + .service__items {
+  columns: 2;
+  column-gap: clamp(2.5rem, 6vw, 5rem);
+  margin-top: 1.5rem;
+}
+.service__intro + .service__items > div { break-inside: avoid; margin-top: 0; padding-bottom: 1.1rem; }
+.service__cta { margin-top: 2rem; }
 /* The folded section reads as one more heading, with its control on the right. */
 .service__fold summary { padding-block: 0; align-items: baseline; }
 .service__fold[open] { padding-bottom: 0; }
+@media (max-width: 900px) {
+  .service__cols { grid-template-columns: minmax(0, 1fr); }
+  .service__cols > div + div { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--rule-soft); }
+  .service__intro + .service__items { columns: 1; }
+}
 
 /* colophon: one line, links together on the left, place and year on the right */
 .colophon {
