@@ -90,7 +90,7 @@ body {
   font-synthesis-weight: none;
 }
 
-/* A column, so a spread can grow and carry its photo down to the colophon line. */
+/* A column, so a spread can grow and carry its photo down to the line below it. */
 main { flex: 1; display: flex; flex-direction: column; }
 
 ::selection { background: var(--spot); color: var(--spot-ink); }
@@ -589,12 +589,20 @@ input[type="range"].scrub::-moz-range-thumb {
   display: grid;
   grid-template-columns: minmax(0, 40fr) minmax(0, 60fr);
 }
-/* Home gives the photo half the page, running from the masthead line to
-   the colophon line as on About. Half the page keeps most of the landscape
-   frame in view. */
-.spread-wide { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+/* Home gives the photo half the page at its own 3:2 shape, so the whole
+   picture shows with nothing cropped. The words centre beside it. */
+.spread-wide { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; }
+/* The photo fills its whole segment, from the masthead line to the line
+   above the offers, whatever the window size. Its 3:2 shape sets the least
+   height; when the words or the window make the segment taller, it stretches
+   with it and crops a little at the sides instead of leaving paper around it. */
+.spread-wide .spread__photo {
+  align-self: stretch;
+  width: 100%;
+  min-height: clamp(16rem, calc(50vw * 2 / 3), calc(100vh - var(--masthead-h) - 19rem));
+}
 /* The words stand off the photo by the same margin the page keeps at its edges. */
-.spread-wide .spread__text { padding: 2.2em var(--page-x) 1.6em; }
+.spread-wide .spread__text { padding: 1.5em var(--page-x); }
 .spread__text {
   font-size: clamp(0.9375rem, 2.05vh, 1.125rem);
   padding: 2.4em var(--page-x) 2em clamp(1.5rem, 4.5vw, 4.5rem);
@@ -611,25 +619,30 @@ input[type="range"].scrub::-moz-range-thumb {
 }
 .about__bio p + p { margin-top: 0.85em; }
 
-/* home: the three things on offer, one row each under the introduction */
-.offers { margin-top: 2em; border-top: 1px solid var(--rule); }
-.offers > li {
+/* home: the three things on offer, side by side under the spread */
+.offers-band { border-top: 1px solid var(--rule); }
+.offers {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 0.2em 1.5em;
-  align-items: baseline;
-  padding-block: 0.85em;
-  border-bottom: 1px solid var(--rule-soft);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  padding-block: 2rem;
 }
-.offers > li:last-child { border-bottom: 0; padding-bottom: 0; }
-.offers h2 { font-size: 1.3em; letter-spacing: -0.015em; line-height: 1.2; }
-.offers .meta { font-size: 0.86em; white-space: nowrap; }
-.offers .prose { grid-column: 1 / -1; }
+.offers > li { display: flex; flex-direction: column; padding-right: var(--gutter); }
+.offers > li + li { padding-left: var(--gutter); border-left: 1px solid var(--rule); }
+.offers > li:last-child { padding-right: 0; }
+.offers h2 { font-size: 1.375rem; }
+.offers .prose { margin-top: 0.6rem; max-width: 30ch; }
+.offers .meta { margin-top: auto; padding-top: 1rem; align-self: start; }
+@media (max-width: 760px) {
+  .offers { grid-template-columns: minmax(0, 1fr); padding-block: 0.5rem; }
+  .offers .prose { max-width: none; }
+  .offers > li { padding: 1.25rem 0; }
+  .offers > li + li { padding-left: 0; border-left: 0; border-top: 1px solid var(--rule-soft); }
+}
 
 @media (max-width: 880px) {
   .spread, .spread-wide { grid-template-columns: minmax(0, 1fr); }
   .spread__photo { aspect-ratio: 4 / 5; max-height: 34rem; }
-  .spread-wide .spread__photo { aspect-ratio: 3 / 2; }
+  .spread-wide .spread__photo { min-height: 0; aspect-ratio: 3 / 2; }
   .spread__text { font-size: 1.0625rem; padding-left: var(--page-x); }
 }
 /* colophon: one line, links together on the left, place and year on the right */
