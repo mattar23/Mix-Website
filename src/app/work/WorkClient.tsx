@@ -21,8 +21,7 @@ export default function WorkClient() {
       <section className="wrap step-b">
         <div className="index">
           {PROJECTS.map((p) => {
-            const sample = AUDIO_SAMPLES.find((s) => s.src === p.audioSrc);
-            const on = sample && currentTrack?.id === sample.id;
+            const samples = AUDIO_SAMPLES.filter((s) => p.audioSrcs?.includes(s.src));
 
             return (
               <div key={p.id} className="index__row index__row-static index__row-two">
@@ -66,17 +65,21 @@ export default function WorkClient() {
                       <span className="num">{p.film.duration}</span>
                     </button>
                   )}
-                  {sample && (
-                    <button
-                      className="listen"
-                      style={{ marginTop: 0, color: on ? 'var(--spot)' : undefined }}
-                      onClick={() => playTrack(sample)}
-                    >
-                      <Glyph playing={Boolean(on && isPlaying)} size={10} />
-                      {on && isPlaying ? 'Playing' : 'Listen'}
-                      <span className="num">{sample.duration}</span>
-                    </button>
-                  )}
+                  {samples.map((sample) => {
+                    const on = currentTrack?.id === sample.id;
+                    return (
+                      <button
+                        key={sample.id}
+                        className="listen"
+                        style={{ marginTop: 0, color: on ? 'var(--spot)' : undefined }}
+                        onClick={() => playTrack(sample)}
+                      >
+                        <Glyph playing={on && isPlaying} size={10} />
+                        {on && isPlaying ? 'Playing' : 'Listen'}
+                        <span className="num">{sample.duration}</span>
+                      </button>
+                    );
+                  })}
                 </span>
               </div>
             );

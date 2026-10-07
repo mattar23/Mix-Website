@@ -95,7 +95,7 @@ Four typed modules are the single source of content truth. Pages import and rend
 
 Adding a piece of gear means adding one entry to `EQUIPMENT_INVENTORY`. It then appears in the rate sheet and the structured data automatically. Same for a project.
 
-A project is linked to its audio by matching `Project.audioSrc` against `AudioSample.src`, not by id. Keep those paths in sync or the listen control disappears from the work index. The two Rawda films are credited for music production and mixing only, because the voiceover on them was not Maryam's, while the audio chapters under the campaign row are her voiceover mixes.
+A project is linked to its audio by matching each path in `Project.audioSrcs` against `AudioSample.src`, not by id. Keep those paths in sync or the listen control disappears from the work index. A project may carry several examples; the Rawda campaign row has two, shown as two unnamed Listen buttons. The two Rawda films are credited for music production and mixing only, because the voiceover on them was not Maryam's, while the audio chapters under the campaign row are her voiceover mixes.
 
 `year`, `description`, `category`, and `tags` are still in the project data but the Work page no longer renders them. The hover plate and its stills and loops were removed at Maryam's request, since it changed with the pointer and read as unstable.
 
