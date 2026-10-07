@@ -37,12 +37,54 @@ The workflow currently builds for that address. The two `env` lines under the bu
 
 ## Email at the domain
 
-A domain purchase does not include a mailbox. The site uses `info@maryamattar.co`, so before launch that address has to deliver somewhere, or enquiries bounce. Two routes:
+A domain purchase does not include a mailbox, and GoDaddy no longer includes free forwarding with a domain. The site shows `info@maryamattar.co`, so before launch that address has to deliver somewhere, or enquiries bounce.
 
-- **Forwarding, free.** A forwarding service such as ImprovMX takes two DNS records at GoDaddy (an MX and a TXT) and forwards `info@` to any existing inbox. Replies come from the existing inbox, not from the domain. GoDaddy also offers forwarding in some domain plans; check the Email section of her account first.
-- **A mailbox, paid.** GoDaddy sells Microsoft 365 mailboxes alongside the domain, and Google Workspace does the same. Either lets her send as `info@maryamattar.co`. Worth it once the site brings enquiries.
+The decision, 2026-10-07: forward `info@` to Maryam's personal inbox for free with ImprovMX. No Microsoft 365. Replies will come from her personal address. If she later wants to send as `info@maryamattar.co`, Google Workspace replaces the forwarding with a DNS change and the site does not change.
 
-Start with forwarding. It can be replaced by a mailbox later without touching the site.
+### Before changing anything
+
+As checked on 2026-10-07 the domain already carries Microsoft 365 mail records, which means a Microsoft email product was attached to it in her GoDaddy account at some point, possibly as a trial at checkout:
+
+```
+MX    @              maryamattar-co.mail.protection.outlook.com   priority 0
+TXT   @              v=spf1 include:secureserver.net -all
+TXT   @              NETORGFT21196915.onmicrosoft.com
+CNAME autodiscover   autodiscover.outlook.com
+```
+
+In GoDaddy, open My Products and look under Email. If a Microsoft 365 or Professional Email plan is listed, check whether it is billing or set to renew, and cancel it if she does not want it. Nothing has been using that mailbox for the site.
+
+### Set up forwarding, about ten minutes
+
+Do this in the same GoDaddy sitting as the website DNS in Stage 2.
+
+1. Maryam creates a free account at improvmx.com, adds the domain `maryamattar.co`, and enters her personal email as the destination. ImprovMX creates a catch all alias, so `info@` and any other address at the domain forward to her.
+2. At GoDaddy, open the domain, then DNS, and make these changes:
+
+   Delete:
+
+   ```
+   MX    @              maryamattar-co.mail.protection.outlook.com
+   TXT   @              v=spf1 include:secureserver.net -all
+   CNAME autodiscover   autodiscover.outlook.com
+   ```
+
+   Add:
+
+   ```
+   MX    @    mx1.improvmx.com    priority 10
+   MX    @    mx2.improvmx.com    priority 20
+   TXT   @    v=spf1 include:spf.improvmx.com ~all
+   ```
+
+   Leave the `_dmarc` record and the `NETORGFT` text record alone; neither affects forwarding. A domain may hold only one text record starting `v=spf1`, which is why the old one is deleted and not kept beside the new one.
+
+3. Back in ImprovMX the domain shows a green "Email forwarding active" once the records are seen, usually within minutes and at most an hour.
+4. Send a message from a different account to `info@maryamattar.co` and confirm it reaches her inbox. Check the spam folder the first time. Then send one through the contact form on the site.
+
+ImprovMX shows the exact records for the domain on its own setup screen. If they differ from the ones above, use theirs.
+
+The free plan is reported as one domain, 25 aliases, and 500 forwarded messages a day, far beyond what the site will need.
 
 ## After launch
 
