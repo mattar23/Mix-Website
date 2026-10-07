@@ -57,9 +57,6 @@ export default function EquipmentPage() {
                   <tr key={item.id}>
                     <th scope="row" className="sheet__name">
                       {item.brand} {item.name}
-                      {item.quantity > 1 && (
-                        <span className="sheet__stock"> {item.quantity} available</span>
-                      )}
                     </th>
                     <td className="sheet__rate">
                       {item.dayRateSAR} <span className="sheet__unit">SAR / day</span>

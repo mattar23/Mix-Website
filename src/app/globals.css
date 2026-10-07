@@ -378,8 +378,6 @@ h4, .small-head {
 
 .sheet__name { text-align: left; font-weight: 400; }
 
-.sheet__stock { font-size: var(--t-fine); color: var(--ink-2); white-space: nowrap; }
-
 .sheet__rate {
   text-align: right;
   font-variant-numeric: tabular-nums;
