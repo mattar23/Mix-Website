@@ -225,12 +225,13 @@ h2 { font-size: var(--t-sub); }
   height: var(--masthead-h);
 }
 
-/* Her name in spaced capitals, as on every one of her mockups. */
+/* Her name is the one place the earlier wide Archivo survives. */
 .masthead__name {
-  font-weight: 400;
+  font-family: var(--font-archivo), var(--sans);
+  font-stretch: 112%;
+  font-weight: 600;
   font-size: 1.3125rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  letter-spacing: -0.02em;
   white-space: nowrap;
 }
 
