@@ -52,9 +52,9 @@ There is one type ladder, defined at the top of the typography block in `globals
 | Interface | 17px nav, 15px links, labels, buttons | 400 | `.meta`, `.btn` |
 | Fine print | 13px | 400 | `.meta-micro` |
 
-On Home and About the text scales down with the window height below about 820px tall so the page stays on one screen; at that height and above it matches the ladder exactly. There is no `font-stretch` anywhere.
+On Home and About the text scales down with the window height below about 820px tall so the page stays on one screen; at that height and above it matches the ladder exactly. There is no `font-stretch` anywhere except the masthead name.
 
-The paper is `#f4f0e7`, the exact value she gave. Her name in the masthead is set in spaced capitals as on her mockups, the one place capitals are used.
+The paper is `#f4f0e7`, the exact value she gave. Her name in the masthead is the one exception to Roboto: it keeps the wide, semi bold Archivo from the earlier design (`font-stretch: 112%`), which Moad asked to bring back on 2026-10-07.
 
 Home and About share one layout, `.spread`: a photo edge to edge on the left and the words on the right. Moad asked on 2026-10-07 for Home to match About, which he finds cleaner. About gives the photo 40 percent and stretches it to the height of the bio. Home uses `.spread-wide`: the photo takes half the page at its own 3:2 shape so the whole close shot shows uncropped, which is as far as it can be zoomed out, with the headline, one line, and button centred beside it and the three offers in a row underneath (`.offers`). The Home photo always fills its segment from the masthead line to the line above the offers: 3:2 is its least height, and it stretches when the words or the window make the segment taller. On both pages `main` is a flex column and `.spread` grows, so on a tall window the photo still reaches the line below it. About has no credits list. The colophon is a single row: Instagram, SoundCloud, and Contact together on the left, place and year on the right.
 
