@@ -32,8 +32,8 @@ jobs:
         env:
           NEXT_PUBLIC_SITE_URL: https://mattar23.github.io/Mix-Website
           NEXT_PUBLIC_BASE_PATH: /Mix-Website
-          # Web3Forms access key for the contact form. Empty: the form opens the mail client.
-          NEXT_PUBLIC_FORM_KEY: ""
+          # Web3Forms access key for the contact form, delivering to info@. Public by design. Empty: the form opens the mail client.
+          NEXT_PUBLIC_FORM_KEY: "2b0e89d0-6b68-49b6-ab54-7c434b7d0624"
       - uses: actions/upload-pages-artifact@v3
         with:
           path: out
