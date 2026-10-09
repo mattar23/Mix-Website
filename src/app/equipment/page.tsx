@@ -6,11 +6,11 @@ import { siteConfig } from '@/config/site';
 export const metadata: Metadata = {
   title: 'Audio equipment rental in Jeddah',
   description:
-    'Microphones, recorders, DI boxes, pedals, and amplifiers for hire in Jeddah, Saudi Arabia. Shure SM7B and SM57, Tascam Model 12, Cloudlifter, Radial. Day and week rates in riyals, terms published in full.',
+    'Microphones, recorders, DI boxes, pedals, and amplifiers for hire in Jeddah, Saudi Arabia. Shure SM7B and SM57, Tascam Model 12, Cloudlifter, Radial. Day rates in riyals, terms published in full.',
   alternates: { canonical: `${siteConfig.url}/equipment` },
   openGraph: {
     title: 'Audio equipment rental in Jeddah | Maryam Attar',
-    description: 'Studio and field recording gear for hire in Jeddah, with day and week rates.',
+    description: 'Studio and field recording gear for hire in Jeddah, with day rates.',
     url: `${siteConfig.url}/equipment`,
     images: [
       {
@@ -45,8 +45,7 @@ export default function EquipmentPage() {
         <span className="accent-rule" aria-hidden="true" />
       </section>
 
-      {/* One rate per row. The week rate is always three days, which the
-          first rental term states, so the sheet stays a single column of prices. */}
+      {/* One rate per row: the day rate. Longer periods are quoted on request. */}
       <section className="wrap step-b">
         <div className="sheets">
           {groups.map(({ category, items }) => (

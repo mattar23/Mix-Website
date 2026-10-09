@@ -258,7 +258,7 @@ export const EQUIPMENT_INVENTORY: EquipmentItem[] = [
 export const RENTAL_TERMS: { heading: string; body: string }[] = [
   {
     heading: 'Rental period and rates',
-    body: 'Rates are per item, per day, in Saudi riyals. A week costs the same as three days. A day runs from collection to the same time the following day. Longer periods are quoted on request.',
+    body: 'Rates are per item, per day, in Saudi riyals. A day runs from collection to the same time the following day. Longer periods are quoted on request.',
   },
   {
     heading: 'Booking and deposit',
