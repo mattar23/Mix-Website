@@ -42,7 +42,7 @@ export default function HomePage() {
           </h1>
           <span className="accent-rule" aria-hidden="true" />
           <p className="prose" style={{ marginTop: '1.25em' }}>
-            Mixing engineer based in {ARTIST_INFO.location}.
+            Mix engineer based in {ARTIST_INFO.location}.
           </p>
           <p style={{ marginTop: '1.75em' }}>
             <Link className="btn" href="/work">
