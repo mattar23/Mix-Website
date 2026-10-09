@@ -24,14 +24,12 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      # Preview from the GitHub project URL. Once maryamattar.co is connected
-      # (DEPLOY.md, step 4) change these two lines to
-      #   NEXT_PUBLIC_SITE_URL: https://maryamattar.co
-      #   NEXT_PUBLIC_BASE_PATH: ""
+      # Built for the custom domain since 2026-10-09. The old project URL
+      # (mattar23.github.io/Mix-Website) redirects to it.
       - run: npm run build
         env:
-          NEXT_PUBLIC_SITE_URL: https://mattar23.github.io/Mix-Website
-          NEXT_PUBLIC_BASE_PATH: /Mix-Website
+          NEXT_PUBLIC_SITE_URL: https://maryamattar.co
+          NEXT_PUBLIC_BASE_PATH: ""
           # Web3Forms access key for the contact form, delivering to info@. Public by design. Empty: the form opens the mail client.
           NEXT_PUBLIC_FORM_KEY: "2b0e89d0-6b68-49b6-ab54-7c434b7d0624"
       - uses: actions/upload-pages-artifact@v3
