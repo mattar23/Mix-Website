@@ -52,9 +52,9 @@ There is one type ladder, defined at the top of the typography block in `globals
 | Interface | 17px nav, 15px links, labels, buttons | 400 | `.meta`, `.btn` |
 | Fine print | 13px | 400 | `.meta-micro` |
 
-On Home and About the text scales down with the window height below about 820px tall so the page stays on one screen; at that height and above it matches the ladder exactly. There is no `font-stretch` anywhere except the masthead name.
+On Home and About the text scales down with the window height below about 820px tall so the page stays on one screen; at that height and above it matches the ladder exactly. There is no `font-stretch` anywhere.
 
-The paper is `#f4f0e7`, the exact value she gave. Her name in the masthead is the one exception to Roboto: it keeps the wide, semi bold Archivo from the earlier design (`font-stretch: 112%`), which Moad asked to bring back on 2026-10-07.
+The paper is `#f4f0e7`, the exact value she gave. Her name in the masthead is set in spaced capitals as on her mockups, the one place capitals are used.
 
 Home and About share one layout, `.spread`: a photo edge to edge on the left and the words on the right. Moad asked on 2026-10-07 for Home to match About, which he finds cleaner. About gives the photo 40 percent and stretches it to the height of the bio. Home uses `.spread-wide`: the photo takes half the page at its own 3:2 shape so the whole close shot shows uncropped, which is as far as it can be zoomed out, with the headline, one line, and button centred beside it and the three offers in a row underneath (`.offers`). The Home photo always fills its segment from the masthead line to the line above the offers: 3:2 is its least height, and it stretches when the words or the window make the segment taller. On both pages `main` is a flex column and `.spread` grows, so on a tall window the photo still reaches the line below it. About has no credits list. The colophon is a single row: Instagram, SoundCloud, and Contact together on the left, place and year on the right.
 
@@ -68,7 +68,7 @@ Class names are semantic and BEM-ish (`.index__row`, `.sheet__rate`, `.doc__marg
 
 The Services page gives each service its name across the page as an `h2`, then two columns (`.service__cols`): what the service is and its quote button on the left, its headed parts as `h3` sections on the right. A single column and a side rail were both tried on 2026-10-07 and dropped; Moad chose two columns of content with the normalised headings. "Additional Services & Deliverables" (`ADDITIONAL_SERVICES` in `data/services.ts`) is a third section at the same level as the two services, placed last at her request, though her document lists it under Mixing. "Mix Delivery Requirements" is a `details` element (`.fold`) styled as one more section heading, closed by default. The masthead order is Home, Services, Work, Equipment, About, Contact, as on her mockups.
 
-The equipment page is a two column rate sheet (`.sheets`, CSS columns, one column under 900px) showing the day rate only. A week is always three days, which is now stated only in the first rental term, since Moad asked on 2026-10-07 for the intro lines under the Services and Equipment titles to go. Page headers are a title and the accent bar, nothing else. The rental terms sit in a native `details` element (`.fold`), closed by default. Visible labels say "rental", Maryam's own word; the terms text keeps "hirer".
+The equipment page is a two column rate sheet (`.sheets`, CSS columns, one column under 900px) showing the day rate only. No week rate is published: on 2026-10-09 Maryam had the line saying a week costs the same as three days removed from the terms, and longer periods are quoted on request. Moad asked on 2026-10-07 for the intro lines under the Services and Equipment titles to go. Page headers are a title and the accent bar, nothing else. The rental terms sit in a native `details` element (`.fold`), closed by default. Visible labels say "rental", Maryam's own word; the terms text keeps "hirer".
 
 Home and About are meant to fit one laptop screen without scrolling, checked at 1440 by 820 and 1280 by 720. Both size their text from the window height. On About the photo takes its height from the text; on Home the photo height is capped by the window height so the offers and colophon stay on the first screen. Recheck both after touching spacing or type sizes.
 
@@ -150,7 +150,7 @@ An Arabic version of the pages with `hreflang` would be the biggest remaining le
 - Import with the `@/*` alias mapped to `./src/*`.
 - Images go through `next/image`; a raw `<img>` fails `next/core-web-vitals` lint.
 - Play and pause are the only icons, drawn in `components/Glyph.tsx`. Do not reintroduce an icon dependency for a shape that can be two rects.
-- Prices are integers in Saudi riyals with a `SAR` suffix in the name. Week rate is three times the day rate, and the copy says a week costs the same as three days.
+- Prices are integers in Saudi riyals with a `SAR` suffix in the name. The `weekRateSAR` field is still in the data but nothing on the site shows or mentions it.
 - The services and equipment pages deep-link into the contact form with `/contact?service=<id>`. Unknown ids fall back to the first service. Preserve the `Suspense` boundary around `useSearchParams` or the build fails.
 - **No dashes anywhere.** Maryam's brief is explicit: no em dash, no en dash, no `--`. This covers site copy, content in `src/data/`, code comments, commit messages, and class names. Use a comma, a colon, a full stop, or a rewrite. Year spans use a slash, as in `2022/23`. Ranges in prose read "2 to 3 tracks". List items take the square marker from `.speclist`, never a dash bullet. BEM modifiers use a single hyphen, so `.btn-solid`, not `.btn--solid`.
 - CSS custom properties are the one exception, since `--ink` and the rest are required syntax and cannot be written any other way.

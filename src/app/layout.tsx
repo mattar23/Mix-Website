@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Archivo, Roboto } from 'next/font/google';
+import { Roboto } from 'next/font/google';
 import './globals.css';
 import { AudioProvider } from '@/components/AudioPlayerContext';
 import { Masthead } from '@/components/Masthead';
@@ -14,15 +14,6 @@ import { asset } from '@/lib/asset';
 const roboto = Roboto({
   subsets: ['latin'],
   variable: '--font-roboto',
-  display: 'swap',
-});
-
-// Her name in the masthead keeps the wide Archivo it had before the move to
-// Roboto. Nothing else uses it.
-const archivo = Archivo({
-  subsets: ['latin'],
-  axes: ['wdth'],
-  variable: '--font-archivo',
   display: 'swap',
 });
 
@@ -90,7 +81,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${roboto.variable} ${archivo.variable}`}>
+    <html lang="en" className={roboto.variable}>
       <head>
         <JsonLd />
       </head>
