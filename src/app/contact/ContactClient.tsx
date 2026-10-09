@@ -52,6 +52,18 @@ function ContactForm() {
         return;
       }
     }
+
+    // The browser's own email check passes "name@gmail", so the ending is
+    // checked here: something after the @, a dot, and at least two letters.
+    const emailField = fields.find((f) => f.type === 'email');
+    if (emailField && !/^[^\s@]+@[^\s@.]+(\.[^\s@.]+)*\.[A-Za-z]{2,}$/.test(emailField.value.trim())) {
+      emailField.setCustomValidity(
+        'Please enter a complete email address, such as name@example.com.'
+      );
+      emailField.reportValidity();
+      return;
+    }
+
     const serviceName =
       SERVICES.find((s) => s.id === form.service)?.title ?? form.service;
 

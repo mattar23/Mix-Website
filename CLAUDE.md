@@ -87,11 +87,11 @@ Four typed modules are the single source of content truth. Pages import and rend
 | `data/services.ts` | `ServiceDetail`, `SERVICES` | home, services page, contact form, JSON-LD offer catalog |
 | `data/bio.ts` | `ARTIST_INFO` | about page, colophon, contact page |
 
-`SERVICES` holds exactly two entries, `mixing` and `voiceover`. Since 2026-10-07 every sentence and heading on the Services page is word for word from her services document, at her request, including her American spellings and hyphens. Do not tidy, shorten, or respell it. Production, sound design, and restoration were removed as services at her request; they survive only as credits and projects. `RENTAL_TERMS` is a numbered list of `{ heading, body }` and is a draft she has not yet approved.
+`SERVICES` holds exactly two entries, `mixing` and `voiceover`. Since 2026-10-07 every sentence and heading on the Services page is word for word from her services document, at her request, including her American spellings and hyphens. Do not tidy, shorten, or respell it. Production, sound design, and restoration were removed as services at her request; they survive only as credits and projects. `RENTAL_TERMS` is a numbered list of `{ heading, body }`, approved by her on 2026-10-09.
 
-`src/config/site.ts` holds site-level identity: canonical URL, description, keywords, `areaServed`, socials. The URL reads `NEXT_PUBLIC_SITE_URL` and falls back to `https://maryamattar.co`. Metadata, sitemap, robots, manifest, and JSON-LD all derive from it. The contact address is `info@maryamattar.co` in both `site.ts` and `bio.ts`; it has no mailbox yet, see `DEPLOY.md`.
+`src/config/site.ts` holds site-level identity: canonical URL, description, keywords, `areaServed`, socials. The URL reads `NEXT_PUBLIC_SITE_URL` and falls back to `https://maryamattar.co`. Metadata, sitemap, robots, manifest, and JSON-LD all derive from it. The contact address is `info@maryamattar.co` in both `site.ts` and `bio.ts`; it is an alias of her Google Workspace mailbox, working since 2026-10-09.
 
-`src/lib/asset.ts` prefixes a public path with `NEXT_PUBLIC_BASE_PATH`. Every raw `src` or `poster` on an image, video, or audio element, and every `next/image` src, goes through `asset()`. `next/link` prefixes the base path itself. The base path is `/Mix-Website` while the site is previewed from the GitHub project URL and empty on the real domain; forgetting `asset()` breaks only the preview, so test with the two variables the workflow sets.
+`src/lib/asset.ts` prefixes a public path with `NEXT_PUBLIC_BASE_PATH`. Every raw `src` or `poster` on an image, video, or audio element, and every `next/image` src, goes through `asset()`. `next/link` prefixes the base path itself. The base path is empty now that the site is on the real domain; it was `/Mix-Website` during the preview. Keep using `asset()` so a project URL build would still work.
 
 Adding a piece of gear means adding one entry to `EQUIPMENT_INVENTORY`. It then appears in the rate sheet and the structured data automatically. Same for a project.
 
@@ -115,7 +115,7 @@ Ranking for mixing, voiceover, and equipment hire in Saudi Arabia and the GCC is
 
 ## Deployment
 
-The site is a static export served by GitHub Pages from `mattar23/Mix-Website`, Maryam's repository, with Moad as a collaborator (push, not admin). `next.config.ts` sets `output: 'export'`, `trailingSlash: true`, `images.unoptimized`, and `basePath` from `NEXT_PUBLIC_BASE_PATH`. `.github/workflows/deploy.yml` builds and deploys on every push to `main`; its two `env` lines pick the preview address or the real domain. The human steps (visibility, Pages source, GoDaddy DNS, email forwarding) are in `DEPLOY.md`.
+The site is a static export served by GitHub Pages from `mattar23/Mix-Website`, Maryam's repository, with Moad as a collaborator (push, not admin). `next.config.ts` sets `output: 'export'`, `trailingSlash: true`, `images.unoptimized`, and `basePath` from `NEXT_PUBLIC_BASE_PATH`. `.github/workflows/deploy.yml` builds and deploys on every push to `main`. Since 2026-10-09 it builds for `https://maryamattar.co`, the live site, so there is no preview: a push is a release, and Moad is asked first. The human steps (visibility, Pages source, GoDaddy DNS, email forwarding) are in `DEPLOY.md`.
 
 ## Media
 
@@ -133,9 +133,9 @@ The Instagram reels once linked from the Rawda campaign were deleted by the acco
 
 ## Known gaps
 
-The contact form can send straight from the page through Web3Forms, but only once `NEXT_PUBLIC_FORM_KEY` is set in the deploy workflow (`siteConfig.formKey`). Until Maryam creates a key, see `DEPLOY.md`, it is empty and the form falls back to composing a pre-filled `mailto:`. The direct path was tested on 2026-10-07 against a stubbed response, not the real service, so send a real test enquiry when the key goes in. Every field is required and a value of only spaces is refused. The equipment page links into the form with `?service=rental`.
+The contact form sends straight from the page through Web3Forms to `info@maryamattar.co`, using the key on the `NEXT_PUBLIC_FORM_KEY` line of the deploy workflow (`siteConfig.formKey`); without a key it falls back to composing a pre-filled `mailto:`. The key only accepts submissions from `maryamattar.co`, so a local or preview build cannot send. A real enquiry was tested on the live domain on 2026-10-09. The visitor gets the on page thank you and no email copy. Every field is required, a value of only spaces is refused, and the email must end in a dot and at least two letters, since the browser's own check passes `name@gmail`. The equipment page links into the form with `?service=rental`.
 
-`RENTAL_TERMS` is a plain-words draft of a standard hire agreement. Maryam has not approved it and no lawyer has read it.
+`RENTAL_TERMS` is a plain-words version of a standard hire agreement. Maryam approved it on 2026-10-09 after one sentence was removed; no lawyer has read it.
 
 Several `EquipmentItem` entries have no `image` field. The rate sheet does not show images, so this currently costs nothing, but the data is incomplete.
 
