@@ -17,6 +17,11 @@ export interface EquipmentItem {
   highlight?: boolean;
 }
 
+// Off while Maryam settles her prices: the rate sheet then lists the gear
+// without a rate column and says the rates are coming soon, and the
+// structured data leaves the prices out. Turn on to publish the day rates.
+export const RATES_PUBLISHED = false;
+
 export const EQUIPMENT_INVENTORY: EquipmentItem[] = [
   // MICROPHONES
   {

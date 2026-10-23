@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { asset } from '@/lib/asset';
 import { SERVICES } from '@/data/services';
 import { ARTIST_INFO } from '@/data/bio';
+import { RATES_PUBLISHED } from '@/data/equipment';
 
 const ENTRIES = [
   ...SERVICES.map((s) => ({
@@ -16,7 +17,7 @@ const ENTRIES = [
     title: 'Equipment Rental',
     body: 'A selection of audio equipment available for short and long term rental.',
     href: '/equipment',
-    cta: 'See the rates',
+    cta: RATES_PUBLISHED ? 'See the rates' : 'See the equipment',
   },
 ];
 

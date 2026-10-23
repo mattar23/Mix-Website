@@ -1,6 +1,6 @@
 import React from 'react';
 import { siteConfig } from '@/config/site';
-import { EQUIPMENT_INVENTORY } from '@/data/equipment';
+import { EQUIPMENT_INVENTORY, RATES_PUBLISHED } from '@/data/equipment';
 import { SERVICES } from '@/data/services';
 
 // Two graphs: the person, and the practice as a local business with its
@@ -72,14 +72,16 @@ export function JsonLd() {
           name: 'Equipment hire, Jeddah',
           itemListElement: EQUIPMENT_INVENTORY.map((gear) => ({
             '@type': 'Offer',
-            priceCurrency: 'SAR',
-            price: gear.dayRateSAR,
-            priceSpecification: {
-              '@type': 'UnitPriceSpecification',
-              price: gear.dayRateSAR,
+            ...(RATES_PUBLISHED ? {
               priceCurrency: 'SAR',
-              unitText: 'DAY',
-            },
+              price: gear.dayRateSAR,
+              priceSpecification: {
+                '@type': 'UnitPriceSpecification',
+                price: gear.dayRateSAR,
+                priceCurrency: 'SAR',
+                unitText: 'DAY',
+              },
+            } : {}),
             availability: 'https://schema.org/InStock',
             itemOffered: {
               '@type': 'Product',

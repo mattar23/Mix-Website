@@ -1,16 +1,16 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { EQUIPMENT_INVENTORY, RENTAL_TERMS } from '@/data/equipment';
+import { EQUIPMENT_INVENTORY, RATES_PUBLISHED, RENTAL_TERMS } from '@/data/equipment';
 import { siteConfig } from '@/config/site';
 
 export const metadata: Metadata = {
   title: 'Audio equipment rental in Jeddah',
   description:
-    'Microphones, recorders, DI boxes, pedals, and amplifiers for hire in Jeddah, Saudi Arabia. Shure SM7B and SM57, Tascam Model 12, Cloudlifter, Radial. Day rates in riyals, terms published in full.',
+    'Microphones, recorders, DI boxes, pedals, and amplifiers for hire in Jeddah, Saudi Arabia. Shure SM7B and SM57, Tascam Model 12, Cloudlifter, Radial. Rates coming soon, terms published in full.',
   alternates: { canonical: `${siteConfig.url}/equipment` },
   openGraph: {
     title: 'Audio equipment rental in Jeddah | Maryam Attar',
-    description: 'Studio and field recording gear for hire in Jeddah, with day rates.',
+    description: 'Studio and field recording gear for hire in Jeddah.',
     url: `${siteConfig.url}/equipment`,
     images: [
       {
@@ -47,6 +47,14 @@ export default function EquipmentPage() {
 
       {/* One rate per row: the day rate. Longer periods are quoted on request. */}
       <section className="wrap step-b">
+        {!RATES_PUBLISHED && (
+          <p className="sheet-note">
+            <span className="sheet-note__head">Rates coming soon</span>
+            <span className="prose prose-fine">
+              Day rates will be listed here shortly. Until then, ask and we will quote.
+            </span>
+          </p>
+        )}
         <div className="sheets">
           {groups.map(({ category, items }) => (
             <table className="sheet" key={category}>
@@ -57,9 +65,11 @@ export default function EquipmentPage() {
                     <th scope="row" className="sheet__name">
                       {item.brand} {item.name}
                     </th>
-                    <td className="sheet__rate">
-                      {item.dayRateSAR} <span className="sheet__unit">SAR / day</span>
-                    </td>
+                    {RATES_PUBLISHED && (
+                      <td className="sheet__rate">
+                        {item.dayRateSAR} <span className="sheet__unit">SAR / day</span>
+                      </td>
+                    )}
                   </tr>
                 ))}
               </tbody>
