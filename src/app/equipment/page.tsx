@@ -23,20 +23,21 @@ export const metadata: Metadata = {
   },
 };
 
-const ORDER = [
-  'Microphones',
-  'Recording & Interfaces',
-  'DI Boxes & Signal',
-  'Guitar Pedals & FX',
-  'Amplifiers',
-  'Cables & Accessories',
+// Two fixed columns, set by hand rather than balanced by the browser.
+const COLUMNS = [
+  ['Microphones', 'Recording & Interfaces', 'Guitar Pedals & FX'],
+  ['Amplifiers', 'Cables & Accessories', 'DI Boxes & Signal'],
 ] as const;
 
 export default function EquipmentPage() {
-  const groups = ORDER.map((category) => ({
-    category,
-    items: EQUIPMENT_INVENTORY.filter((item) => item.category === category),
-  })).filter((g) => g.items.length > 0);
+  const columns = COLUMNS.map((categories) =>
+    categories
+      .map((category) => ({
+        category,
+        items: EQUIPMENT_INVENTORY.filter((item) => item.category === category),
+      }))
+      .filter((g) => g.items.length > 0),
+  );
 
   return (
     <>
@@ -56,24 +57,28 @@ export default function EquipmentPage() {
           </p>
         )}
         <div className="sheets">
-          {groups.map(({ category, items }) => (
-            <table className="sheet" key={category}>
-              <caption>{category}</caption>
-              <tbody>
-                {items.map((item) => (
-                  <tr key={item.id}>
-                    <th scope="row" className="sheet__name">
-                      {item.brand} {item.name}
-                    </th>
-                    {RATES_PUBLISHED && (
-                      <td className="sheet__rate">
-                        {item.dayRateSAR} <span className="sheet__unit">SAR / day</span>
-                      </td>
-                    )}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          {columns.map((groups, i) => (
+            <div className="sheets__col" key={i}>
+              {groups.map(({ category, items }) => (
+                <table className="sheet" key={category}>
+                  <caption>{category}</caption>
+                  <tbody>
+                    {items.map((item) => (
+                      <tr key={item.id}>
+                        <th scope="row" className="sheet__name">
+                          {item.brand} {item.name}
+                        </th>
+                        {RATES_PUBLISHED && (
+                          <td className="sheet__rate">
+                            {item.dayRateSAR} <span className="sheet__unit">SAR / day</span>
+                          </td>
+                        )}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              ))}
+            </div>
           ))}
         </div>
       </section>

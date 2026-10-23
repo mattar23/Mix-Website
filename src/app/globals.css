@@ -349,8 +349,14 @@ h4, .small-head {
 
 /* ============ rate sheet ============ */
 
-/* Categories flow into two balanced columns, as on her rental mockup. */
-.sheets { columns: 2; column-gap: clamp(2.5rem, 6vw, 5rem); }
+/* Categories sit in two columns, as on her rental mockup; which category
+   goes in which column is set in the page, not balanced by the browser. */
+.sheets {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: clamp(2.5rem, 6vw, 5rem);
+  align-items: start;
+}
 
 .sheet {
   width: 100%;
@@ -387,7 +393,7 @@ h4, .small-head {
 
 .sheet__unit { font-size: var(--t-fine); color: var(--ink-2); }
 
-@media (max-width: 900px) { .sheets { columns: 1; } }
+@media (max-width: 900px) { .sheets { grid-template-columns: minmax(0, 1fr); } }
 
 /* Stands in for the rate column until the rates are published. */
 .sheet-note {
